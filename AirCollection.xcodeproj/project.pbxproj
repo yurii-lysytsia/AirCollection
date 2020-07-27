@@ -7,19 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B94A91E24BF7D0A00B2D01B /* ElementKindSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B94A91D24BF7D0A00B2D01B /* ElementKindSection.swift */; };
+		5BB3298C24BF1E4A00323F11 /* IdentificableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */; };
+		5BB3298E24BF1E8A00323F11 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */; };
+		5BB3299024BF1E9800323F11 /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */; };
+		5BB3299224BF1EC000323F11 /* TextFieldInputModelConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3299124BF1EC000323F11 /* TextFieldInputModelConfigurable.swift */; };
+		5BB3299424BF1EDB00323F11 /* TextViewInputModelConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3299324BF1EDB00323F11 /* TextViewInputModelConfigurable.swift */; };
+		5BB3299A24BF1F2900323F11 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3299924BF1F2900323F11 /* Array+Extension.swift */; };
+		5BB329A524BF239C00323F11 /* ItemSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329A424BF239C00323F11 /* ItemSize.swift */; };
+		5BB329A924BF29B400323F11 /* ViewHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329A824BF29B400323F11 /* ViewHeight.swift */; };
+		5BB329AC24BF2A6C00323F11 /* CollectionViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329AB24BF2A6C00323F11 /* CollectionViewData.swift */; };
+		5BB329AE24BF2AB900323F11 /* CollectionViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329AD24BF2AB900323F11 /* CollectionViewControllerProtocol.swift */; };
+		5BB329B024BF2AC000323F11 /* CollectionViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329AF24BF2AC000323F11 /* CollectionViewPresenterProtocol.swift */; };
+		5BB329B224BF2D4F00323F11 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329B124BF2D4F00323F11 /* UICollectionView+Extension.swift */; };
 		DA182C912211757900163B42 /* AirCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = DA182C8F2211757900163B42 /* AirCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DA182CA52211786600163B42 /* AirTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA182CA42211786600163B42 /* AirTable.swift */; };
-		DA383AB52211D62B002923D3 /* AirTable+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA383AB42211D62B002923D3 /* AirTable+UITableView.swift */; };
-		DAC08CDA2211973D005061E7 /* AirTableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC08CD92211973D005061E7 /* AirTableProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B94A91D24BF7D0A00B2D01B /* ElementKindSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementKindSection.swift; sourceTree = "<group>"; };
+		5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificableView.swift; sourceTree = "<group>"; };
+		5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
+		5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
+		5BB3299124BF1EC000323F11 /* TextFieldInputModelConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldInputModelConfigurable.swift; sourceTree = "<group>"; };
+		5BB3299324BF1EDB00323F11 /* TextViewInputModelConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewInputModelConfigurable.swift; sourceTree = "<group>"; };
+		5BB3299924BF1F2900323F11 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		5BB329A424BF239C00323F11 /* ItemSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSize.swift; sourceTree = "<group>"; };
+		5BB329A824BF29B400323F11 /* ViewHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHeight.swift; sourceTree = "<group>"; };
+		5BB329AB24BF2A6C00323F11 /* CollectionViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewData.swift; sourceTree = "<group>"; };
+		5BB329AD24BF2AB900323F11 /* CollectionViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewControllerProtocol.swift; sourceTree = "<group>"; };
+		5BB329AF24BF2AC000323F11 /* CollectionViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewPresenterProtocol.swift; sourceTree = "<group>"; };
+		5BB329B124BF2D4F00323F11 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		DA182C8C2211757900163B42 /* AirCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AirCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA182C8F2211757900163B42 /* AirCollection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirCollection.h; sourceTree = "<group>"; };
 		DA182C902211757900163B42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA182CA42211786600163B42 /* AirTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTable.swift; sourceTree = "<group>"; };
-		DA383AB42211D62B002923D3 /* AirTable+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AirTable+UITableView.swift"; sourceTree = "<group>"; };
-		DAC08CD92211973D005061E7 /* AirTableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTableProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +53,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5BB3298A24BF1E3E00323F11 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */,
+				5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */,
+				5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */,
+				5BB3299124BF1EC000323F11 /* TextFieldInputModelConfigurable.swift */,
+				5BB3299324BF1EDB00323F11 /* TextViewInputModelConfigurable.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		5BB3299724BF1EFA00323F11 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5BB3299924BF1F2900323F11 /* Array+Extension.swift */,
+				5BB329B124BF2D4F00323F11 /* UICollectionView+Extension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		5BB329A324BF239000323F11 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5BB329A424BF239C00323F11 /* ItemSize.swift */,
+				5BB329A824BF29B400323F11 /* ViewHeight.swift */,
+				5B94A91D24BF7D0A00B2D01B /* ElementKindSection.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		5BB329AA24BF2A6300323F11 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				5BB329AB24BF2A6C00323F11 /* CollectionViewData.swift */,
+				5BB329AD24BF2AB900323F11 /* CollectionViewControllerProtocol.swift */,
+				5BB329AF24BF2AC000323F11 /* CollectionViewPresenterProtocol.swift */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
 		DA182C822211757900163B42 = {
 			isa = PBXGroup;
 			children = (
@@ -53,9 +114,10 @@
 			isa = PBXGroup;
 			children = (
 				DA182C8F2211757900163B42 /* AirCollection.h */,
-				DA182CA42211786600163B42 /* AirTable.swift */,
-				DAC08CD92211973D005061E7 /* AirTableProtocol.swift */,
-				DA383AB42211D62B002923D3 /* AirTable+UITableView.swift */,
+				5BB3298A24BF1E3E00323F11 /* Protocols */,
+				5BB329A324BF239000323F11 /* Models */,
+				5BB329AA24BF2A6300323F11 /* Source */,
+				5BB3299724BF1EFA00323F11 /* Extensions */,
 				DA182C902211757900163B42 /* Info.plist */,
 			);
 			path = Source;
@@ -104,7 +166,7 @@
 				TargetAttributes = {
 					DA182C8B2211757900163B42 = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
@@ -114,6 +176,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = DA182C822211757900163B42;
 			productRefGroup = DA182C8D2211757900163B42 /* Products */;
@@ -140,9 +203,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA182CA52211786600163B42 /* AirTable.swift in Sources */,
-				DAC08CDA2211973D005061E7 /* AirTableProtocol.swift in Sources */,
-				DA383AB52211D62B002923D3 /* AirTable+UITableView.swift in Sources */,
+				5BB329B224BF2D4F00323F11 /* UICollectionView+Extension.swift in Sources */,
+				5BB329A524BF239C00323F11 /* ItemSize.swift in Sources */,
+				5BB3298C24BF1E4A00323F11 /* IdentificableView.swift in Sources */,
+				5BB329B024BF2AC000323F11 /* CollectionViewPresenterProtocol.swift in Sources */,
+				5BB3299424BF1EDB00323F11 /* TextViewInputModelConfigurable.swift in Sources */,
+				5B94A91E24BF7D0A00B2D01B /* ElementKindSection.swift in Sources */,
+				5BB3298E24BF1E8A00323F11 /* NibLoadableView.swift in Sources */,
+				5BB3299A24BF1F2900323F11 /* Array+Extension.swift in Sources */,
+				5BB3299024BF1E9800323F11 /* ConfigurableView.swift in Sources */,
+				5BB329AE24BF2AB900323F11 /* CollectionViewControllerProtocol.swift in Sources */,
+				5BB3299224BF1EC000323F11 /* TextFieldInputModelConfigurable.swift in Sources */,
+				5BB329A924BF29B400323F11 /* ViewHeight.swift in Sources */,
+				5BB329AC24BF2A6C00323F11 /* CollectionViewData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,17 +357,19 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Lysytsia.Developer.AirCollection;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lysytsia.yurii.air-collection";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -312,16 +387,18 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Lysytsia.Developer.AirCollection;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lysytsia.yurii.air-collection";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
