@@ -1,5 +1,5 @@
 //
-//  ItemSize.swift
+//  CollectionViewItemSize.swift
 //  AirCollection
 //
 //  Created by Lysytsia Yurii on 15.07.2020.
