@@ -1,25 +1,27 @@
-Pod::Spec.new do |s|
+Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.name         = "AirCollection"
-  s.version      = "0.1"
-  s.summary      = "Not created yet"
-  s.description  = "AirCollection is better way to create table view or collection view"
-  s.homepage     = "https://github.com/YuriFox/AirCollection"
+  spec.name           = "AirCollection"
+  spec.version        = "1.0.0"
+  spec.summary        = "AirCollection is a wrapper for UITableView / UICollectionView for VIPER / MVP architecture"
+  spec.homepage       = "https://github.com/YuriFox/AirCollection"
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.license      = { :type => "MIT", :file => "LICENSE" }
+  spec.license        = { :type => "MIT", :file => "LICENSE" }
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.author             = { "YuriFox" => "yuri17fox@gmail.com" }
-
+  spec.author         = { "Yurii Lysytsia" => "yuri17fox@gmail.com" }
+  
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.platform     = :ios, "8.0"
+  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  spec.platform       = :ios, "11.0"
+  spec.swift_versions = '5.0'
+
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.source       = { :git => "https://github.com/YuriFox/AirCollection.git", :tag => s.version.to_s }
+  spec.source       = { :git => "https://github.com/YuriFox/AirCollection.git", :tag => "#{spec.version}" }
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.source_files = "Source/*.swift"
+  spec.source_files  = "Source/**/*.swift"
 
 end
