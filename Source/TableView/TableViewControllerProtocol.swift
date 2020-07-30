@@ -229,11 +229,11 @@ public extension TableViewControllerProtocol {
 }
 
 // MARK: - UIScrollViewDelegateForward
-public extension TableViewControllerProtocol where Self: UIScrollViewDelegate {
+public extension TableViewControllerProtocol where Self: TableViewDelegate {
     
-    /// Forward all table view data `UIScrollViewDelegate` to current view controller.
-    func forwardTableViewScrollViewDelegate() {
-        self.tableViewData.scrollViewDelegate = self
+    /// Forward available table view delegates to current view controller.
+    func forwardTableViewDelegate() {
+        self.tableViewData.tableViewDelegate = self
     }
     
 }

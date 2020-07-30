@@ -13,6 +13,7 @@
 		5B5A8DEA24CF49440001CB13 /* TableViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DE924CF49440001CB13 /* TableViewData.swift */; };
 		5B5A8DEC24CF49510001CB13 /* TableViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */; };
 		5B5A8DEF24CF49670001CB13 /* TableViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DEE24CF49670001CB13 /* TableViewControllerProtocol.swift */; };
+		5B8BA20524D35BFB0070CC77 /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8BA20424D35BFB0070CC77 /* TableViewDelegate.swift */; };
 		5B94A91E24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B94A91D24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift */; };
 		5BB3298C24BF1E4A00323F11 /* IdentificableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */; };
 		5BB3298E24BF1E8A00323F11 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */; };
@@ -36,6 +37,7 @@
 		5B5A8DE924CF49440001CB13 /* TableViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewData.swift; sourceTree = "<group>"; };
 		5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B5A8DEE24CF49670001CB13 /* TableViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerProtocol.swift; sourceTree = "<group>"; };
+		5B8BA20424D35BFB0070CC77 /* TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
 		5B94A91D24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewElementKindSection.swift; sourceTree = "<group>"; };
 		5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificableView.swift; sourceTree = "<group>"; };
 		5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				5B5A8DE924CF49440001CB13 /* TableViewData.swift */,
+				5B8BA20424D35BFB0070CC77 /* TableViewDelegate.swift */,
 				5B5A8DEE24CF49670001CB13 /* TableViewControllerProtocol.swift */,
 				5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */,
 			);
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B8BA20524D35BFB0070CC77 /* TableViewDelegate.swift in Sources */,
 				5BB329B224BF2D4F00323F11 /* UICollectionView+Extension.swift in Sources */,
 				5B5A8DE624CF49250001CB13 /* TableViewRowHeight.swift in Sources */,
 				5BB329A524BF239C00323F11 /* CollectionViewItemSize.swift in Sources */,
