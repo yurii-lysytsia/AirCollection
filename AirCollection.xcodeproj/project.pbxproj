@@ -14,6 +14,7 @@
 		5B5A8DEC24CF49510001CB13 /* TableViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */; };
 		5B5A8DEF24CF49670001CB13 /* TableViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DEE24CF49670001CB13 /* TableViewControllerProtocol.swift */; };
 		5B8BA20524D35BFB0070CC77 /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8BA20424D35BFB0070CC77 /* TableViewDelegate.swift */; };
+		5B8BA20924D365750070CC77 /* AirCollection.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 5B8BA20824D365750070CC77 /* AirCollection.podspec */; };
 		5B94A91E24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B94A91D24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift */; };
 		5BB3298C24BF1E4A00323F11 /* IdentificableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */; };
 		5BB3298E24BF1E8A00323F11 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */; };
@@ -38,6 +39,7 @@
 		5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B5A8DEE24CF49670001CB13 /* TableViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerProtocol.swift; sourceTree = "<group>"; };
 		5B8BA20424D35BFB0070CC77 /* TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
+		5B8BA20824D365750070CC77 /* AirCollection.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = AirCollection.podspec; sourceTree = "<group>"; };
 		5B94A91D24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewElementKindSection.swift; sourceTree = "<group>"; };
 		5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificableView.swift; sourceTree = "<group>"; };
 		5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		DA182C822211757900163B42 = {
 			isa = PBXGroup;
 			children = (
+				5B8BA20824D365750070CC77 /* AirCollection.podspec */,
 				DA182C8E2211757900163B42 /* Source */,
 				DA182C8D2211757900163B42 /* Products */,
 			);
@@ -270,6 +273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B8BA20924D365750070CC77 /* AirCollection.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +362,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -416,7 +420,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -447,7 +451,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "lysytsia.yurii.air-collection";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -477,7 +481,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "lysytsia.yurii.air-collection";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
