@@ -21,9 +21,18 @@ import protocol UIKit.UITableViewDelegate
 
 /// Data for building `UITableView` based on `UITableViewDataSource` and `UITableViewDelegate`
 class TableViewData: NSObject {
-
+    
     // MARK: Stored properties
     weak var scrollViewDelegate: UIScrollViewDelegate?
+    
+    /// Cached table view width when last row displayed
+    private var preferredTableViewWidthForRow: CGFloat = 0
+    
+    /// Cached table view width when last header displayed
+    private var preferredTableViewWidthForHeader: CGFloat = 0
+    
+    /// Cached table view width when last footer displayed
+    private var preferredTableViewWidthForFooter: CGFloat = 0
     
     /// Array of sections (array of rows) with estimated sizes for table view row. First array is equal to `IndexPath.section`, second to `IndexPath.row`
     private var estimatedHeightsForRow = [[CGFloat]]()
@@ -221,66 +230,9 @@ extension TableViewData: UITableViewDataSource {
         let hasTrailingActions = self.tableView(tableView, trailingSwipeActionsConfigurationForRowAt: indexPath) != nil
         return hasLeadingActions || hasTrailingActions
     }
- 
+    
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return self.output.tableSectionIndexTitles(for: tableView)
-    }
-    
-}
-
-// MARK: - UIScrollViewDelegate
-extension TableViewData: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
-    }
-    
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
-    }
-
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
-    }
-
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        self.scrollViewDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
-    }
-
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        self.scrollViewDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
-    }
-
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewWillBeginDecelerating?(scrollView)
-    }
-
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidEndDecelerating?(scrollView)
-    }
-
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
-    }
-
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.scrollViewDelegate?.viewForZooming?(in: scrollView)
-    }
-
-    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-        self.scrollViewDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
-    }
-
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        self.scrollViewDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
-    }
-
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        return self.scrollViewDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? true
-    }
-
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidScrollToTop?(scrollView)
     }
     
 }
@@ -290,36 +242,37 @@ extension TableViewData: UITableViewDelegate {
     
     // MARK: Cell
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let height = self.estimatedHeightsForRow[safe: indexPath.section]?[safe: indexPath.row], height != UITableView.automaticDimension {
-            return height
+        // Check is table view has correct width. Because if width invalid size for row be invalid too
+        if tableView.frame.width == self.preferredTableViewWidthForRow {
+            if let height = self.estimatedHeightsForRow[safe: indexPath.section]?[safe: indexPath.row], height != UITableView.automaticDimension {
+                return height
+            }
         }
         
         switch self.output.tableRowHeight(for: indexPath) {
         case .fixed(let height):
-            self.estimatedHeightsForRow[indexPath.section][indexPath.row] = height
             return height
             
         case .flexible:
-            let cell = self.tableView(tableView, cellForRowAt: indexPath)
-            cell.contentView.layoutIfNeeded()
-            let targetSize = CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude)
-            let prefferedSize = cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-            let height = prefferedSize.height
-            self.estimatedHeightsForRow[indexPath.section][indexPath.row] = height
-            return height
+            return UITableView.automaticDimension
         }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard self.estimatedHeightsForRow.indices.contains(indexPath.section) else {
-            assertionFailure("Something went wrong")
-            return UITableView.automaticDimension
+        return self.tableView(tableView, estimatedHeightForRowAt: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.preferredTableViewWidthForRow = tableView.frame.width
+        self.estimatedHeightsForRow[indexPath.section][indexPath.row] = cell.frame.height
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Resave estimated height if it's not correct. Usually it happened for first visible rows when it rendered first time
+        if let height = self.estimatedHeightsForRow[safe: indexPath.section]?[safe: indexPath.row], height != cell.frame.height {
+            self.estimatedHeightsForRow[indexPath.section][indexPath.row] = cell.frame.height
         }
-        guard self.estimatedHeightsForRow[indexPath.section].indices.contains(indexPath.row) else {
-            assertionFailure("Something went wrong")
-            return UITableView.automaticDimension
-        }
-        return self.estimatedHeightsForRow[indexPath.section][indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -340,8 +293,11 @@ extension TableViewData: UITableViewDelegate {
     
     // MARK: Header
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        if let height = self.estimatedHeightsForHeader[safe: section], height != UITableView.automaticDimension {
-            return height
+        // Check is table view has correct width. Because if width invalid size for header be invalid too
+        if tableView.frame.width == self.preferredTableViewWidthForHeader {
+            if let height = self.estimatedHeightsForHeader[safe: section], height != UITableView.automaticDimension {
+                return height
+            }
         }
         
         switch self.output.tableHeaderHeight(for: section) {
@@ -349,30 +305,15 @@ extension TableViewData: UITableViewDelegate {
             return 0
             
         case .fixed(let height):
-            self.estimatedHeightsForHeader[section] = height
             return height
             
         case .flexible:
-            guard let view = self.tableView(tableView, viewForHeaderInSection: section) as? UITableViewHeaderFooterView else {
-                assertionFailure("View for header in section `\(section)` is nil")
-                return UITableView.automaticDimension
-            }
-            
-            view.layoutIfNeeded()
-            let targetSize = CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude)
-            let prefferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-            let height = prefferedSize.height
-            self.estimatedHeightsForHeader[section] = height
-            return height
+            return UITableView.automaticDimension
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let height = self.estimatedHeightsForHeader[safe: section], height != UITableView.automaticDimension {
-            return height
-        } else {
-            return self.tableView(tableView, estimatedHeightForHeaderInSection: section)
-        }
+        return self.tableView(tableView, estimatedHeightForHeaderInSection: section)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -387,10 +328,24 @@ extension TableViewData: UITableViewDelegate {
         return view
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        self.preferredTableViewWidthForHeader = tableView.frame.width
+        self.estimatedHeightsForHeader[section] = view.frame.height
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        if let height = self.estimatedHeightsForHeader[safe: section], height != view.frame.height {
+            self.estimatedHeightsForHeader[section] = view.frame.height
+        }
+    }
+    
     // MARK: Footer
     func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        if let height = self.estimatedHeightsForFooter[safe: section] {
-            return height
+        // Check is table view has correct width. Because if width invalid size for footer be invalid too
+        if tableView.frame.width == self.preferredTableViewWidthForFooter {
+            if let height = self.estimatedHeightsForFooter[safe: section], height != UITableView.automaticDimension {
+                return height
+            }
         }
         
         switch self.output.tableFooterHeight(for: section) {
@@ -398,29 +353,15 @@ extension TableViewData: UITableViewDelegate {
             return 0
             
         case .fixed(let height):
-            self.estimatedHeightsForFooter[section] = height
             return height
             
         case .flexible:
-            guard let view = self.tableView(tableView, viewForFooterInSection: section) else {
-                assertionFailure("View for footer in section `\(section)` is nil")
-                return UITableView.automaticDimension
-            }
-            view.layoutIfNeeded()
-            let targetSize = CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude)
-            let prefferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-            let height = prefferedSize.height
-            self.estimatedHeightsForFooter[section] = height
-            return height
+            return UITableView.automaticDimension
         }
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if let height = self.estimatedHeightsForFooter[safe: section] {
-            return height
-        } else {
-            return self.tableView(tableView, estimatedHeightForFooterInSection: section)
-        }
+        return self.tableView(tableView, estimatedHeightForFooterInSection: section)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -434,6 +375,73 @@ extension TableViewData: UITableViewDelegate {
         self.configureFooterView(view, for: section)
         return view
     }
-
+    
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        self.preferredTableViewWidthForFooter = tableView.frame.height
+        self.estimatedHeightsForFooter[section] = view.frame.height
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+        if let height = self.estimatedHeightsForFooter[safe: section], height != view.frame.height {
+            self.estimatedHeightsForFooter[section] = view.frame.height
+        }
+    }
+    
 }
 
+// MARK: - UIScrollViewDelegate
+extension TableViewData: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        self.scrollViewDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.scrollViewDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewWillBeginDecelerating?(scrollView)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewDidEndDecelerating?(scrollView)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.scrollViewDelegate?.viewForZooming?(in: scrollView)
+    }
+    
+    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        self.scrollViewDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
+    }
+    
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        self.scrollViewDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
+    }
+    
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        return self.scrollViewDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? true
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewDidScrollToTop?(scrollView)
+    }
+    
+}

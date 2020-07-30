@@ -9,6 +9,7 @@
 import struct CoreGraphics.CGPoint
 import class UIKit.UIView
 import class UIKit.UITableView
+import class UIKit.UITableViewCell
 import protocol UIKit.UIScrollViewDelegate
 
 public protocol TableViewControllerProtocol: class {

@@ -163,8 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				5B5A8DE924CF49440001CB13 /* TableViewData.swift */,
-				5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */,
 				5B5A8DEE24CF49670001CB13 /* TableViewControllerProtocol.swift */,
+				5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";

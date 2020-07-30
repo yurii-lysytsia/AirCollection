@@ -424,4 +424,5 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             }
         }
     }
+    
 }
