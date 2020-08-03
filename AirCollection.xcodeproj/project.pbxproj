@@ -28,6 +28,7 @@
 		5BB329AE24BF2AB900323F11 /* CollectionViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329AD24BF2AB900323F11 /* CollectionViewControllerProtocol.swift */; };
 		5BB329B024BF2AC000323F11 /* CollectionViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329AF24BF2AC000323F11 /* CollectionViewPresenterProtocol.swift */; };
 		5BB329B224BF2D4F00323F11 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329B124BF2D4F00323F11 /* UICollectionView+Extension.swift */; };
+		5BD5B1C324D803D80065E5DB /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5B1C224D803D80065E5DB /* CollectionViewDelegate.swift */; };
 		DA182C912211757900163B42 /* AirCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = DA182C8F2211757900163B42 /* AirCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		5BB329AD24BF2AB900323F11 /* CollectionViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollectionViewControllerProtocol.swift; path = Source/CollectionView/CollectionViewControllerProtocol.swift; sourceTree = SOURCE_ROOT; };
 		5BB329AF24BF2AC000323F11 /* CollectionViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollectionViewPresenterProtocol.swift; path = Source/CollectionView/CollectionViewPresenterProtocol.swift; sourceTree = SOURCE_ROOT; };
 		5BB329B124BF2D4F00323F11 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		5BD5B1C224D803D80065E5DB /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
 		DA182C8C2211757900163B42 /* AirCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AirCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA182C8F2211757900163B42 /* AirCollection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirCollection.h; sourceTree = "<group>"; };
 		DA182C902211757900163B42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB329AB24BF2A6C00323F11 /* CollectionViewData.swift */,
+				5BD5B1C224D803D80065E5DB /* CollectionViewDelegate.swift */,
 				5BB329AD24BF2AB900323F11 /* CollectionViewControllerProtocol.swift */,
 				5BB329AF24BF2AC000323F11 /* CollectionViewPresenterProtocol.swift */,
 			);
@@ -295,6 +298,7 @@
 				5BB3299424BF1EDB00323F11 /* TextViewInputModelConfigurable.swift in Sources */,
 				5B94A91E24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift in Sources */,
 				5BB3298E24BF1E8A00323F11 /* NibLoadableView.swift in Sources */,
+				5BD5B1C324D803D80065E5DB /* CollectionViewDelegate.swift in Sources */,
 				5BB3299A24BF1F2900323F11 /* Array+Extension.swift in Sources */,
 				5BB3299024BF1E9800323F11 /* ConfigurableView.swift in Sources */,
 				5B5A8DE224CF48FE0001CB13 /* UITableView+Extension.swift in Sources */,

@@ -25,7 +25,13 @@ import protocol UIKit.UICollectionViewDelegateFlowLayout
 class CollectionViewData: NSObject {
 
     // MARK: Stored properties
-    weak var scrollViewDelegate: UIScrollViewDelegate?
+    weak var collectionViewDelegate: CollectionViewDelegate?
+    
+    /// Cached collection view size for items
+    private var preferredCollectionViewSizeForItems: CGSize = .zero
+    
+    /// Cached collection view size for supplementary view
+    private var preferredCollectionViewSizeForSupplementaryView: CGSize = .zero
     
     /// Array of sections (array of items) with estimated sizes for collection view cell. First array is equal to `IndexPath.section`, second to `IndexPath.row`
     private var estimatedSizeForItems = [[CGSize]]()
@@ -244,55 +250,55 @@ extension CollectionViewData: UICollectionViewDataSource {
 extension CollectionViewData: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
+        self.collectionViewDelegate?.scrollViewDidScroll?(scrollView)
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
+        self.collectionViewDelegate?.scrollViewDidScroll?(scrollView)
     }
 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
+        self.collectionViewDelegate?.scrollViewWillBeginDragging?(scrollView)
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        self.scrollViewDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+        self.collectionViewDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        self.scrollViewDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
+        self.collectionViewDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
     }
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewWillBeginDecelerating?(scrollView)
+        self.collectionViewDelegate?.scrollViewWillBeginDecelerating?(scrollView)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidEndDecelerating?(scrollView)
+        self.collectionViewDelegate?.scrollViewDidEndDecelerating?(scrollView)
     }
 
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
+        self.collectionViewDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
     }
 
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.scrollViewDelegate?.viewForZooming?(in: scrollView)
+        return self.collectionViewDelegate?.viewForZooming?(in: scrollView)
     }
 
     func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-        self.scrollViewDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
+        self.collectionViewDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
     }
 
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        self.scrollViewDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
+        self.collectionViewDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
     }
 
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        return self.scrollViewDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? true
+        return self.collectionViewDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? true
     }
 
     func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidScrollToTop?(scrollView)
+        self.collectionViewDelegate?.scrollViewDidScrollToTop?(scrollView)
     }
     
 }
@@ -308,14 +314,58 @@ extension CollectionViewData: UICollectionViewDelegate {
         self.output.collectionItemDidDeselect(at: indexPath)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.preferredCollectionViewSizeForItems = collectionView.bounds.size
+        self.estimatedSizeForItems[indexPath.section][indexPath.row] = cell.bounds.size
+        self.collectionViewDelegate?.collectionViewWillDisplayCell(cell, forItemAt: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // Resave estimated size if it's not correct. Usually it happened for first visible items when it rendered first time
+        if let height = self.estimatedSizeForItems[safe: indexPath.section]?[safe: indexPath.row], height != cell.bounds.size {
+           self.estimatedSizeForItems[indexPath.section][indexPath.row] = cell.bounds.size
+        }
+        self.collectionViewDelegate?.collectionViewDidEndDisplayingCell(cell, forItemAt: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        let elementKindSection = UICollectionView.ElementKindSection(rawValue: elementKind)
+        self.preferredCollectionViewSizeForSupplementaryView = collectionView.bounds.size
+        switch elementKindSection {
+        case .header:
+            self.estimatedSizeForHeaders[indexPath.section] = view.bounds.size
+        case .footer:
+            self.estimatedSizeForFooters[indexPath.section] = view.bounds.size
+        }
+        self.collectionViewDelegate?.collectionViewWillDisplaySupplementaryView(view, for: elementKindSection, at: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        let elementKindSection = UICollectionView.ElementKindSection(rawValue: elementKind)
+        switch elementKindSection {
+        case .header:
+            if let size = self.estimatedSizeForHeaders[safe: indexPath.section], size != view.bounds.size {
+                self.estimatedSizeForHeaders[indexPath.section] = view.bounds.size
+            }
+        case .footer:
+            if let size = self.estimatedSizeForFooters[safe: indexPath.section], size != view.bounds.size {
+                self.estimatedSizeForFooters[indexPath.section] = view.bounds.size
+            }
+        }
+        self.collectionViewDelegate?.collectionViewDidEndDisplayingSupplementaryView(view, for: elementKindSection, at: indexPath)
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension CollectionViewData: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if let estimatedSize = self.estimatedSizeForItems[safe: indexPath.section]?[safe: indexPath.row], estimatedSize != UICollectionViewFlowLayout.automaticSize {
-            return estimatedSize
+        // Check is collection view has correct size. Because if size invalid size for item be invalid too
+        if collectionView.bounds.size == self.preferredCollectionViewSizeForItems {
+            if let size = self.estimatedSizeForItems[safe: indexPath.section]?[safe: indexPath.row], size != UICollectionViewFlowLayout.automaticSize {
+                return size
+            }
         }
         
         switch self.output.collectionItemSize(for: indexPath) {
@@ -339,6 +389,56 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        // Check is collection view has correct size. Because if size invalid size for item be invalid too
+        if collectionView.bounds.size == self.preferredCollectionViewSizeForSupplementaryView {
+            if let size = self.estimatedSizeForHeaders[safe: section], size != UICollectionViewFlowLayout.automaticSize {
+                return size
+            }
+        }
+        let preferredHeight = self.output.collectionHeaderHeight(for: section)
+        return self.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForSupplementaryViewInSection: section, preferredHeight: preferredHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        // Check is collection view has correct size. Because if size invalid size for item be invalid too
+        if collectionView.bounds.size == self.preferredCollectionViewSizeForSupplementaryView {
+            if let size = self.estimatedSizeForFooters[safe: section], size != UICollectionViewFlowLayout.automaticSize {
+                return size
+            }
+        }
+        let preferredHeight = self.output.collectionFooterHeight(for: section)
+        return self.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForSupplementaryViewInSection: section, preferredHeight: preferredHeight)
+    }
+    
+    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForSupplementaryViewInSection section: Int, preferredHeight: UICollectionView.ViewHeight) -> CGSize {
+        switch preferredHeight {
+        case .none:
+            return CGSize.zero
+            
+        case .flexible:
+            return UICollectionViewFlowLayout.automaticSize
+
+        case .fixedHeight(let height):
+            guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
+                assertionFailure("Collection flow layout must be `UICollectionViewFlowLayout` type for using `fixedHeight` size")
+                return CGSize.zero
+            }
+            switch flowLayout.scrollDirection {
+            case .horizontal:
+                return CGSize(width: height, height: collectionView.bounds.height)
+
+            case .vertical:
+                return CGSize(width: collectionView.bounds.width, height: height)
+
+            @unknown default:
+                assertionFailure("Unknown collection view layout scroll direction")
+                return CGSize.zero
+            }
+        }
+    }
+
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return self.output.collectionInset(for: section)
     }
@@ -349,80 +449,6 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return self.output.collectionMinimumInteritemSpacing(for: section)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if let estimatedSize = self.estimatedSizeForHeaders[safe: section], estimatedSize != UICollectionViewFlowLayout.automaticSize {
-            return estimatedSize
-        }
-        
-        switch self.output.collectionHeaderHeight(for: section) {
-        case .none:
-            return CGSize.zero
-            
-        case .flexible:
-            let indexPath = IndexPath(row: 0, section: section)
-            let view = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath)
-            let targetSize = CGSize(width: collectionView.bounds.width, height: CGFloat.greatestFiniteMagnitude)
-            let prefferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-            let size =  CGSize(width: collectionView.bounds.width, height: prefferedSize.height)
-            self.estimatedSizeForHeaders[section] = size
-            return size
-
-        case .fixedHeight(let height):
-            guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-                assertionFailure("Collection flow layout must be `UICollectionViewFlowLayout` type for using `fillEqually` size")
-                return CGSize.zero
-            }
-            switch flowLayout.scrollDirection {
-            case .horizontal:
-                return CGSize(width: height, height: collectionView.bounds.height)
-
-            case .vertical:
-                return CGSize(width: collectionView.bounds.width, height: height)
-
-            @unknown default:
-                assertionFailure("Unknown collection view layout scroll direction")
-                return CGSize.zero
-            }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if let estimatedSize = self.estimatedSizeForFooters[safe: section], estimatedSize != UICollectionViewFlowLayout.automaticSize {
-            return estimatedSize
-        }
-        
-        switch self.output.collectionFooterHeight(for: section) {
-        case .none:
-            return CGSize.zero
-            
-        case .flexible:
-            let indexPath = IndexPath(row: 0, section: section)
-            let view = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionFooter, at: indexPath)
-            let targetSize = CGSize(width: collectionView.bounds.width, height: CGFloat.greatestFiniteMagnitude)
-            let prefferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-            let size =  CGSize(width: collectionView.bounds.width, height: prefferedSize.height)
-            self.estimatedSizeForFooters[section] = size
-            return size
-
-        case .fixedHeight(let height):
-            guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-                assertionFailure("Collection flow layout must be `UICollectionViewFlowLayout` type for using `fillEqually` size")
-                return CGSize.zero
-            }
-            switch flowLayout.scrollDirection {
-            case .horizontal:
-                return CGSize(width: height, height: collectionView.bounds.height)
-
-            case .vertical:
-                return CGSize(width: collectionView.bounds.width, height: height)
-
-            @unknown default:
-                assertionFailure("Unknown collection view layout scroll direction")
-                return CGSize.zero
-            }
-        }
     }
     
 }
