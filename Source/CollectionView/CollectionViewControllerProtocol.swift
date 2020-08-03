@@ -187,12 +187,12 @@ public extension CollectionViewControllerProtocol {
 
 }
 
-// MARK: - UIScrollViewDelegateForward
-public extension CollectionViewControllerProtocol where Self: UIScrollViewDelegate {
+// MARK: - CollectionViewDelegateForward
+public extension CollectionViewControllerProtocol where Self: CollectionViewDelegate {
     
     /// Forward all collection view `UIScrollViewDelegate` to current view controller.
-    func forwardCollectionViewScrollViewDelegate() {
-        self.collectionViewData.scrollViewDelegate = self
+    func forwardCollectionViewDelegate() {
+        self.collectionViewData.collectionViewDelegate = self
     }
     
 }

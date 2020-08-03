@@ -384,9 +384,44 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             let height = (collectionView.bounds.height - verticallySpace) / verticallyItems
             
             let size = CGSize(width: width, height: height)
-            self.estimatedSizeForItems[indexPath.section][indexPath.row] = size
             return size
+            
+        case .flexibleHorizontallyItems(let itemsPerRow, let aspectRatio):
+            let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
+            let minimumInteritemSpacing = self.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: indexPath.section)
+            
+            let horizontallySpace = sectionInset.left + sectionInset.right + (minimumInteritemSpacing * (itemsPerRow - 1))
+            let width = (collectionView.bounds.width - horizontallySpace) / itemsPerRow
+            let height = width * aspectRatio
+            
+            let size = CGSize(width: width, height: height)
+            return size
+            
+            
+        case .flexibleVerticallyItems(let itemsPerRow, let aspectRatio):
+            let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
+            let minimumLineSpacing = self.collectionView(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAt: indexPath.section)
+            
+            let space = sectionInset.top + sectionInset.bottom + (minimumLineSpacing * (itemsPerRow - 1))
+            let height = (collectionView.bounds.height - space)/itemsPerRow
+            let width = height * aspectRatio
+            return CGSize(width: height, height: width)
+            
+        case .flexibleItemsWidth(let aspectRatio):
+            let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
+            let insetedRect = collectionView.frame.inset(by: sectionInset)
+            let width = insetedRect.width
+            let height = width * aspectRatio
+            return CGSize(width: width, height: height)
+            
+        case .flexibleItemsHeight(let aspectRatio):
+            let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
+            let insetedRect = collectionView.frame.inset(by: sectionInset)
+            let height = insetedRect.height
+            let width = height * aspectRatio
+            return CGSize(width: width, height: height)
         }
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
