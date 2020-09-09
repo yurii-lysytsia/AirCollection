@@ -32,6 +32,14 @@ public protocol CollectionViewControllerProtocol: class {
     ///   - completion: A completion handler block to execute when all of the operations are finished
     func updateCollectionView(updates: () -> Void, completion: ((Bool) -> Void)?)
     
+    /// Update collection view items for specific item and section.
+    /// - Parameters:
+    ///   - deletions: Items that will be delete
+    ///   - insertions: Items that will be insert
+    ///   - modifications: Items that will be reload
+    ///   - section: Section where this items will updated. For exaple for `deletions = [0]` and `section = 1` will removed item at `IndexPath(row: 0, section: 1)`
+    func updateCollectionView(deletions: [Int], insertions: [Int], modifications: [Int], forSection section: Int, completion: ((Bool) -> Void)?)
+    
     /// Reloads just the collection view items at the specified index paths
     func reloadCollectionViewItems(at indexPaths: [IndexPath])
     
@@ -101,6 +109,27 @@ public extension CollectionViewControllerProtocol {
 
     func updateCollectionView(updates: () -> Void) {
         self.updateCollectionView(updates: updates, completion: nil)
+    }
+    
+    func updateCollectionView(deletions: [Int], insertions: [Int], modifications: [Int], forSection section: Int, completion: ((Bool) -> Void)?) {
+        if deletions.isEmpty, insertions.isEmpty, modifications.isEmpty {
+            assertionFailure("\(#function) deletions, insertions or modifications can't be empty. One of them must contains element")
+            return
+        }
+        self.updateCollectionView(updates: {
+            if !deletions.isEmpty {
+                let indexPaths = deletions.map { IndexPath(row: $0, section: section) }
+                self.deleteCollectionViewItems(at: indexPaths)
+            }
+            if !insertions.isEmpty {
+                let indexPaths = insertions.map { IndexPath(row: $0, section: section) }
+                self.insertCollectionViewItems(at: indexPaths)
+            }
+            if !modifications.isEmpty {
+                let indexPaths = modifications.map { IndexPath(row: $0, section: section) }
+                self.reloadCollectionViewItems(at: indexPaths)
+            }
+        }, completion: completion)
     }
     
     // MARK: Items
