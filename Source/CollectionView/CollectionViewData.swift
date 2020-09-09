@@ -369,10 +369,36 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             }
         }
         
+        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
+            assertionFailure("\(#function) support only `UICollectionViewFlowLayout` subclasses to calculate")
+            return .zero
+        }
+    
+
+        
         // Calculate additional values
+        let safeArea = collectionView.safeAreaInsets
         let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
-        let minimumLineSpacing = self.collectionView(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAt: indexPath.section)
-        let minimumInteritemSpacing = self.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: indexPath.section)
+        let minimumVerticalSpacing: CGFloat = {
+            switch flowLayout.scrollDirection {
+            case .vertical:
+                return self.collectionView(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAt: indexPath.section)
+            case .horizontal:
+                return self.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: indexPath.section)
+            @unknown default:
+                return 0
+            }
+        }()
+        let minimumHorizintalSpacing: CGFloat = {
+            switch flowLayout.scrollDirection {
+            case .vertical:
+                return self.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: indexPath.section)
+            case .horizontal:
+                return self.collectionView(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAt: indexPath.section)
+            @unknown default:
+                return 0
+            }
+        }()
         let itemSize = self.output.collectionItemSize(for: indexPath)
 
         // Calculate item width
@@ -383,11 +409,12 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             width = value
             flexibleWidth = false
         case .fillEquall(let items):
-            let horizontallySpace = sectionInset.left + sectionInset.right + (minimumInteritemSpacing * (items - 1))
-            width = (collectionView.bounds.width - horizontallySpace) / items
+            let horizontallyInsets = safeArea.left + safeArea.right + sectionInset.left + sectionInset.right
+            let horizontallySpace = horizontallyInsets + (minimumHorizintalSpacing * (items - 1))
+            width = (collectionView.frame.width - horizontallySpace) / items
             flexibleWidth = false
         case .flexible:
-            width = CGFloat.greatestFiniteMagnitude
+            width = 0
             flexibleWidth = true
         }
         
@@ -399,11 +426,12 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             height = value
             flexibleHeight = false
         case .fillEquall(let items):
-            let verticallySpace = sectionInset.top + sectionInset.bottom + (minimumLineSpacing * (items - 1))
-            height = (collectionView.bounds.height - verticallySpace) / items
+            let verticallyInsets = safeArea.top + safeArea.bottom + sectionInset.top + sectionInset.bottom
+            let verticallySpace = verticallyInsets + (minimumVerticalSpacing * (items - 1))
+            height = (collectionView.frame.height - verticallySpace) / items
             flexibleHeight = false
         case .flexible:
-            height = CGFloat.greatestFiniteMagnitude
+            height = 0
             flexibleHeight = true
         }
         
