@@ -6,6 +6,8 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct CoreGraphics.CGPoint
+import class UIKit.UIView
 import class UIKit.UICollectionView
 import protocol UIKit.UIScrollViewDelegate
 
@@ -29,6 +31,14 @@ public protocol CollectionViewControllerProtocol: class {
     ///   - updates: Use this block to call update methods for table view. You should call `reloadCollectionViewRows(at:with:)`, `deleteCollectionViewRows(at:with:)`, `insertCollectionViewRows(at:with:)`
     ///   - completion: A completion handler block to execute when all of the operations are finished
     func updateCollectionView(updates: () -> Void, completion: ((Bool) -> Void)?)
+    
+    /// Update collection view items for specific item and section.
+    /// - Parameters:
+    ///   - deletions: Items that will be delete
+    ///   - insertions: Items that will be insert
+    ///   - modifications: Items that will be reload
+    ///   - section: Section where this items will updated. For exaple for `deletions = [0]` and `section = 1` will removed item at `IndexPath(row: 0, section: 1)`
+    func updateCollectionView(deletions: [Int], insertions: [Int], modifications: [Int], forSection section: Int, completion: ((Bool) -> Void)?)
     
     /// Reloads just the collection view items at the specified index paths
     func reloadCollectionViewItems(at indexPaths: [IndexPath])
@@ -66,6 +76,9 @@ public protocol CollectionViewControllerProtocol: class {
     /// Call `configureCell(_:for)` method for cell at specified index path of the collection view
     func reconfigureCollectionViewCellForItem(at indexPath: IndexPath)
     
+    /// Returns an index path identifying the subview
+    func indexPathForItem(with view: UIView) -> IndexPath?
+    
 }
 
 public extension CollectionViewControllerProtocol {
@@ -85,10 +98,6 @@ public extension CollectionViewControllerProtocol {
     
     // MARK: Update
     func updateCollectionView(updates: () -> Void, completion: ((Bool) -> Void)?) {
-        if self.isPerformBatchUpdatesCalled {
-            assertionFailure("`updateCollectionView(updates:completion:)` was called befor. Please check your logic because it the feature it can be fatal error")
-            return
-        }
         self.isPerformBatchUpdatesCalled = true
         self.collectionViewSource.performBatchUpdates({
             updates()
@@ -100,6 +109,27 @@ public extension CollectionViewControllerProtocol {
 
     func updateCollectionView(updates: () -> Void) {
         self.updateCollectionView(updates: updates, completion: nil)
+    }
+    
+    func updateCollectionView(deletions: [Int], insertions: [Int], modifications: [Int], forSection section: Int, completion: ((Bool) -> Void)?) {
+        if deletions.isEmpty, insertions.isEmpty, modifications.isEmpty {
+            assertionFailure("\(#function) deletions, insertions or modifications can't be empty. One of them must contains element")
+            return
+        }
+        self.updateCollectionView(updates: {
+            if !deletions.isEmpty {
+                let indexPaths = deletions.map { IndexPath(row: $0, section: section) }
+                self.deleteCollectionViewItems(at: indexPaths)
+            }
+            if !insertions.isEmpty {
+                let indexPaths = insertions.map { IndexPath(row: $0, section: section) }
+                self.insertCollectionViewItems(at: indexPaths)
+            }
+            if !modifications.isEmpty {
+                let indexPaths = modifications.map { IndexPath(row: $0, section: section) }
+                self.reloadCollectionViewItems(at: indexPaths)
+            }
+        }, completion: completion)
     }
     
     // MARK: Items
@@ -184,7 +214,11 @@ public extension CollectionViewControllerProtocol {
         }
         self.collectionViewData.configureCell(cell, for: indexPath)
     }
-
+    
+    func indexPathForItem(with view: UIView) -> IndexPath? {
+        let point = view.convert(CGPoint.zero, to: self.collectionViewSource)
+        return self.collectionViewSource.indexPathForItem(at: point)
+    }
 }
 
 // MARK: - CollectionViewDelegateForward

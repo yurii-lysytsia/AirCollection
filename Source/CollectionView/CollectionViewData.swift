@@ -10,6 +10,7 @@ import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGPoint
 import struct CoreGraphics.CGSize
 import struct UIKit.UIEdgeInsets
+import struct UIKit.UILayoutPriority
 import class UIKit.UIView
 import class UIKit.UIScrollView
 import class UIKit.UICollectionView
@@ -42,6 +43,9 @@ class CollectionViewData: NSObject {
     /// Array of sections with estimated sizes for collection view footer. Element of array is equal to `IndexPath.section`
     private var estimatedSizeForFooters = [CGSize]()
     
+    /// Cached collection view cell implementation for identifiers. Need for optimization when calculate dynamic cell size with similar type
+    private var cachedReusableCell = [String : UICollectionViewCell]()
+    
     // MARK: Dependency injection
     private unowned let input: CollectionViewControllerProtocol
     private unowned let output: CollectionViewPresenterProtocol
@@ -59,6 +63,7 @@ class CollectionViewData: NSObject {
         self.estimatedSizeForItems.removeAll()
         self.estimatedSizeForHeaders.removeAll()
         self.estimatedSizeForFooters.removeAll()
+        self.cachedReusableCell.removeAll()
     }
     
     // MARK: Sections
@@ -368,60 +373,99 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             }
         }
         
-        switch self.output.collectionItemSize(for: indexPath) {
-        case .fixedSize(let size):
-            return size
-            
-        case .flexibleItems(let horizontallyItems, let verticallyItems):
-            let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
-            let minimumLineSpacing = self.collectionView(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAt: indexPath.section)
-            let minimumInteritemSpacing = self.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: indexPath.section)
-            
-            let horizontallySpace = sectionInset.left + sectionInset.right + (minimumInteritemSpacing * (horizontallyItems - 1))
-            let width = (collectionView.bounds.width - horizontallySpace) / horizontallyItems
-            
-            let verticallySpace = sectionInset.top + sectionInset.bottom + (minimumLineSpacing * (verticallyItems - 1))
-            let height = (collectionView.bounds.height - verticallySpace) / verticallyItems
-            
-            let size = CGSize(width: width, height: height)
-            return size
-            
-        case .flexibleHorizontallyItems(let itemsPerRow, let aspectRatio):
-            let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
-            let minimumInteritemSpacing = self.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: indexPath.section)
-            
-            let horizontallySpace = sectionInset.left + sectionInset.right + (minimumInteritemSpacing * (itemsPerRow - 1))
-            let width = (collectionView.bounds.width - horizontallySpace) / itemsPerRow
-            let height = width * aspectRatio
-            
-            let size = CGSize(width: width, height: height)
-            return size
-            
-            
-        case .flexibleVerticallyItems(let itemsPerRow, let aspectRatio):
-            let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
-            let minimumLineSpacing = self.collectionView(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAt: indexPath.section)
-            
-            let space = sectionInset.top + sectionInset.bottom + (minimumLineSpacing * (itemsPerRow - 1))
-            let height = (collectionView.bounds.height - space)/itemsPerRow
-            let width = height * aspectRatio
-            return CGSize(width: height, height: width)
-            
-        case .flexibleItemsWidth(let aspectRatio):
-            let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
-            let insetedRect = collectionView.frame.inset(by: sectionInset)
-            let width = insetedRect.width
-            let height = width * aspectRatio
-            return CGSize(width: width, height: height)
-            
-        case .flexibleItemsHeight(let aspectRatio):
-            let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
-            let insetedRect = collectionView.frame.inset(by: sectionInset)
-            let height = insetedRect.height
-            let width = height * aspectRatio
-            return CGSize(width: width, height: height)
+        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
+            assertionFailure("\(#function) support only `UICollectionViewFlowLayout` subclasses to calculate")
+            return .zero
         }
     
+
+        
+        // Calculate additional values
+        let safeArea = collectionView.safeAreaInsets
+        let sectionInset = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
+        let minimumVerticalSpacing: CGFloat = {
+            switch flowLayout.scrollDirection {
+            case .vertical:
+                return self.collectionView(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAt: indexPath.section)
+            case .horizontal:
+                return self.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: indexPath.section)
+            @unknown default:
+                return 0
+            }
+        }()
+        let minimumHorizintalSpacing: CGFloat = {
+            switch flowLayout.scrollDirection {
+            case .vertical:
+                return self.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: indexPath.section)
+            case .horizontal:
+                return self.collectionView(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAt: indexPath.section)
+            @unknown default:
+                return 0
+            }
+        }()
+        let itemSize = self.output.collectionItemSize(for: indexPath)
+
+        // Calculate item width
+        let width: CGFloat
+        let flexibleWidth: Bool
+        switch itemSize.width {
+        case .fixed(let value):
+            width = value
+            flexibleWidth = false
+        case .fillEquall(let items):
+            let horizontallyInsets = safeArea.left + safeArea.right + sectionInset.left + sectionInset.right
+            let horizontallySpace = horizontallyInsets + (minimumHorizintalSpacing * (items - 1))
+            width = (collectionView.frame.width - horizontallySpace) / items
+            flexibleWidth = false
+        case .flexible:
+            width = 0
+            flexibleWidth = true
+        }
+        
+        // Calculate item height
+        let height: CGFloat
+        let flexibleHeight: Bool
+        switch itemSize.height {
+        case .fixed(let value):
+            height = value
+            flexibleHeight = false
+        case .fillEquall(let items):
+            let verticallyInsets = safeArea.top + safeArea.bottom + sectionInset.top + sectionInset.bottom
+            let verticallySpace = verticallyInsets + (minimumVerticalSpacing * (items - 1))
+            height = (collectionView.frame.height - verticallySpace) / items
+            flexibleHeight = false
+        case .flexible:
+            height = 0
+            flexibleHeight = true
+        }
+        
+        // Create items size
+        var targetSize = CGSize(width: width, height: height)
+        
+        // Calculate dynamic width and/or height
+        if flexibleWidth || flexibleHeight {
+            let identifier = self.output.collectionItemIdentifier(for: indexPath)
+            
+            // Get dequeue reusable cell or get from cache
+            let cell: UICollectionViewCell = {
+                if let cachedCell = self.cachedReusableCell[identifier] {
+                    return cachedCell
+                }
+                let dequeueCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+                self.cachedReusableCell[identifier] = dequeueCell
+                return dequeueCell
+            }()
+            
+            // Configure cell for actual data
+            self.configureCell(cell, for: indexPath)
+            
+            // Calculate dynamic size for item
+            let horizontalFittingPriority: UILayoutPriority = flexibleWidth ? .fittingSizeLevel : .required
+            let verticalFittingPriority: UILayoutPriority = flexibleHeight ? .fittingSizeLevel : .required
+            targetSize = cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+        }
+        
+        return targetSize
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -446,7 +490,7 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
         return self.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForSupplementaryViewInSection: section, preferredHeight: preferredHeight)
     }
     
-    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForSupplementaryViewInSection section: Int, preferredHeight: UICollectionView.ViewHeight) -> CGSize {
+    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForSupplementaryViewInSection section: Int, preferredHeight: CollectionViewSupplementaryViewHeight) -> CGSize {
         switch preferredHeight {
         case .none:
             return CGSize.zero

@@ -91,7 +91,7 @@ class Presenter: NSObject, TableViewPresenterProtocol {
         return TableViewCell.viewIdentifier // But I recommend use `IdentificableView` protocol and `viewIdentifier` property
     }
     
-    func tableRowHeight(for indexPath: IndexPath) -> UITableView.RowHeight {
+    func tableRowHeight(for indexPath: IndexPath) -> TableViewRowHeight {
         // Height to use for a row in a specified location of the table view for index path
         return .flexible // Dynamic table view row height. Not stable for version 1.0-alpha
         retunr .fixed(44) // Fixed table view row height

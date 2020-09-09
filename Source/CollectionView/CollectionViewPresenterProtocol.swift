@@ -8,7 +8,6 @@
 
 import struct CoreGraphics.CGFloat
 import struct UIKit.UIEdgeInsets
-import class UIKit.UICollectionView
 
 public protocol CollectionViewPresenterProtocol: class {
     
@@ -22,7 +21,7 @@ public protocol CollectionViewPresenterProtocol: class {
     func collectionItemIdentifier(for indexPath: IndexPath) -> String
     
     /// Size to use for a item in a specified location of the collection view for index path
-    func collectionItemSize(for indexPath: IndexPath) -> UICollectionView.ItemSize
+    func collectionItemSize(for indexPath: IndexPath) -> CollectionViewItemSize
     
     /// Model to use for a row in a specified location of the table view for index path
     func collectionItemModel(for indexPath: IndexPath) -> Any?
@@ -37,7 +36,7 @@ public protocol CollectionViewPresenterProtocol: class {
     func collectionHeaderIdentifier(for section: Int) -> String?
     
     /// Height to use for the header of a particular section of the collection view
-    func collectionHeaderHeight(for section: Int) -> UICollectionView.ViewHeight
+    func collectionHeaderHeight(for section: Int) -> CollectionViewSupplementaryViewHeight
     
     /// Model to use for the header of a particular section of the collection view
     func collectionHeaderModel(for section: Int) -> Any?
@@ -46,7 +45,7 @@ public protocol CollectionViewPresenterProtocol: class {
     func collectionFooterIdentifier(for section: Int) -> String?
     
     /// Height to use for the footer of a particular section of the collection view
-    func collectionFooterHeight(for section: Int) -> UICollectionView.ViewHeight
+    func collectionFooterHeight(for section: Int) -> CollectionViewSupplementaryViewHeight
     
     /// Model to use for the footer of a particular section of the collection view
     func collectionFooterModel(for section: Int) -> Any?
@@ -78,7 +77,7 @@ public extension CollectionViewPresenterProtocol {
         return nil
     }
     
-    func collectionHeaderHeight(for section: Int) -> UICollectionView.ViewHeight {
+    func collectionHeaderHeight(for section: Int) -> CollectionViewSupplementaryViewHeight {
         return self.collectionHeaderIdentifier(for: section) == nil ? .none : .flexible
     }
     
@@ -91,7 +90,7 @@ public extension CollectionViewPresenterProtocol {
         return nil
     }
     
-    func collectionFooterHeight(for section: Int) -> UICollectionView.ViewHeight {
+    func collectionFooterHeight(for section: Int) -> CollectionViewSupplementaryViewHeight {
         return self.collectionFooterIdentifier(for: section) == nil ? .none : .flexible
     }
     
