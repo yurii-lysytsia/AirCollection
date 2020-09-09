@@ -33,6 +33,14 @@ public protocol TableViewControllerProtocol: class {
     ///   - completion: A completion handler block to execute when all of the operations are finished
     func updateTableView(updates: () -> Void, completion: ((Bool) -> Void)?)
     
+    /// Update table view rows for specific rows and section.
+    /// - Parameters:
+    ///   - deletions: Rows that will be delete
+    ///   - insertions: Rows that will be insert
+    ///   - modifications: Rows that will be reload
+    ///   - section: Section where this rows will reload. For exaple for `deletions = [0]` and `section = 1` will removed rows with `IndexPath(row: 0, section: 1)`
+    func updateTableView(deletions: [Int], insertions: [Int], modifications: [Int], forSection section: Int, with animation: UITableView.RowAnimation, completion: ((Bool) -> Void)?)
+    
     /// Reloads the specified rows using a given animation effect.
     func reloadTableViewRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation)
     
@@ -109,6 +117,31 @@ public extension TableViewControllerProtocol {
     
     func updateTableView(updates: () -> Void) {
         self.updateTableView(updates: updates, completion: nil)
+    }
+    
+    func updateTableView(deletions: [Int], insertions: [Int], modifications: [Int], forSection section: Int, with animation: UITableView.RowAnimation, completion: ((Bool) -> Void)?) {
+        if deletions.isEmpty, insertions.isEmpty, modifications.isEmpty {
+            assertionFailure("\(#function) deletions, insertions or modifications can't be empty. One of them must contains element")
+            return
+        }
+        self.updateTableView(updates: {
+            if !deletions.isEmpty {
+                let indexPaths = deletions.map { IndexPath(row: $0, section: section) }
+                self.deleteTableViewRows(at: indexPaths, with: animation)
+            }
+            if !insertions.isEmpty {
+                let indexPaths = insertions.map { IndexPath(row: $0, section: section) }
+                self.insertTableViewRows(at: indexPaths, with: animation)
+            }
+            if !modifications.isEmpty {
+                let indexPaths = modifications.map { IndexPath(row: $0, section: section) }
+                self.reloadTableViewRows(at: indexPaths, with: animation)
+            }
+        }, completion: completion)
+    }
+    
+    func updateTableView(deletions: [Int], insertions: [Int], modifications: [Int], forSection section: Int, completion: ((Bool) -> Void)? = nil) {
+        self.updateTableView(deletions: deletions, insertions: insertions, modifications: modifications, forSection: section, with: .automatic, completion: completion)
     }
     
     // MARK: Rows
