@@ -43,6 +43,9 @@ class CollectionViewData: NSObject {
     /// Array of sections with estimated sizes for collection view footer. Element of array is equal to `IndexPath.section`
     private var estimatedSizeForFooters = [CGSize]()
     
+    /// Cached collection view cell implementation for identifiers. Need for optimization when calculate dynamic cell size with similar type
+    private var cachedReusableCell = [String : UICollectionViewCell]()
+    
     // MARK: Dependency injection
     private unowned let input: CollectionViewControllerProtocol
     private unowned let output: CollectionViewPresenterProtocol
@@ -60,6 +63,7 @@ class CollectionViewData: NSObject {
         self.estimatedSizeForItems.removeAll()
         self.estimatedSizeForHeaders.removeAll()
         self.estimatedSizeForFooters.removeAll()
+        self.cachedReusableCell.removeAll()
     }
     
     // MARK: Sections
@@ -440,15 +444,25 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
         
         // Calculate dynamic width and/or height
         if flexibleWidth || flexibleHeight {
-            // Get dequeue reusable cell
             let identifier = self.output.collectionItemIdentifier(for: indexPath)
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-            self.configureCell(cell, for: indexPath)
-            cell.layoutIfNeeded()
             
+            // Get dequeue reusable cell or get from cache
+            let cell: UICollectionViewCell = {
+                if let cachedCell = self.cachedReusableCell[identifier] {
+                    return cachedCell
+                }
+                let dequeueCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+                self.cachedReusableCell[identifier] = dequeueCell
+                return dequeueCell
+            }()
+            
+            // Configure cell for actual data
+            self.configureCell(cell, for: indexPath)
+            
+            // Calculate dynamic size for item
             let horizontalFittingPriority: UILayoutPriority = flexibleWidth ? .fittingSizeLevel : .required
             let verticalFittingPriority: UILayoutPriority = flexibleHeight ? .fittingSizeLevel : .required
-            targetSize = cell.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+            targetSize = cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
         }
         
         return targetSize
