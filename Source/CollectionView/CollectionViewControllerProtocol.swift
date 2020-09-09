@@ -6,6 +6,8 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct CoreGraphics.CGPoint
+import class UIKit.UIView
 import class UIKit.UICollectionView
 import protocol UIKit.UIScrollViewDelegate
 
@@ -65,6 +67,9 @@ public protocol CollectionViewControllerProtocol: class {
     
     /// Call `configureCell(_:for)` method for cell at specified index path of the collection view
     func reconfigureCollectionViewCellForItem(at indexPath: IndexPath)
+    
+    /// Returns an index path identifying the subview
+    func indexPathForItem(with view: UIView) -> IndexPath?
     
 }
 
@@ -184,7 +189,11 @@ public extension CollectionViewControllerProtocol {
         }
         self.collectionViewData.configureCell(cell, for: indexPath)
     }
-
+    
+    func indexPathForItem(with view: UIView) -> IndexPath? {
+        let point = view.convert(CGPoint.zero, to: self.collectionViewSource)
+        return self.collectionViewSource.indexPathForItem(at: point)
+    }
 }
 
 // MARK: - CollectionViewDelegateForward
