@@ -21,7 +21,7 @@ public protocol TableViewPresenterProtocol: class {
     func tableRowIdentifier(for indexPath: IndexPath) -> String
     
     /// Height to use for a row in a specified location of the table view for index path
-    func tableRowHeight(for indexPath: IndexPath) -> UITableView.RowHeight
+    func tableRowHeight(for indexPath: IndexPath) -> TableViewRowHeight
     
     /// Model to use for a row in a specified location of the table view for index path
     func tableRowModel(for indexPath: IndexPath) -> Any?
@@ -42,7 +42,7 @@ public protocol TableViewPresenterProtocol: class {
     func tableHeaderIdentifier(for section: Int) -> String?
     
     /// Height to use for the header of a particular section of the table view
-    func tableHeaderHeight(for section: Int) -> UITableView.ViewHeight
+    func tableHeaderHeight(for section: Int) -> TableViewHeaderFooterViewHeight
     
     /// Model to use for the header of a particular section of the table view
     func tableHeaderModel(for section: Int) -> Any?
@@ -51,7 +51,7 @@ public protocol TableViewPresenterProtocol: class {
     func tableFooterIdentifier(for section: Int) -> String?
     
     /// Height to use for the footer of a particular section of the table view
-    func tableFooterHeight(for section: Int) -> UITableView.ViewHeight
+    func tableFooterHeight(for section: Int) -> TableViewHeaderFooterViewHeight
     
     /// Model to use for the footer of a particular section of the table view
     func tableFooterModel(for section: Int) -> Any?
@@ -85,7 +85,7 @@ public extension TableViewPresenterProtocol {
         return nil
     }
     
-    func tableHeaderHeight(for section: Int) -> UITableView.ViewHeight {
+    func tableHeaderHeight(for section: Int) -> TableViewHeaderFooterViewHeight {
         return self.tableHeaderIdentifier(for: section) == nil ? .none : .flexible
     }
     
@@ -98,7 +98,7 @@ public extension TableViewPresenterProtocol {
         return nil
     }
     
-    func tableFooterHeight(for section: Int) -> UITableView.ViewHeight {
+    func tableFooterHeight(for section: Int) -> TableViewHeaderFooterViewHeight {
         return self.tableFooterIdentifier(for: section) == nil ? .none : .flexible
     }
     
