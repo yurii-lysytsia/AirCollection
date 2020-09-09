@@ -38,7 +38,7 @@ public protocol TableViewControllerProtocol: class {
     ///   - deletions: Rows that will be delete
     ///   - insertions: Rows that will be insert
     ///   - modifications: Rows that will be reload
-    ///   - section: Section where this rows will reload. For exaple for `deletions = [0]` and `section = 1` will removed rows with `IndexPath(row: 0, section: 1)`
+    ///   - section: Section where this rows will updated. For exaple for `deletions = [0]` and `section = 1` will removed row at `IndexPath(row: 0, section: 1)`
     func updateTableView(deletions: [Int], insertions: [Int], modifications: [Int], forSection section: Int, with animation: UITableView.RowAnimation, completion: ((Bool) -> Void)?)
     
     /// Reloads the specified rows using a given animation effect.
@@ -102,10 +102,6 @@ public extension TableViewControllerProtocol {
     
     // MARK: Update
     func updateTableView(updates: () -> Void, completion: ((Bool) -> Void)?) {
-        if self.isPerformBatchUpdatesCalled {
-            assertionFailure("`updateTableView(updates:completion:)` was called befor. Please check your logic because it the feature it can be fatal error")
-            return
-        }
         self.isPerformBatchUpdatesCalled = true
         self.tableViewSource.performBatchUpdates({
             updates()
