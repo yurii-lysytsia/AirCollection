@@ -90,10 +90,6 @@ public extension CollectionViewControllerProtocol {
     
     // MARK: Update
     func updateCollectionView(updates: () -> Void, completion: ((Bool) -> Void)?) {
-        if self.isPerformBatchUpdatesCalled {
-            assertionFailure("`updateCollectionView(updates:completion:)` was called befor. Please check your logic because it the feature it can be fatal error")
-            return
-        }
         self.isPerformBatchUpdatesCalled = true
         self.collectionViewSource.performBatchUpdates({
             updates()
