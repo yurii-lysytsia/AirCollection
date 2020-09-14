@@ -31,11 +31,11 @@ public enum TextFieldInputModelConfiguration {
     case datePicker(mode: UIDatePicker.Mode, date: Date, minimumDate: Date?, maximumDate: Date?, delegate: UIDatePickerDelegate?)
 }
 
-public extension InputModelConfigurableView where InputModel: TextFieldInputModelConfigurable, InputModelView: UITextField  {
+public extension TextInputConfigurableView where Model: TextFieldInputModelConfigurable, TextInputView: UITextField  {
     
-    func configureInputModel(inputModel: InputModel) {
-        let textField = self.inputModelView
-        let configuration = inputModel.textFieldConfiguration
+    func configureTextInputView(model: Model) {
+        let textField = self.textInputView
+        let configuration = model.textFieldConfiguration
         
         switch configuration {
         case .default:
@@ -61,7 +61,7 @@ public extension InputModelConfigurableView where InputModel: TextFieldInputMode
             datePicker.delegate = delegate
             textField.inputView = datePicker
         }
-    
+        
     }
     
 }
