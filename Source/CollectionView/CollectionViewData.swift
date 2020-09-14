@@ -464,7 +464,9 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
                 if let cachedCell = self.cachedReusableCell[identifier] {
                     return cachedCell
                 }
-                return self.collectionView(collectionView, cellForItemAt: indexPath)
+                let cell = self.collectionView(collectionView, cellForItemAt: indexPath)
+                self.cachedReusableCell[identifier] = cell
+                return cell
             }()
             
             // Configure cell for actual data
