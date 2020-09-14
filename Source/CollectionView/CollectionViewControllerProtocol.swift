@@ -98,12 +98,10 @@ public extension CollectionViewControllerProtocol {
     
     // MARK: Update
     func updateCollectionView(updates: () -> Void, completion: ((Bool) -> Void)?) {
-        self.isPerformBatchUpdatesCalled = true
         self.collectionViewSource.performBatchUpdates({
             updates()
         }, completion: { (finished) in
             completion?(finished)
-            self.isPerformBatchUpdatesCalled = false
         })
     }
 
@@ -134,37 +132,21 @@ public extension CollectionViewControllerProtocol {
     
     // MARK: Items
     func reloadCollectionViewItems(at indexPaths: [IndexPath]) {
-        guard self.isPerformBatchUpdatesCalled else {
-            assertionFailure("You must call `updateTableView(updates:completion:)` and call this method inside `updates` block")
-            return
-        }
         self.collectionViewData.reloadItems(at: indexPaths)
         self.collectionViewSource.reloadItems(at: indexPaths)
     }
     
     func deleteCollectionViewItems(at indexPaths: [IndexPath]) {
-        guard self.isPerformBatchUpdatesCalled else {
-            assertionFailure("You must call `updateCollectionView(updates:completion:)` and call this method inside `updates` block")
-            return
-        }
         self.collectionViewData.removeItems(at: indexPaths)
         self.collectionViewSource.deleteItems(at: indexPaths)
     }
 
     func insertCollectionViewItems(at indexPaths: [IndexPath]) {
-        guard self.isPerformBatchUpdatesCalled else {
-            assertionFailure("You must call `updateTableView(updates:completion:)` and call this method inside `updates` block")
-            return
-        }
         self.collectionViewData.insertItems(at: indexPaths)
         self.collectionViewSource.insertItems(at: indexPaths)
     }
 
     func moveCollectionViewItem(at indexPath: IndexPath, to newIndexPath: IndexPath) {
-        guard self.isPerformBatchUpdatesCalled else {
-            assertionFailure("You must call `updateTableView(updates:completion:)` and call this method inside `updates` block")
-            return
-        }
         self.collectionViewData.moveItem(from: indexPath, to: newIndexPath)
         self.collectionViewSource.moveItem(at: indexPath, to: newIndexPath)
     }
@@ -233,7 +215,6 @@ public extension CollectionViewControllerProtocol where Self: CollectionViewDele
 
 // MARK: - CollectionViewData
 fileprivate var collectionViewDataKey: String = "TableViewControllerProtocol.tableViewData"
-fileprivate var isPerformBatchUpdatesCalledKey: String = "TableViewControllerProtocol.isPerformBatchUpdatesCalled"
 fileprivate extension CollectionViewControllerProtocol {
     
     /// Get associated `CollectionViewData` object with this table view controller. Will create new one if associated object is nil
@@ -245,21 +226,6 @@ fileprivate extension CollectionViewControllerProtocol {
             let collectionViewData = CollectionViewData(input: self, output: self.collectionViewPresenter)
             objc_setAssociatedObject(self, &collectionViewDataKey, collectionViewData, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return collectionViewData
-        }
-    }
-    
-    var isPerformBatchUpdatesCalled: Bool {
-        set {
-            if newValue {
-                let object = NSObject()
-                objc_setAssociatedObject(self, &isPerformBatchUpdatesCalledKey, object, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            } else {
-                objc_setAssociatedObject(self, &isPerformBatchUpdatesCalledKey, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-        }
-        get {
-            let object = objc_getAssociatedObject(self, &isPerformBatchUpdatesCalledKey) as? NSObject
-            return object != nil
         }
     }
     

@@ -27,6 +27,9 @@ public struct CollectionViewItemSize {
         /// Fill item size for full available width or height and divided for `items` count
         case fillEquall(items: CGFloat)
         
+        /// Item width will calculate relative height or height will calculated relative widht multiplier. Don't use for both because it will fatal error.
+        case aspectRatio(multiplier: CGFloat)
+        
         /// Item size will calculete based on autolayouts
         case flexible
         
@@ -53,6 +56,16 @@ public struct CollectionViewItemSize {
     /// Flexible collection view items size. Size for item will be calulated automatically based on collection view height, items per row and width. Than save to cache. Item height will be equal to collection view height minus top and bottom insets, line spacing and devided to items per row. Item width will be equal to `width`.
     public static func flexibleVerticallyItems(itemsPerRow: CGFloat, width: CGFloat) -> CollectionViewItemSize {
         return CollectionViewItemSize(width: .fixed(width), height: .fillEquall(items: itemsPerRow))
+    }
+    
+    /// Flixible collection view items size. Size for item will be calulated automatically based on collection view width, items per row and aspect ratio. Than save to cache. Item width will be equal to collection view width minus left and right insets, interitem spacing and devided to items per row. Item height will be equal to item width multiply aspect ratio.
+    public static func flexibleHorizontallyItems(itemsPerRow: CGFloat, heightAspectRatioMultiplier: CGFloat) -> CollectionViewItemSize {
+        return CollectionViewItemSize(width: .fillEquall(items: itemsPerRow), height: .aspectRatio(multiplier: heightAspectRatioMultiplier))
+    }
+    
+    /// Flixible collection view items size. Size for item will be calulated automatically based on collection view height, items per row and aspect ratio. Than save to cache. Item height will be equal to collection view height minus top and bottom insets, line spacing and devided to items per row. Item width will be equal to item height multiply aspect ratio.
+    public static func flexibleVerticallyItems(itemsPerRow: CGFloat, widthAspectRatioMultiplier: CGFloat)  -> CollectionViewItemSize {
+        return CollectionViewItemSize(width: .aspectRatio(multiplier: widthAspectRatioMultiplier), height: .fillEquall(items: itemsPerRow))
     }
     
     /// Flexible collection view items size. Size for item will be calulated automatically based on collection view width and items per row. Than save to cache. Item width will be equal to collection view width minus left and right insets, interitem spacing and devided to items per row. Item height will be calculated based on autolayouts.

@@ -102,12 +102,10 @@ public extension TableViewControllerProtocol {
     
     // MARK: Update
     func updateTableView(updates: () -> Void, completion: ((Bool) -> Void)?) {
-        self.isPerformBatchUpdatesCalled = true
         self.tableViewSource.performBatchUpdates({
             updates()
         }, completion: { (finished) in
             completion?(finished)
-            self.isPerformBatchUpdatesCalled = false
         })
     }
     
@@ -142,10 +140,6 @@ public extension TableViewControllerProtocol {
     
     // MARK: Rows
     func reloadTableViewRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-        guard self.isPerformBatchUpdatesCalled else {
-            assertionFailure("You must call `updateTableView(updates:completion:)` and call this method inside `updates` block")
-            return
-        }
         self.tableViewData.reloadRows(at: indexPaths)
         self.tableViewSource.reloadRows(at: indexPaths, with: animation)
     }
@@ -155,10 +149,6 @@ public extension TableViewControllerProtocol {
     }
     
     func deleteTableViewRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-        guard self.isPerformBatchUpdatesCalled else {
-            assertionFailure("You must call `updateTableView(updates:completion:)` and call this method inside `updates` block")
-            return
-        }
         self.tableViewData.removeRows(at: indexPaths)
         self.tableViewSource.deleteRows(at: indexPaths, with: animation)
     }
@@ -168,10 +158,6 @@ public extension TableViewControllerProtocol {
     }
     
     func insertTableViewRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-        guard self.isPerformBatchUpdatesCalled else {
-            assertionFailure("You must call `updateTableView(updates:completion:)` and call this method inside `updates` block")
-            return
-        }
         self.tableViewData.insertRows(at: indexPaths)
         self.tableViewSource.insertRows(at: indexPaths, with: animation)
     }
@@ -181,10 +167,6 @@ public extension TableViewControllerProtocol {
     }
     
     func moveTableViewRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
-        guard self.isPerformBatchUpdatesCalled else {
-            assertionFailure("You must call `updateTableView(updates:completion:)` and call this method inside `updates` block")
-            return
-        }
         self.tableViewData.moveRow(from: indexPath, to: newIndexPath)
         self.tableViewSource.moveRow(at: indexPath, to: newIndexPath)
     }
@@ -269,7 +251,6 @@ public extension TableViewControllerProtocol where Self: TableViewDelegate {
 
 // MARK: - TableViewData
 fileprivate var tableViewDataKey: String = "TableViewControllerProtocol.tableViewData"
-fileprivate var isPerformBatchUpdatesCalledKey: String = "TableViewControllerProtocol.isPerformBatchUpdatesCalled"
 fileprivate extension TableViewControllerProtocol {
     
     /// Get associated `TableViewData` object with this table view controller. Will create new one if associated object is nil
@@ -281,21 +262,6 @@ fileprivate extension TableViewControllerProtocol {
             let tableViewData = TableViewData(input: self, output: self.tableViewPresenter)
             objc_setAssociatedObject(self, &tableViewDataKey, tableViewData, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return tableViewData
-        }
-    }
-    
-    var isPerformBatchUpdatesCalled: Bool {
-        set {
-            if newValue {
-                let object = NSObject()
-                objc_setAssociatedObject(self, &isPerformBatchUpdatesCalledKey, object, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            } else {
-                objc_setAssociatedObject(self, &isPerformBatchUpdatesCalledKey, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-        }
-        get {
-            let object = objc_getAssociatedObject(self, &isPerformBatchUpdatesCalledKey) as? NSObject
-            return object != nil
         }
     }
     

@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.name           = "AirCollection"
-  spec.version        = "1.3.0"
+  spec.version        = "1.3.1"
   spec.summary        = "AirCollection is a wrapper for UITableView / UICollectionView for VIPER / MVP architecture"
   spec.homepage       = "https://github.com/YuriFox/AirCollection"
 
