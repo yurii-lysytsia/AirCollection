@@ -25,8 +25,6 @@ public protocol TextFieldInputModelConfigurable {
 
 // MARK: - TextFieldInputModelConfiguration
 public enum TextFieldInputModelConfiguration {
-    case `default`
-    case keyboard(type: UIKeyboardType, textContentType: UITextContentType?, delegate: UITextFieldDelegate?)
     case pickerView(dataSouce: UIPickerViewDataSource, delegate: UIPickerViewDelegate)
     case datePicker(mode: UIDatePicker.Mode, date: Date, minimumDate: Date?, maximumDate: Date?, delegate: UIDatePickerDelegate?)
 }
@@ -37,15 +35,7 @@ public extension TextInputConfigurableView where Model: TextFieldInputModelConfi
         let textField = self.textInputView
         let configuration = model.textFieldConfiguration
         
-        switch configuration {
-        case .default:
-            break
-            
-        case .keyboard(let keyboardType, let textContentType, let delegate):
-            textField.keyboardType = keyboardType
-            textField.textContentType = textContentType
-            textField.delegate = delegate
-            
+        switch configuration {            
         case .pickerView(let dataSouce, let delegate):
             let pickerView = UIPickerView()
             pickerView.dataSource = dataSouce
