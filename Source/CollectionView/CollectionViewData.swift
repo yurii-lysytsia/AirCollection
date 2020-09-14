@@ -334,7 +334,7 @@ extension CollectionViewData: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        let elementKindSection = UICollectionView.ElementKindSection(rawValue: elementKind)
+        let elementKindSection = CollectionViewElementKindSection(rawValue: elementKind)
         self.preferredCollectionViewSizeForSupplementaryView = collectionView.bounds.size
         switch elementKindSection {
         case .header:
@@ -346,7 +346,7 @@ extension CollectionViewData: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
-        let elementKindSection = UICollectionView.ElementKindSection(rawValue: elementKind)
+        let elementKindSection = CollectionViewElementKindSection(rawValue: elementKind)
         switch elementKindSection {
         case .header:
             if let size = self.estimatedSizeForHeaders[safe: indexPath.section], size != view.bounds.size {
@@ -377,8 +377,6 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             assertionFailure("\(#function) support only `UICollectionViewFlowLayout` subclasses to calculate")
             return .zero
         }
-    
-
         
         // Calculate additional values
         let safeArea = collectionView.safeAreaInsets
@@ -404,39 +402,55 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             }
         }()
         let itemSize = self.output.collectionItemSize(for: indexPath)
-
+        
         // Calculate item width
         let width: CGFloat
         let flexibleWidth: Bool
+        let aspectRatioWidth: Bool
         switch itemSize.width {
         case .fixed(let value):
             width = value
             flexibleWidth = false
+            aspectRatioWidth = false
         case .fillEquall(let items):
             let horizontallyInsets = safeArea.left + safeArea.right + sectionInset.left + sectionInset.right
             let horizontallySpace = horizontallyInsets + (minimumHorizintalSpacing * (items - 1))
             width = (collectionView.frame.width - horizontallySpace) / items
             flexibleWidth = false
+            aspectRatioWidth = false
+        case .aspectRatio(let multiplier):
+            width = multiplier
+            flexibleWidth = false
+            aspectRatioWidth = true
         case .flexible:
             width = 0
             flexibleWidth = true
+            aspectRatioWidth = false
         }
         
         // Calculate item height
         let height: CGFloat
         let flexibleHeight: Bool
+        let aspectRatioHeight: Bool
         switch itemSize.height {
         case .fixed(let value):
             height = value
             flexibleHeight = false
+            aspectRatioHeight = false
         case .fillEquall(let items):
             let verticallyInsets = safeArea.top + safeArea.bottom + sectionInset.top + sectionInset.bottom
             let verticallySpace = verticallyInsets + (minimumVerticalSpacing * (items - 1))
             height = (collectionView.frame.height - verticallySpace) / items
             flexibleHeight = false
+            aspectRatioHeight = false
+        case .aspectRatio(let multiplier):
+            height = multiplier
+            flexibleHeight = false
+            aspectRatioHeight = true
         case .flexible:
             height = 0
             flexibleHeight = true
+            aspectRatioHeight = false
         }
         
         // Create items size
@@ -444,16 +458,13 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
         
         // Calculate dynamic width and/or height
         if flexibleWidth || flexibleHeight {
-            let identifier = self.output.collectionItemIdentifier(for: indexPath)
-            
             // Get dequeue reusable cell or get from cache
             let cell: UICollectionViewCell = {
+                let identifier = self.output.collectionItemIdentifier(for: indexPath)
                 if let cachedCell = self.cachedReusableCell[identifier] {
                     return cachedCell
                 }
-                let dequeueCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-                self.cachedReusableCell[identifier] = dequeueCell
-                return dequeueCell
+                return self.collectionView(collectionView, cellForItemAt: indexPath)
             }()
             
             // Configure cell for actual data
@@ -463,6 +474,17 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             let horizontalFittingPriority: UILayoutPriority = flexibleWidth ? .fittingSizeLevel : .required
             let verticalFittingPriority: UILayoutPriority = flexibleHeight ? .fittingSizeLevel : .required
             targetSize = cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+        }
+        
+        if aspectRatioWidth && aspectRatioHeight {
+            // Throw fatal error if both sides use aspect ratio
+            fatalError("\(#function) `.aspectRatio(multiplier:)` don't support for both sides")
+        } else if aspectRatioWidth {
+            // Calculate width with multiplier
+            targetSize.width = targetSize.height * targetSize.width
+        } else if aspectRatioHeight {
+            // Calculate height with multiplier
+            targetSize.height = targetSize.width * targetSize.height
         }
         
         return targetSize
@@ -476,7 +498,7 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             }
         }
         let preferredHeight = self.output.collectionHeaderHeight(for: section)
-        return self.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForSupplementaryViewInSection: section, preferredHeight: preferredHeight)
+        return self.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForSupplementaryViewInSection: section, kind: UICollectionView.elementKindSectionHeader, preferredHeight: preferredHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
@@ -487,16 +509,22 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
             }
         }
         let preferredHeight = self.output.collectionFooterHeight(for: section)
-        return self.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForSupplementaryViewInSection: section, preferredHeight: preferredHeight)
+        return self.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForSupplementaryViewInSection: section, kind: UICollectionView.elementKindSectionFooter, preferredHeight: preferredHeight)
     }
     
-    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForSupplementaryViewInSection section: Int, preferredHeight: CollectionViewSupplementaryViewHeight) -> CGSize {
+        private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForSupplementaryViewInSection section: Int, kind: String, preferredHeight: CollectionViewSupplementaryViewHeight) -> CGSize {
         switch preferredHeight {
         case .none:
             return CGSize.zero
             
         case .flexible:
-            return UICollectionViewFlowLayout.automaticSize
+            // Get supplementary view
+            let indexPath = IndexPath(item: 0, section: section)
+            let view = self.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
+            // Get target size and calulate optimal size
+            var targetSize = CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height)
+            targetSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+            return targetSize
 
         case .fixedHeight(let height):
             guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {

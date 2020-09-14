@@ -21,10 +21,10 @@ public protocol CollectionViewDelegate: UIScrollViewDelegate {
     func collectionViewDidEndDisplayingCell(_ cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
     
     /// Tells the delegate that the specified supplementary view is about to be displayed in the collection view
-    func collectionViewWillDisplaySupplementaryView(_ view: UICollectionReusableView, for elementKind: UICollectionView.ElementKindSection, at indexPath: IndexPath)
+    func collectionViewWillDisplaySupplementaryView(_ view: UICollectionReusableView, for elementKind: CollectionViewElementKindSection, at indexPath: IndexPath)
     
     /// Tells the delegate that the specified supplementary view was removed from the collection view
-    func collectionViewDidEndDisplayingSupplementaryView(_ view: UICollectionReusableView, for elementKind: UICollectionView.ElementKindSection, at indexPath: IndexPath)
+    func collectionViewDidEndDisplayingSupplementaryView(_ view: UICollectionReusableView, for elementKind: CollectionViewElementKindSection, at indexPath: IndexPath)
     
 }
 
@@ -38,11 +38,11 @@ public extension CollectionViewDelegate {
         
     }
     
-    func collectionViewWillDisplaySupplementaryView(_ view: UICollectionReusableView, for elementKind: UICollectionView.ElementKindSection, at indexPath: IndexPath) {
+    func collectionViewWillDisplaySupplementaryView(_ view: UICollectionReusableView, for elementKind: CollectionViewElementKindSection, at indexPath: IndexPath) {
         
     }
     
-    func collectionViewDidEndDisplayingSupplementaryView(_ view: UICollectionReusableView, for elementKind: UICollectionView.ElementKindSection, at indexPath: IndexPath) {
+    func collectionViewDidEndDisplayingSupplementaryView(_ view: UICollectionReusableView, for elementKind: CollectionViewElementKindSection, at indexPath: IndexPath) {
         
     }
     
