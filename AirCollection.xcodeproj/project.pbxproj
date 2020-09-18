@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		5B0D9F9D2515476D000C6673 /* TextFieldPickerViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9F9C2515476D000C6673 /* TextFieldPickerViewConfiguration.swift */; };
 		5B0D9F9F251555FB000C6673 /* TextFieldDatePickerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9F9E251555FB000C6673 /* TextFieldDatePickerConfiguration.swift */; };
+		5B0D9FA425156155000C6673 /* TableViewController+TextFieldPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FA325156155000C6673 /* TableViewController+TextFieldPickerView.swift */; };
+		5B0D9FA7251567CE000C6673 /* PickerViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FA6251567CE000C6673 /* PickerViewControllerProtocol.swift */; };
+		5B0D9FA9251567E2000C6673 /* PickerViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */; };
+		5B0D9FAE25156F66000C6673 /* PickerViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FAD25156F66000C6673 /* PickerViewTitle.swift */; };
 		5B5A8DE224CF48FE0001CB13 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DE124CF48FE0001CB13 /* UITableView+Extension.swift */; };
 		5B5A8DE624CF49250001CB13 /* TableViewRowHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DE524CF49250001CB13 /* TableViewRowHeight.swift */; };
 		5B5A8DE824CF49330001CB13 /* TableViewHeaderFooterViewHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DE724CF49330001CB13 /* TableViewHeaderFooterViewHeight.swift */; };
@@ -38,6 +42,10 @@
 /* Begin PBXFileReference section */
 		5B0D9F9C2515476D000C6673 /* TextFieldPickerViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPickerViewConfiguration.swift; sourceTree = "<group>"; };
 		5B0D9F9E251555FB000C6673 /* TextFieldDatePickerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldDatePickerConfiguration.swift; sourceTree = "<group>"; };
+		5B0D9FA325156155000C6673 /* TableViewController+TextFieldPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableViewController+TextFieldPickerView.swift"; sourceTree = "<group>"; };
+		5B0D9FA6251567CE000C6673 /* PickerViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewControllerProtocol.swift; sourceTree = "<group>"; };
+		5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewPresenterProtocol.swift; sourceTree = "<group>"; };
+		5B0D9FAD25156F66000C6673 /* PickerViewTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewTitle.swift; sourceTree = "<group>"; };
 		5B5A8DE124CF48FE0001CB13 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		5B5A8DE524CF49250001CB13 /* TableViewRowHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewRowHeight.swift; sourceTree = "<group>"; };
 		5B5A8DE724CF49330001CB13 /* TableViewHeaderFooterViewHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeaderFooterViewHeight.swift; sourceTree = "<group>"; };
@@ -77,6 +85,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B0D9FAC25156C43000C6673 /* PickerView */ = {
+			isa = PBXGroup;
+			children = (
+				5B0D9FAD25156F66000C6673 /* PickerViewTitle.swift */,
+				5B0D9FA6251567CE000C6673 /* PickerViewControllerProtocol.swift */,
+				5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */,
+			);
+			name = PickerView;
+			sourceTree = "<group>";
+		};
 		5B5A8DD724CF47AC0001CB13 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,7 +130,10 @@
 				5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */,
 				5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */,
 				5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */,
-				5BB7AC83250FEBDA004F8394 /* InputConfigurableView */,
+				5BB7AC84250FECF0004F8394 /* TextInputConfigurableView.swift */,
+				5BB7AC86250FED97004F8394 /* TextField */,
+				5BB7AC87250FEE5B004F8394 /* TextView */,
+				5B0D9FAC25156C43000C6673 /* PickerView */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -158,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				5B5A8DE124CF48FE0001CB13 /* UITableView+Extension.swift */,
+				5B0D9FA325156155000C6673 /* TableViewController+TextFieldPickerView.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -180,16 +202,6 @@
 				5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */,
 			);
 			name = Source;
-			sourceTree = "<group>";
-		};
-		5BB7AC83250FEBDA004F8394 /* InputConfigurableView */ = {
-			isa = PBXGroup;
-			children = (
-				5BB7AC84250FECF0004F8394 /* TextInputConfigurableView.swift */,
-				5BB7AC86250FED97004F8394 /* TextField */,
-				5BB7AC87250FEE5B004F8394 /* TextView */,
-			);
-			name = InputConfigurableView;
 			sourceTree = "<group>";
 		};
 		5BB7AC86250FED97004F8394 /* TextField */ = {
@@ -322,6 +334,8 @@
 			files = (
 				5B0D9F9D2515476D000C6673 /* TextFieldPickerViewConfiguration.swift in Sources */,
 				5B8BA20524D35BFB0070CC77 /* TableViewDelegate.swift in Sources */,
+				5B0D9FA7251567CE000C6673 /* PickerViewControllerProtocol.swift in Sources */,
+				5B0D9FA9251567E2000C6673 /* PickerViewPresenterProtocol.swift in Sources */,
 				5BB329B224BF2D4F00323F11 /* UICollectionView+Extension.swift in Sources */,
 				5B5A8DE624CF49250001CB13 /* TableViewRowHeight.swift in Sources */,
 				5BB329A524BF239C00323F11 /* CollectionViewItemSize.swift in Sources */,
@@ -341,9 +355,11 @@
 				5BB7AC89250FF267004F8394 /* TextFieldConfiguration.swift in Sources */,
 				5BB7AC85250FECF0004F8394 /* TextInputConfigurableView.swift in Sources */,
 				5BB329AE24BF2AB900323F11 /* CollectionViewControllerProtocol.swift in Sources */,
+				5B0D9FAE25156F66000C6673 /* PickerViewTitle.swift in Sources */,
 				5BB329A924BF29B400323F11 /* CollectionViewSupplementaryViewHeight.swift in Sources */,
 				5BB329AC24BF2A6C00323F11 /* CollectionViewData.swift in Sources */,
 				5B5A8DE824CF49330001CB13 /* TableViewHeaderFooterViewHeight.swift in Sources */,
+				5B0D9FA425156155000C6673 /* TableViewController+TextFieldPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

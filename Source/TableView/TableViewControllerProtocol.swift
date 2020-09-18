@@ -17,7 +17,7 @@ public protocol TableViewControllerProtocol: class {
     /// Return an instanse of the table view. This table view will be use by presenter
     var tableViewSource: UITableView { get }
     
-    /// Return an instanse of the table view present
+    /// Return an instanse of the table view presenter
     var tableViewPresenter: TableViewPresenterProtocol { get }
     
     /// Configure `UITableViewDataSource` and `UITableViewDelegate` for specific table view data model
