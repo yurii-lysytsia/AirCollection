@@ -7,12 +7,9 @@
 //
 
 import protocol UIKit.UITextFieldDelegate
-import protocol UIKit.UIPickerViewDataSource
-import protocol UIKit.UIPickerViewDelegate
 import class UIKit.UITextField
 import class UIKit.UIView
 import class UIKit.UIColor
-import class UIKit.UIPickerView
 import struct UIKit.UITextContentType
 import enum UIKit.UITextAutocapitalizationType
 import enum UIKit.UITextAutocorrectionType
@@ -25,7 +22,7 @@ import enum UIKit.UITextSmartInsertDeleteType
 import enum UIKit.UITextSpellCheckingType
 import enum UIKit.NSTextAlignment
 
-public struct TextFieldConfiguration: TextInputConfiguration {
+open class TextFieldConfiguration: TextInputConfiguration {
     
     /// The auto-capitalization style for the text object. Default is `UITextAutocapitalizationType.sentences`
     public var autocapitalizationType: UITextAutocapitalizationType = .sentences
@@ -56,6 +53,12 @@ public struct TextFieldConfiguration: TextInputConfiguration {
     /// The semantic meaning expected by a text input area. Default is nil
     public var textContentType: UITextContentType? = nil
     
+    public init(keyboardType: UIKeyboardType = .default, textContentType: UITextContentType? = nil, delegate: UITextFieldDelegate? = nil) {
+        self.keyboardType = keyboardType
+        self.textContentType = textContentType
+        self.delegate = delegate
+    }
+    
     public func configure(textInputView: UITextField) {
         textInputView.autocapitalizationType = self.autocapitalizationType
         textInputView.autocorrectionType = self.autocorrectionType
@@ -72,97 +75,5 @@ public struct TextFieldConfiguration: TextInputConfiguration {
         textInputView.spellCheckingType = self.spellCheckingType
         textInputView.textContentType = self.textContentType
     }
-    
-    public static func keyboard(keyboardType: UIKeyboardType = .default, textContentType: UITextContentType? = nil, delegate: UITextFieldDelegate? = nil) -> TextFieldConfiguration {
-        return TextFieldConfiguration(delegate: delegate, keyboardType: keyboardType, textContentType: textContentType)
-    }
-    
-    public static func pickerView(_ pickerView: UIPickerView) -> TextFieldConfiguration {
-        return TextFieldConfiguration(inputView: pickerView)
-    }
-    
-    public static func pickerView(dataSouce: UIPickerViewDataSource, delegate: UIPickerViewDelegate) -> TextFieldConfiguration {
-        let pickerView = UIPickerView()
-        pickerView.dataSource = dataSouce
-        pickerView.delegate = delegate
-        return self.pickerView(pickerView)
-    }
-    
-    public static func datePicker(mode: UIDatePicker.Mode, date: Date, minimumDate: Date? = nil, maximumDate: Date? = nil, delegate: UIDatePickerDelegate?) -> TextFieldConfiguration {
-        let datePicker = TextFieldDatePicker()
-        datePicker.datePickerMode = mode
-        datePicker.date = date
-        datePicker.minimumDate = minimumDate
-        datePicker.maximumDate = maximumDate
-        datePicker.delegate = delegate
-        return TextFieldConfiguration(inputView: datePicker)
-    }
-    
-}
-
-
-
-
-import class UIKit.UIToolbar
-import class UIKit.UIBarButtonItem
-import class UIKit.UIDatePicker
-
-// MARK: - UIDatePickerDelegate
-public protocol UIDatePickerDelegate: class {
-    func datePicker(_ datePicker: UIDatePicker, didSelect date: Date)
-    func datePickerShouldReturn(_ datePicker: UIDatePicker) -> Bool
-}
-
-public extension UIDatePickerDelegate {
-    
-    func datePickerShouldReturn(_ datePicker: UIDatePicker) -> Bool {
-        return true
-    }
-    
-}
-
-// MARK: - TextFieldDatePicker
-fileprivate class TextFieldDatePicker: UIDatePicker {
-    
-    weak var delegate: UIDatePickerDelegate?
-    
-    init() {
-        super.init(frame: .zero)
-        self.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-    }
-    
-//    unowned let textField: UITextField
-//
-//    init(textField: UITextField) {
-//        self.textField = textField
-//        super.init(frame: .zero)
-//        self.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-//        textField.inputAccessoryView = self.createToolbar()
-//    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-//    func createToolbar() -> UIView {
-//        let toolbar = UIToolbar()
-//        toolbar.barStyle = .default
-//        toolbar.items = [
-//            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-//            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonDidTap(_:)))
-//        ]
-//        toolbar.sizeToFit()
-//        return toolbar
-//    }
-    
-    @objc private func valueChanged() {
-        self.delegate?.datePicker(self, didSelect: self.date)
-    }
-    
-//    @objc private func doneButtonDidTap(_ sender: UIBarButtonItem) {
-//        if self.delegate?.datePickerShouldReturn(self) == true {
-//            self.textField.resignFirstResponder()
-//        }
-//    }
     
 }

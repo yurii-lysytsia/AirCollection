@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B0D9F9D2515476D000C6673 /* TextFieldPickerViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9F9C2515476D000C6673 /* TextFieldPickerViewConfiguration.swift */; };
+		5B0D9F9F251555FB000C6673 /* TextFieldDatePickerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9F9E251555FB000C6673 /* TextFieldDatePickerConfiguration.swift */; };
 		5B5A8DE224CF48FE0001CB13 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DE124CF48FE0001CB13 /* UITableView+Extension.swift */; };
 		5B5A8DE624CF49250001CB13 /* TableViewRowHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DE524CF49250001CB13 /* TableViewRowHeight.swift */; };
 		5B5A8DE824CF49330001CB13 /* TableViewHeaderFooterViewHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DE724CF49330001CB13 /* TableViewHeaderFooterViewHeight.swift */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B0D9F9C2515476D000C6673 /* TextFieldPickerViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPickerViewConfiguration.swift; sourceTree = "<group>"; };
+		5B0D9F9E251555FB000C6673 /* TextFieldDatePickerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldDatePickerConfiguration.swift; sourceTree = "<group>"; };
 		5B5A8DE124CF48FE0001CB13 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		5B5A8DE524CF49250001CB13 /* TableViewRowHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewRowHeight.swift; sourceTree = "<group>"; };
 		5B5A8DE724CF49330001CB13 /* TableViewHeaderFooterViewHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeaderFooterViewHeight.swift; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				5BB7AC88250FF267004F8394 /* TextFieldConfiguration.swift */,
+				5B0D9F9C2515476D000C6673 /* TextFieldPickerViewConfiguration.swift */,
+				5B0D9F9E251555FB000C6673 /* TextFieldDatePickerConfiguration.swift */,
 			);
 			name = TextField;
 			sourceTree = "<group>";
@@ -314,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B0D9F9D2515476D000C6673 /* TextFieldPickerViewConfiguration.swift in Sources */,
 				5B8BA20524D35BFB0070CC77 /* TableViewDelegate.swift in Sources */,
 				5BB329B224BF2D4F00323F11 /* UICollectionView+Extension.swift in Sources */,
 				5B5A8DE624CF49250001CB13 /* TableViewRowHeight.swift in Sources */,
@@ -327,6 +334,7 @@
 				5BB3298E24BF1E8A00323F11 /* NibLoadableView.swift in Sources */,
 				5BD5B1C324D803D80065E5DB /* CollectionViewDelegate.swift in Sources */,
 				5BB3299A24BF1F2900323F11 /* Array+Extension.swift in Sources */,
+				5B0D9F9F251555FB000C6673 /* TextFieldDatePickerConfiguration.swift in Sources */,
 				5BB3299024BF1E9800323F11 /* ConfigurableView.swift in Sources */,
 				5B5A8DE224CF48FE0001CB13 /* UITableView+Extension.swift in Sources */,
 				5B5A8DEF24CF49670001CB13 /* TableViewControllerProtocol.swift in Sources */,
