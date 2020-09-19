@@ -44,13 +44,15 @@ public extension TextFieldPickerViewDelegate {
 }
 
 // MARK: - TextFieldPickerViewConfiguration
-open class TextFieldPickerViewConfiguration: TextFieldConfiguration {
+public class TextFieldPickerViewConfiguration: TextFieldConfiguration {
     
     /// Picker view which will use as text field `inputView`
     public let pickerView: UIPickerView
     
     /// Methods will call by picker view for needed actions
     public unowned let pickerViewDataSource: TextFieldPickerViewDataSource
+    
+    /// Methods will call by picker view for notify about actions actions
     public unowned let pickerViewDelegate: TextFieldPickerViewDelegate
     
     /// Create configuration for text field that will be with picker view instead keyboard. Please set `dataSource` and `delegate` as a reference for strong object because are will be unowned property. Default `pickerView` is `UIPickerView()`
@@ -164,16 +166,16 @@ fileprivate class TextFieldPickerViewData: NSObject, UIPickerViewDataSource, UIP
 }
 
 // MARK: - Wrapper Associated Object
-fileprivate var textFieldPickerViewWrapperKey: String = "TextFieldPickerViewWrapper.textField"
+fileprivate var textFieldPickerViewDataKey: String = "TextFieldPickerViewData.textField"
 fileprivate extension UITextField {
     
-    /// Get associated `TableViewData` object with this table view controller. Will create new one if associated object is nil
+    /// Get associated `TableViewData` object with this text field
     var pickerViewWrapper: TextFieldPickerViewData? {
         set {
-            objc_setAssociatedObject(self, &textFieldPickerViewWrapperKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &textFieldPickerViewDataKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            objc_getAssociatedObject(self, &textFieldPickerViewWrapperKey) as? TextFieldPickerViewData
+            objc_getAssociatedObject(self, &textFieldPickerViewDataKey) as? TextFieldPickerViewData
         }
     }
     
