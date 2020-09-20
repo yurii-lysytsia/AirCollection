@@ -27,6 +27,10 @@
 		5B94A91E24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B94A91D24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift */; };
 		5BAB775C2517DE10002961AF /* CollectionView+TextFieldPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAB775B2517DE10002961AF /* CollectionView+TextFieldPickerView.swift */; };
 		5BAB775E2517DE5F002961AF /* CollectionView+TextFieldDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAB775D2517DE5F002961AF /* CollectionView+TextFieldDatePicker.swift */; };
+		5BAB77602517DF63002961AF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB775F2517DF62002961AF /* README.md */; };
+		5BAB77642517DF6A002961AF /* README_COLLECTION.md in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB77612517DF6A002961AF /* README_COLLECTION.md */; };
+		5BAB77652517DF6A002961AF /* README_VIEW.md in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB77622517DF6A002961AF /* README_VIEW.md */; };
+		5BAB77662517DF6A002961AF /* README_TABLE.md in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB77632517DF6A002961AF /* README_TABLE.md */; };
 		5BB3298C24BF1E4A00323F11 /* IdentificableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */; };
 		5BB3298E24BF1E8A00323F11 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */; };
 		5BB3299024BF1E9800323F11 /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */; };
@@ -65,6 +69,10 @@
 		5B94A91D24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewElementKindSection.swift; sourceTree = "<group>"; };
 		5BAB775B2517DE10002961AF /* CollectionView+TextFieldPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+TextFieldPickerView.swift"; sourceTree = "<group>"; };
 		5BAB775D2517DE5F002961AF /* CollectionView+TextFieldDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+TextFieldDatePicker.swift"; sourceTree = "<group>"; };
+		5BAB775F2517DF62002961AF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5BAB77612517DF6A002961AF /* README_COLLECTION.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README_COLLECTION.md; sourceTree = "<group>"; };
+		5BAB77622517DF6A002961AF /* README_VIEW.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README_VIEW.md; sourceTree = "<group>"; };
+		5BAB77632517DF6A002961AF /* README_TABLE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README_TABLE.md; sourceTree = "<group>"; };
 		5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificableView.swift; sourceTree = "<group>"; };
 		5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
 		5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
@@ -249,6 +257,10 @@
 			isa = PBXGroup;
 			children = (
 				5B8BA20824D365750070CC77 /* AirCollection.podspec */,
+				5BAB775F2517DF62002961AF /* README.md */,
+				5BAB77622517DF6A002961AF /* README_VIEW.md */,
+				5BAB77632517DF6A002961AF /* README_TABLE.md */,
+				5BAB77612517DF6A002961AF /* README_COLLECTION.md */,
 				DA182C8E2211757900163B42 /* Source */,
 				DA182C8D2211757900163B42 /* Products */,
 			);
@@ -344,6 +356,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BAB77602517DF63002961AF /* README.md in Resources */,
+				5BAB77652517DF6A002961AF /* README_VIEW.md in Resources */,
+				5BAB77642517DF6A002961AF /* README_COLLECTION.md in Resources */,
+				5BAB77662517DF6A002961AF /* README_TABLE.md in Resources */,
 				5B8BA20924D365750070CC77 /* AirCollection.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,7 +551,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "lysytsia.yurii.air-collection";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -565,7 +581,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "lysytsia.yurii.air-collection";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
