@@ -24,9 +24,9 @@ public protocol ModelConfigurableView: ConfigurableView {
     
 }
 
-public extension ModelConfigurableView {
+extension ModelConfigurableView {
     
-    func configure(model: Any?) {
+    public func configure(model: Any?) {
         guard let configurableModel = model as? Model else {
             assertionFailure("Invalid model for configure view of type `\(type(of: self))`. Model is not confirm to model type \(Model.self)")
             return
@@ -35,30 +35,3 @@ public extension ModelConfigurableView {
     }
     
 }
-
-// MARK: - InputModelConfigurableView
-public protocol InputModelConfigurableView: ModelConfigurableView {
-    var inputModelView: InputModelView { get }
-    func configureInputModel(inputModel: InputModel)
-    associatedtype InputModel
-    associatedtype InputModelView
-}
-
-public extension InputModelConfigurableView {
-    
-    func configure(model: Any?) {
-        if let configurableModel = model as? Model {
-            self.configure(model: configurableModel)
-        } else {
-            assertionFailure("Model is not \(Model.self) type")
-        }
-        
-        if let configurableInputModel = model as? InputModel {
-            self.configureInputModel(inputModel: configurableInputModel)
-        } else {
-            assertionFailure("Input Model is not \(InputModel.self) type")
-        }
-    }
-    
-}
-

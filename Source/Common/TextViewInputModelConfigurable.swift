@@ -12,22 +12,22 @@ import class UIKit.UITextView
 import protocol UIKit.UITextViewDelegate
 
 // MARK: - TextViewInputModelConfigurable
-protocol TextViewInputModelConfigurable {
+public protocol TextViewInputModelConfigurable {
     var textViewConfiguration: TextViewInputModelConfiguration { get }
 }
 
 // MARK: - TextViewInputModelConfiguration
-enum TextViewInputModelConfiguration {
+public enum TextViewInputModelConfiguration {
     case `default`
     case keyboard(type: UIKeyboardType, textContentType: UITextContentType?, delegate: UITextViewDelegate?)
 }
 
 // MARK: - InputModelConfigurableView
-extension InputModelConfigurableView where InputModel: TextViewInputModelConfigurable, InputModelView: UITextView {
+public extension TextInputConfigurableView where Model: TextViewInputModelConfigurable, TextInputView: UITextView {
     
-    func configureInputModel(inputModel: InputModel) {
-        let textView = self.inputModelView
-        let configuration = inputModel.textViewConfiguration
+    func configureTextInputView(model: Model) {
+        let textView = self.textInputView
+        let configuration = model.textViewConfiguration
         
         switch configuration {
         case .default:
