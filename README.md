@@ -2,12 +2,11 @@
 
 [![platform](https://img.shields.io/badge/Platform-iOS%2011+-blue.svg)]()
 [![language](https://img.shields.io/badge/Language-Swift-red.svg)]()
-[![language](https://img.shields.io/badge/pod-1.4.0-blue.svg)]()
+[![language](https://img.shields.io/badge/pod-1.4.1-blue.svg)]()
 [![license](https://img.shields.io/badge/license-MIT-lightgray.svg)]()
 
 Save your coding time with AirCollection written on Swift. It's a great wrapper for UITableView / UICollectionView and VIPER / MVP architecture.
 
-- [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
     - [CocoaPods](#CocoaPods)
@@ -15,15 +14,7 @@ Save your coding time with AirCollection written on Swift. It's a great wrapper 
     - [Reusable View](#reusable-view)
     - [Table view](#table-view)
     - [Collection view](#collection-view)
-- [License](#license)
-
-
-## Features
-- [ ] Collection view documentation
-- [ ] Static table view with from programmatically model
-- [ ] Implement interactor array model to display table view
-- [ ] Example
- 
+- [License](#license) 
  
 ## Requirements
 - iOS 11.0+
@@ -42,13 +33,13 @@ pod 'AirCollection'
 ## Usage
 
 ### Reusable View
-All about reusable view usage you can read [there](README_VIEW.md)
+All about reusable view, table view cells and collection view cells usage you can read [here](README_VIEW.md)
 
 ### Table view
-All about table view usage you can read [there](README_TABLE.md)
+All about table view usage you can read [here](README_TABLE.md)
 
 ### Collection view
-All about collection view usage you can read [there](README_COLLECTION.md)
+All about collection view usage you can read [here](README_COLLECTION.md)
 
 
 ## License
