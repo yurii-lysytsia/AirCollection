@@ -17,7 +17,7 @@ final class StaticTablePresenter {
     
     // MARK: Stored properties
     private let rows: [[Row]] = [
-        [.nib]
+        [.dynamicTableView]
     ]
     
     // MARK: Dependency properties
@@ -28,11 +28,9 @@ final class StaticTablePresenter {
         self.view = view
     }
     
-    // MARK: Functions
-    
     // MARK: Helpers
     private enum Row: String, CaseIterable {
-        case nib = "Load UIView from Nib"
+        case dynamicTableView = "Dynamic table view"
     }
     
 }
@@ -63,6 +61,10 @@ extension StaticTablePresenter: StaticTableViewOutput {
     
     func tableRowDidSelect(at indexPath: IndexPath) {
         self.view.deselectTableViewRow(at: indexPath, animated: true)
+        switch self.rows[indexPath.section][indexPath.row] {
+        case .dynamicTableView:
+            self.view.showDynamicViewController()
+        }
     }
     
 }

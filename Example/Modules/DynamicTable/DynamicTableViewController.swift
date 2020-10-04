@@ -1,5 +1,5 @@
 //
-//  StaticTableViewController.swift
+//  DynamicTableViewController.swift
 //  Example
 //
 //  Created by Lysytsia Yurii on 04.10.2020.
@@ -9,14 +9,14 @@
 import UIKit
 import Source
 
-protocol StaticTableViewInput: TableViewControllerProtocol {
-    func showDynamicViewController()
+protocol DynamicTableViewInput: TableViewControllerProtocol {
+    func showAlert(title: String, message: String?)
 }
 
-final class StaticTableViewController: UIViewController {
+final class DynamicTableViewController: UIViewController {
     
     // MARK: Stored properties
-    var output: StaticTableViewOutput!
+    var output: DynamicTableViewOutput!
     
     // MARK: Outlet properties
     private let tableView: UITableView = UITableView(frame: .zero, style: .plain)
@@ -28,7 +28,7 @@ final class StaticTableViewController: UIViewController {
         self.view.addSubview(self.tableView)
         
         self.configureTableView { (tableView) in
-            tableView.register(StaticTableViewCell.self)
+            tableView.register(DynamicTitleDescriptionTableViewCell.self)
         }
         
     }
@@ -40,10 +40,21 @@ final class StaticTableViewController: UIViewController {
         
     }
     
+    // MARK: Functions
+    
+    // MARK: Helpers
+    
 }
 
 // MARK: - StaticTableViewInput
-extension StaticTableViewController: StaticTableViewInput {
+extension DynamicTableViewController: DynamicTableViewInput {
+    
+    func showAlert(title: String, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
     
     var tableViewSource: UITableView {
         return self.tableView
@@ -52,10 +63,6 @@ extension StaticTableViewController: StaticTableViewInput {
     var tableViewPresenter: TableViewPresenterProtocol {
         return self.output
     }
-
-    func showDynamicViewController() {
-        let viewController = ModuleFabric.createDynamicTableModule()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
     
 }
+
