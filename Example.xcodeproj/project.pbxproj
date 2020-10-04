@@ -176,18 +176,10 @@
 		5B4C37B62529DCF500A53EE0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				5B4C37B72529DCFA00A53EE0 /* TitleDescription */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		5B4C37B72529DCFA00A53EE0 /* TitleDescription */ = {
-			isa = PBXGroup;
-			children = (
 				5B4C37B92529DD0D00A53EE0 /* DynamicTitleDescriptionTableViewCell.swift */,
 				5B4C37B82529DD0D00A53EE0 /* DynamicTitleDescriptionTableViewCell.xib */,
 			);
-			path = TitleDescription;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		5B4C37BC2529E53800A53EE0 /* Models */ = {
