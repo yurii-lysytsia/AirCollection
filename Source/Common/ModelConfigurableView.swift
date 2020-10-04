@@ -13,14 +13,14 @@
 /// Read more about [ModelConfigurableView](https://github.com/YuriFox/AirCollection/blob/master/README_VIEW.md#model-configurable-view).
 public protocol ModelConfigurableView: ConfigurableView {
     
-    /// Predefined model type for configure this view
+    /// Predefined model type for configure this view.
     associatedtype Model
     
     /// Configure view with predefined model type.
     ///
-    ///  By default this method use as delegate and called when abstract *configure(_:)* method called with similar *Model* type parameter.
+    /// By default this method use as delegate and called when abstract *configure(_:)* method called with similar *Model* type parameter.
     ///
-    /// - Parameter model: predefined model that will use for update view
+    /// - Parameter model: Predefined model that will use for update view.
     func configure(model: Model)
     
 }
@@ -31,7 +31,7 @@ extension ModelConfigurableView {
     ///
     /// **Caution!** Don't override this method implementation because it able to break other functionality
     ///
-    /// - Parameter model: any model that will use for update view
+    /// - Parameter model: Any model that will use for update view
     public func configure(_ model: Any) {
         guard let predefinedModel = model as? Model else {
             assertionFailure("\(#function). `\(String(reflecting: Self.self))` not able to `configure(model:)` because received model `\(String(reflecting: type(of: model).self))` not confirm to `\(String(reflecting: Model.self))`")

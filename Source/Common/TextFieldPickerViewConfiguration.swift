@@ -3,7 +3,7 @@
 //  AirCollection
 //
 //  Created by Lysytsia Yurii on 18.09.2020.
-//  Copyright © 2020 Developer Lysytsia. All rights reserved.
+//  Copyright © 2020 Lysytsia Yurii. All rights reserved.
 //
 
 import protocol UIKit.UIPickerViewDataSource
@@ -28,7 +28,7 @@ public protocol TextFieldPickerViewDataSource: class {
 }
 
 // MARK: - TextFieldPickerViewDelegate
-public protocol TextFieldPickerViewDelegate: class {
+public protocol TextFieldPickerViewDelegate: TextFieldDelegate {
     /// Called by the text field picker view when the user selects a row in a component
     func textField(_ textField: UITextField, pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     
@@ -64,6 +64,7 @@ public class TextFieldPickerViewConfiguration: TextFieldConfiguration {
         self.pickerView = pickerView
         self.pickerViewDataSource = dataSource
         self.pickerViewDelegate = delegate
+        super.init(delegate: delegate)
     }
     
     /// Create configuration for text field that will be with picker view instead keyboard. Please set `controller` as a reference for strong object because are will be unowned property. Default `pickerView` is `UIPickerView()`
@@ -76,7 +77,7 @@ public class TextFieldPickerViewConfiguration: TextFieldConfiguration {
         self.pickerView.dataSource = data
         self.pickerView.delegate = data
         self.inputView = self.pickerView
-        textInputView.pickerViewWrapper = data
+        textInputView.textFieldPickerViewData = data
         super.configure(textInputView: textInputView)
     }
     
@@ -170,11 +171,11 @@ fileprivate class TextFieldPickerViewData: NSObject, UIPickerViewDataSource, UIP
 }
 
 // MARK: - Wrapper Associated Object
-fileprivate var textFieldPickerViewDataKey: String = "TextFieldPickerViewData.textField"
+fileprivate var textFieldPickerViewDataKey: String = "UITextField.textFieldPickerViewData"
 fileprivate extension UITextField {
     
-    /// Get associated `TableViewData` object with this text field
-    var pickerViewWrapper: TextFieldPickerViewData? {
+    /// Get associated `TextFieldPickerViewData` object with this text field
+    var textFieldPickerViewData: TextFieldPickerViewData? {
         set {
             objc_setAssociatedObject(self, &textFieldPickerViewDataKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }

@@ -17,7 +17,7 @@ public protocol ConfigurableView: class {
     ///
     /// You shouldn't use this method implementation, but you able to create additional protocol that implement default implementation based on this method. See [ModelConfigurableView](https://github.com/YuriFox/AirCollection/blob/master/README_VIEW.md#model-configurable-view) for your custom implementation sample.
     ///
-    /// - Parameter model: any model that will use for update view
+    /// - Parameter model: Any model that will use for update view
     func configure(_ model: Any)
     
 }

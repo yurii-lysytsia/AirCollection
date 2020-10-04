@@ -22,6 +22,10 @@
 		5B4C37BB2529DD0D00A53EE0 /* DynamicTitleDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37B92529DD0D00A53EE0 /* DynamicTitleDescriptionTableViewCell.swift */; };
 		5B4C37BE2529E53E00A53EE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37BD2529E53E00A53EE0 /* User.swift */; };
 		5B4C37C02529E56800A53EE0 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37BF2529E56800A53EE0 /* Story.swift */; };
+		5B4C37CB2529EBE200A53EE0 /* DynamicUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37C72529EBE200A53EE0 /* DynamicUserTableViewController.swift */; };
+		5B4C37CE2529EBE200A53EE0 /* DynamicUserTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37CA2529EBE200A53EE0 /* DynamicUserTablePresenter.swift */; };
+		5B4C37D22529ECB200A53EE0 /* DynamicUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C37D02529ECB200A53EE0 /* DynamicUserTableViewCell.xib */; };
+		5B4C37D32529ECB200A53EE0 /* DynamicUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37D12529ECB200A53EE0 /* DynamicUserTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +59,10 @@
 		5B4C37B92529DD0D00A53EE0 /* DynamicTitleDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTitleDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		5B4C37BD2529E53E00A53EE0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5B4C37BF2529E56800A53EE0 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
+		5B4C37C72529EBE200A53EE0 /* DynamicUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicUserTableViewController.swift; sourceTree = "<group>"; };
+		5B4C37CA2529EBE200A53EE0 /* DynamicUserTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicUserTablePresenter.swift; sourceTree = "<group>"; };
+		5B4C37D02529ECB200A53EE0 /* DynamicUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DynamicUserTableViewCell.xib; sourceTree = "<group>"; };
+		5B4C37D12529ECB200A53EE0 /* DynamicUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicUserTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +121,7 @@
 			children = (
 				5B4C37AB2529C8A200A53EE0 /* StaticTable */,
 				5B4C37B12529DBF300A53EE0 /* DynamicTable */,
+				5B4C37C62529EBC600A53EE0 /* DynamicUserTable */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -179,6 +188,25 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		5B4C37C62529EBC600A53EE0 /* DynamicUserTable */ = {
+			isa = PBXGroup;
+			children = (
+				5B4C37CA2529EBE200A53EE0 /* DynamicUserTablePresenter.swift */,
+				5B4C37C72529EBE200A53EE0 /* DynamicUserTableViewController.swift */,
+				5B4C37CF2529ECA400A53EE0 /* Cell */,
+			);
+			path = DynamicUserTable;
+			sourceTree = "<group>";
+		};
+		5B4C37CF2529ECA400A53EE0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5B4C37D12529ECB200A53EE0 /* DynamicUserTableViewCell.swift */,
+				5B4C37D02529ECB200A53EE0 /* DynamicUserTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -238,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B4C37D22529ECB200A53EE0 /* DynamicUserTableViewCell.xib in Resources */,
 				5B4C378425299E5E00A53EE0 /* LaunchScreen.storyboard in Resources */,
 				5B4C374E25299ABC00A53EE0 /* Assets.xcassets in Resources */,
 				5B4C37BA2529DD0D00A53EE0 /* DynamicTitleDescriptionTableViewCell.xib in Resources */,
@@ -253,12 +282,15 @@
 			files = (
 				5B4C37912529A0E000A53EE0 /* StaticTableViewCell.swift in Sources */,
 				5B4C37B02529C90700A53EE0 /* ModuleFabric.swift in Sources */,
+				5B4C37CB2529EBE200A53EE0 /* DynamicUserTableViewController.swift in Sources */,
 				5B4C37B52529DC2900A53EE0 /* DynamicTablePresenter.swift in Sources */,
 				5B4C374525299ABB00A53EE0 /* AppDelegate.swift in Sources */,
 				5B4C37BB2529DD0D00A53EE0 /* DynamicTitleDescriptionTableViewCell.swift in Sources */,
+				5B4C37D32529ECB200A53EE0 /* DynamicUserTableViewCell.swift in Sources */,
 				5B4C37BE2529E53E00A53EE0 /* User.swift in Sources */,
 				5B4C377F25299E4000A53EE0 /* StaticTablePresenter.swift in Sources */,
 				5B4C37B32529DC1D00A53EE0 /* DynamicTableViewController.swift in Sources */,
+				5B4C37CE2529EBE200A53EE0 /* DynamicUserTablePresenter.swift in Sources */,
 				5B4C377B25299E4000A53EE0 /* StaticTableViewController.swift in Sources */,
 				5B4C37C02529E56800A53EE0 /* Story.swift in Sources */,
 			);

@@ -11,6 +11,7 @@ import Source
 
 protocol DynamicTableViewInput: TableViewControllerProtocol {
     func showAlert(title: String, message: String?)
+    func showUser(_ user: User)
 }
 
 final class DynamicTableViewController: UIViewController {
@@ -33,16 +34,19 @@ final class DynamicTableViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.reloadTableView()
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         self.tableView.frame = self.view.bounds
         
     }
-    
-    // MARK: Functions
-    
-    // MARK: Helpers
     
 }
 
@@ -54,6 +58,11 @@ extension DynamicTableViewController: DynamicTableViewInput {
         let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showUser(_ user: User) {
+        let view = ModuleFabric.createDynamicUserTableModule(user: user)
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     var tableViewSource: UITableView {

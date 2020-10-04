@@ -23,5 +23,12 @@ enum ModuleFabric {
         view.output = presenter
         return view
     }
+ 
+    static func createDynamicUserTableModule(user: User) -> UIViewController {
+        let view = DynamicUserTableViewController()
+        let presenter = DynamicUserTablePresenter(user: user, view: view)
+        view.output = presenter
+        return view
+    }
     
 }
