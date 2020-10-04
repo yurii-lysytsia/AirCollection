@@ -57,16 +57,43 @@ public protocol ModelConfigurableView: ConfigurableView {
 ```
 
 ### Text Input Configurable View
+Child `ModelConfigurableView` protocol implementation and defines new property `textInputView` and associated `TextInputView` type. Use this protocol when you need observe some text input subview (e.g. `UITextField` or `UITextView`) inside your reusable view. **Important!** This protocol is able to implement only for `Model` which implement [TextInputConfigurableModel](#text-input-configurable-model).
 ```swift
+public protocol TextInputConfigurableView: ModelConfigurableView where Model: TextInputConfigurableModel {
+    associatedtype TextInputView: UIView
+    var textInputView: TextInputView { get }
+}
 ```
 
-#### TextInputConfigurableModel
+#### Text Input Configurable Model
+Aditional protocol for `ConfigurableView.Model` that defines new property `textInputConfiguration` and associated `Configuration` type. Read topics below for aditional information
+```swift
+public protocol TextInputConfigurableModel {
+    associatedtype Configuration: TextInputConfiguration
+    var textInputConfiguration: Configuration { get }
+}
+```
 
-#### TextInputConfiguration
+Use this protocol for `ConfigurableView.Model` and implement `textInputConfiguration` with type that you need. e.g. `TextFieldConfiguration`:
+```Swift
+struct Model: TextInputConfigurableModel {
+    let textInputConfiguration: TextFieldConfiguration
+}
+```
+
+#### Text Input Configuration
+Abstract protocol needed for implement `TextInputConfigurableView` that defines one method `configure(textInputView:)` and associated `TextInputView` type. You shouldn't use this protocol for your views (include cells) implementation, but you able to create additional protocol that implement default implementation. Read topics below for aditional information.
+```swift
+public protocol TextInputConfiguration {
+    associatedtype TextInputView: UIView
+    func configure(textInputView: TextInputView)
+}
+```
+
 #### TextFieldConfiguration
 #### TextFieldPickerViewConfiguration
 #### TextFieldDatePickerConfiguration
-#### TextFieldConfiguration
+#### TextViewConfiguration
 
 ## Table view cell
 Table view cell should implement [Identificable View](#identificable-view), one child implementation of [Configurable View](#configurable-view) and optionally [Nib Loadable View](#nib-loadable-view) if cell layouts have `Xib` file.
