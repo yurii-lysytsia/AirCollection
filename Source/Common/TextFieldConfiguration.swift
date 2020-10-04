@@ -232,16 +232,16 @@ fileprivate class TextFieldData: NSObject, UITextFieldDelegate {
 }
 
 // MARK: - Wrapper Associated Object
-fileprivate var textFieldPickerViewDataKey: String = "UITextField.textFieldData"
+fileprivate var textFieldDataKey: String = "UITextField.textFieldData"
 fileprivate extension UITextField {
     
     /// Get associated `TableViewData` object with this text field
     var textFieldData: TextFieldData? {
         set {
-            objc_setAssociatedObject(self, &textFieldPickerViewDataKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &textFieldDataKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            objc_getAssociatedObject(self, &textFieldPickerViewDataKey) as? TextFieldData
+            objc_getAssociatedObject(self, &textFieldDataKey) as? TextFieldData
         }
     }
     

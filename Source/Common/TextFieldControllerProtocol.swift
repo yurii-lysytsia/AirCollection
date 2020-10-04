@@ -7,6 +7,8 @@
 //
 
 public protocol TextFieldControllerProtocol: TextFieldDelegate {
+    
     /// Return an instanse of the text field presenter
     var textFieldPresenter: TextFieldPresenterProtocol { get }
+    
 }
