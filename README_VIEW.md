@@ -2,7 +2,7 @@
 
 All `AirCollection` views (include cells) based on few protocols. View can implement several protocols to describe needed functionality
 
-## IdentificableView
+## Identificable View
 Protocol needed for implement unique view identifier and defines only one property `viewIdentifier`. By default this property is equal to `String(describing: self)`
 ```swift
 public protocol IdentificableView: class {
@@ -10,7 +10,7 @@ public protocol IdentificableView: class {
 }
 ```
 
-## NibLoadableView
+## Nib Loadable View
 Protocol needed for implement view nib instantiate and defines only one property `viewNib`
 ```swift
 public protocol NibLoadableView {
@@ -27,8 +27,8 @@ static var viewNib: UINib {
 }
 ```
 
-`ConfigurableView` will be described here
+## Configurable View
+Abstract protocol needed for implement configure view method and defines one method `configure(model:)`. You shouldn't use this protocol for your views (include cells) implementation, but you able to create additional protocol that implement default implementation. Read about [ModelConfigurableView](#model-configurable-view) for additional information
 
-Not available now but will be fixed soon
-
-
+## Model Configurable View
+Not created yet
