@@ -178,7 +178,7 @@ class CollectionViewData: NSObject {
             assertionFailure("For use `CollectionViewData.configureCell(_:for:)`and configure cell you must implement `ConfigurableView` protocol for item type `\(type(of: cell))`")
             return
         }
-        configurableCell.configure(model: model)
+        configurableCell.configure(model)
     }
 
     func configureHeaderView(_ view: UICollectionReusableView, for section: Int) {
@@ -189,7 +189,7 @@ class CollectionViewData: NSObject {
             assertionFailure("For use `CollectionViewData.configureHeaderView(_:for:)`and configure header view you must implement `ConfigurableView` protocol for header view type `\(type(of: view))`")
             return
         }
-        configurableView.configure(model: model)
+        configurableView.configure(model)
     }
 
     func configureFooterView(_ view: UICollectionReusableView, for section: Int) {
@@ -200,7 +200,7 @@ class CollectionViewData: NSObject {
             assertionFailure("For use `CollectionViewData.configureFooterView(_:for:)`and configure footer view you must implement `ConfigurableView` protocol for footer view type `\(type(of: view))`")
             return
         }
-        configurableView.configure(model: model)
+        configurableView.configure(model)
     }
 
 }

@@ -174,7 +174,7 @@ class TableViewData: NSObject {
             assertionFailure("For use `TableViewData.configureCell(_:for:)`and configure cell you must implement `ConfigurableView` protocol for cell type `\(type(of: cell))`")
             return
         }
-        configurableCell.configure(model: model)
+        configurableCell.configure(model)
     }
     
     /// Configure table header view with some model. Header view must implement `ConfigurableView` protocol.
@@ -186,7 +186,7 @@ class TableViewData: NSObject {
             assertionFailure("For use `TableViewData.configureHeaderView(_:for:)`and configure header view you must implement `ConfigurableView` protocol for header view type `\(type(of: view))`")
             return
         }
-        configurableView.configure(model: model)
+        configurableView.configure(model)
     }
     
     /// Configure table footer view with some model. Footer view must implement `ConfigurableView` protocol.
@@ -198,7 +198,7 @@ class TableViewData: NSObject {
             assertionFailure("For use `TableViewData.configureFooterView(_:for:)`and configure footer view you must implement `ConfigurableView` protocol for footer view type `\(type(of: view))`")
             return
         }
-        configurableView.configure(model: model)
+        configurableView.configure(model)
     }
     
 }

@@ -25,7 +25,7 @@ public protocol TextInputConfigurableView: ModelConfigurableView where Model: Te
 
 public extension TextInputConfigurableView where Model: TextInputConfigurableModel, TextInputView == Model.Configuration.TextInputView {
 
-    func configure(model: Any?) {
+    func configure(_ model: Any) {
         guard let configurableModel = model as? Model else {
             assertionFailure("Invalid model for configure view of type `\(type(of: self))`. Model is not confirm to model type \(Model.self)")
             return

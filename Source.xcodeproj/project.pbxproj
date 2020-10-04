@@ -13,6 +13,7 @@
 		5B0D9FA7251567CE000C6673 /* PickerViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FA6251567CE000C6673 /* PickerViewControllerProtocol.swift */; };
 		5B0D9FA9251567E2000C6673 /* PickerViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */; };
 		5B0D9FAE25156F66000C6673 /* PickerViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FAD25156F66000C6673 /* PickerViewTitle.swift */; };
+		5B4C37952529BC4800A53EE0 /* ModelConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37942529BC4800A53EE0 /* ModelConfigurableView.swift */; };
 		5B4ED7A625167DC00027E92A /* DatePickerControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4ED7A525167DC00027E92A /* DatePickerControllerProtocol.swift */; };
 		5B4ED7A825167E030027E92A /* DatePickerPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4ED7A725167E030027E92A /* DatePickerPresenterProtocol.swift */; };
 		5B4ED7AD251682D10027E92A /* TableView+TextFieldDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4ED7AC251682D10027E92A /* TableView+TextFieldDatePicker.swift */; };
@@ -49,6 +50,7 @@
 		5B0D9FA6251567CE000C6673 /* PickerViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewControllerProtocol.swift; sourceTree = "<group>"; };
 		5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B0D9FAD25156F66000C6673 /* PickerViewTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewTitle.swift; sourceTree = "<group>"; };
+		5B4C37942529BC4800A53EE0 /* ModelConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConfigurableView.swift; sourceTree = "<group>"; };
 		5B4ED7A525167DC00027E92A /* DatePickerControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerControllerProtocol.swift; sourceTree = "<group>"; };
 		5B4ED7A725167E030027E92A /* DatePickerPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B4ED7AC251682D10027E92A /* TableView+TextFieldDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+TextFieldDatePicker.swift"; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */,
 				5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */,
 				5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */,
+				5B4C37942529BC4800A53EE0 /* ModelConfigurableView.swift */,
 				5BB7AC84250FECF0004F8394 /* TextInputConfigurableView.swift */,
 				5BB7AC86250FED97004F8394 /* TextField */,
 				5BB7AC87250FEE5B004F8394 /* TextView */,
@@ -306,7 +309,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1200;
-				ORGANIZATIONNAME = "Developer Lysytsia";
+				ORGANIZATIONNAME = "Lysytsia Yurii";
 				TargetAttributes = {
 					DA182C8B2211757900163B42 = {
 						CreatedOnToolsVersion = 10.1;
@@ -372,6 +375,7 @@
 				5B5A8DEF24CF49670001CB13 /* TableViewControllerProtocol.swift in Sources */,
 				5BB7AC89250FF267004F8394 /* TextFieldConfiguration.swift in Sources */,
 				5BB7AC85250FECF0004F8394 /* TextInputConfigurableView.swift in Sources */,
+				5B4C37952529BC4800A53EE0 /* ModelConfigurableView.swift in Sources */,
 				5BB329AE24BF2AB900323F11 /* CollectionViewControllerProtocol.swift in Sources */,
 				5B0D9FAE25156F66000C6673 /* PickerViewTitle.swift in Sources */,
 				5BB329A924BF29B400323F11 /* CollectionViewSupplementaryViewHeight.swift in Sources */,
