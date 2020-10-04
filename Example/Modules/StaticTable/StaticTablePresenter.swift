@@ -9,7 +9,7 @@
 import Foundation
 import Source
 
-protocol HomeViewOutput: TableViewPresenterProtocol {
+protocol StaticTableViewOutput: TableViewPresenterProtocol {
 
 }
 
@@ -21,10 +21,10 @@ final class StaticTablePresenter {
     ]
     
     // MARK: Dependency properties
-    private unowned let view: HomeViewInput
+    private unowned let view: StaticTableViewInput
     
     // MARK: Lifecycle
-    init(view: HomeViewInput) {
+    init(view: StaticTableViewInput) {
         self.view = view
     }
     
@@ -38,7 +38,7 @@ final class StaticTablePresenter {
 }
 
 // MARK: - HomeViewOutput
-extension StaticTablePresenter: HomeViewOutput {
+extension StaticTablePresenter: StaticTableViewOutput {
     
     var tableSections: Int {
         return self.rows.count
@@ -49,7 +49,7 @@ extension StaticTablePresenter: HomeViewOutput {
     }
     
     func tableRowIdentifier(for indexPath: IndexPath) -> String {
-        return HomeTableViewCell.viewIdentifier
+        return StaticTableViewCell.viewIdentifier
     }
     
     func tableRowHeight(for indexPath: IndexPath) -> TableViewRowHeight {
@@ -58,7 +58,7 @@ extension StaticTablePresenter: HomeViewOutput {
     
     func tableRowModel(for indexPath: IndexPath) -> Any? {
         let row = self.rows[indexPath.section][indexPath.row]
-        return HomeTableViewCell.Model(title: row.rawValue)
+        return StaticTableViewCell.Model(title: row.rawValue)
     }
     
     func tableRowDidSelect(at indexPath: IndexPath) {

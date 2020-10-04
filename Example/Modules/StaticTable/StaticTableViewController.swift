@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  StaticTableViewController.swift
 //  Example
 //
 //  Created by Lysytsia Yurii on 04.10.2020.
@@ -9,27 +9,35 @@
 import UIKit
 import Source
 
-protocol HomeViewInput: TableViewControllerProtocol {
+protocol StaticTableViewInput: TableViewControllerProtocol {
     // Add public methods which will use by presenter
 }
 
-final class HomeViewController: UIViewController {
+final class StaticTableViewController: UIViewController {
     
     // MARK: Stored properties
-    var output: HomeViewOutput!
+    var output: StaticTableViewOutput!
     
     // MARK: Outlet properties
-    @IBOutlet private weak var tableView: UITableView!
+    private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.addSubview(self.tableView)
+        
         self.configureTableView { (tableView) in
-            tableView.register(HomeTableViewCell.self)
+            tableView.register(StaticTableViewCell.self)
         }
         
-        self.output.didLoad()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.tableView.frame = self.view.bounds
+        
     }
     
     // MARK: Functions
@@ -38,8 +46,8 @@ final class HomeViewController: UIViewController {
     
 }
 
-// MARK: - HomeViewInput
-extension HomeViewController: HomeViewInput {
+// MARK: - StaticTableViewInput
+extension StaticTableViewController: StaticTableViewInput {
     
     var tableViewSource: UITableView {
         return self.tableView

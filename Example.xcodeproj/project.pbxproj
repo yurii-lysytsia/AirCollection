@@ -9,16 +9,13 @@
 /* Begin PBXBuildFile section */
 		5B4C374525299ABB00A53EE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C374425299ABB00A53EE0 /* AppDelegate.swift */; };
 		5B4C374E25299ABC00A53EE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C374D25299ABC00A53EE0 /* Assets.xcassets */; };
-		5B4C377B25299E4000A53EE0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C377625299E4000A53EE0 /* HomeViewController.swift */; };
-		5B4C377C25299E4000A53EE0 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C377725299E4000A53EE0 /* HomeInteractor.swift */; };
-		5B4C377D25299E4000A53EE0 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C377825299E4000A53EE0 /* HomeRouter.swift */; };
-		5B4C377E25299E4000A53EE0 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C377925299E4000A53EE0 /* HomeViewController.xib */; };
-		5B4C377F25299E4000A53EE0 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C377A25299E4000A53EE0 /* HomePresenter.swift */; };
+		5B4C377B25299E4000A53EE0 /* StaticTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C377625299E4000A53EE0 /* StaticTableViewController.swift */; };
+		5B4C377F25299E4000A53EE0 /* StaticTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C377A25299E4000A53EE0 /* StaticTablePresenter.swift */; };
 		5B4C378425299E5E00A53EE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C378325299E5E00A53EE0 /* LaunchScreen.storyboard */; };
 		5B4C378825299F8300A53EE0 /* Source.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4C378725299F8300A53EE0 /* Source.framework */; };
 		5B4C378925299F8300A53EE0 /* Source.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4C378725299F8300A53EE0 /* Source.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5B4C37902529A0E000A53EE0 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C378E2529A0E000A53EE0 /* HomeTableViewCell.xib */; };
-		5B4C37912529A0E000A53EE0 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C378F2529A0E000A53EE0 /* HomeTableViewCell.swift */; };
+		5B4C37912529A0E000A53EE0 /* StaticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C378F2529A0E000A53EE0 /* StaticTableViewCell.swift */; };
+		5B4C37B02529C90700A53EE0 /* ModuleFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37AF2529C90700A53EE0 /* ModuleFabric.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,15 +37,12 @@
 		5B4C374425299ABB00A53EE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B4C374D25299ABC00A53EE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B4C375225299ABC00A53EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5B4C377625299E4000A53EE0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		5B4C377725299E4000A53EE0 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
-		5B4C377825299E4000A53EE0 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
-		5B4C377925299E4000A53EE0 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		5B4C377A25299E4000A53EE0 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		5B4C377625299E4000A53EE0 /* StaticTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableViewController.swift; sourceTree = "<group>"; };
+		5B4C377A25299E4000A53EE0 /* StaticTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTablePresenter.swift; sourceTree = "<group>"; };
 		5B4C378325299E5E00A53EE0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B4C378725299F8300A53EE0 /* Source.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Source.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B4C378E2529A0E000A53EE0 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
-		5B4C378F2529A0E000A53EE0 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		5B4C378F2529A0E000A53EE0 /* StaticTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableViewCell.swift; sourceTree = "<group>"; };
+		5B4C37AF2529C90700A53EE0 /* ModuleFabric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleFabric.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				5B4C374425299ABB00A53EE0 /* AppDelegate.swift */,
+				5B4C37AF2529C90700A53EE0 /* ModuleFabric.swift */,
 				5B4C377225299DEE00A53EE0 /* Modules */,
 				5B4C376D25299D1800A53EE0 /* Resources */,
 			);
@@ -103,22 +98,9 @@
 		5B4C377225299DEE00A53EE0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				5B4C377525299E3A00A53EE0 /* Home */,
+				5B4C37AB2529C8A200A53EE0 /* StaticTable */,
 			);
 			path = Modules;
-			sourceTree = "<group>";
-		};
-		5B4C377525299E3A00A53EE0 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				5B4C377825299E4000A53EE0 /* HomeRouter.swift */,
-				5B4C377A25299E4000A53EE0 /* HomePresenter.swift */,
-				5B4C377725299E4000A53EE0 /* HomeInteractor.swift */,
-				5B4C377625299E4000A53EE0 /* HomeViewController.swift */,
-				5B4C377925299E4000A53EE0 /* HomeViewController.xib */,
-				5B4C378B2529A08700A53EE0 /* Cell */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		5B4C378625299F8300A53EE0 /* Frameworks */ = {
@@ -132,10 +114,19 @@
 		5B4C378B2529A08700A53EE0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				5B4C378F2529A0E000A53EE0 /* HomeTableViewCell.swift */,
-				5B4C378E2529A0E000A53EE0 /* HomeTableViewCell.xib */,
+				5B4C378F2529A0E000A53EE0 /* StaticTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		5B4C37AB2529C8A200A53EE0 /* StaticTable */ = {
+			isa = PBXGroup;
+			children = (
+				5B4C377A25299E4000A53EE0 /* StaticTablePresenter.swift */,
+				5B4C377625299E4000A53EE0 /* StaticTableViewController.swift */,
+				5B4C378B2529A08700A53EE0 /* Cell */,
+			);
+			path = StaticTable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,8 +190,6 @@
 			files = (
 				5B4C378425299E5E00A53EE0 /* LaunchScreen.storyboard in Resources */,
 				5B4C374E25299ABC00A53EE0 /* Assets.xcassets in Resources */,
-				5B4C37902529A0E000A53EE0 /* HomeTableViewCell.xib in Resources */,
-				5B4C377E25299E4000A53EE0 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,12 +200,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B4C37912529A0E000A53EE0 /* HomeTableViewCell.swift in Sources */,
-				5B4C377C25299E4000A53EE0 /* HomeInteractor.swift in Sources */,
-				5B4C377D25299E4000A53EE0 /* HomeRouter.swift in Sources */,
+				5B4C37912529A0E000A53EE0 /* StaticTableViewCell.swift in Sources */,
+				5B4C37B02529C90700A53EE0 /* ModuleFabric.swift in Sources */,
 				5B4C374525299ABB00A53EE0 /* AppDelegate.swift in Sources */,
-				5B4C377F25299E4000A53EE0 /* HomePresenter.swift in Sources */,
-				5B4C377B25299E4000A53EE0 /* HomeViewController.swift in Sources */,
+				5B4C377F25299E4000A53EE0 /* StaticTablePresenter.swift in Sources */,
+				5B4C377B25299E4000A53EE0 /* StaticTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
