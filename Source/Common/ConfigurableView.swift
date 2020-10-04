@@ -7,7 +7,7 @@
 //
 
 // MARK: - ConfigurableView
-public protocol ConfigurableView: IdentificableView {
+public protocol ConfigurableView: class {
     
     /// Configure view with some non specific model
     func configure(model: Any?)

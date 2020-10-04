@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-class HomeTableViewCell: UITableViewCell, NibLoadableView, ModelConfigurableView {    
+class HomeTableViewCell: UITableViewCell, IdentificableView, NibLoadableView, ModelConfigurableView {    
         
     // MARK: Outlet properties
     @IBOutlet private weak var titleLabel: UILabel!

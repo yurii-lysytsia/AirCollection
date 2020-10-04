@@ -18,8 +18,8 @@ public extension UITableView {
     }
     
     /// Registers a nib object containing a cell with the table view under a specified identifier.
-    func register<T: UITableViewCell>(_ cellClass: T.Type) where T: NibLoadableView {
-        self.register(cellClass.nib(), forCellReuseIdentifier: cellClass.viewIdentifier)
+    func register<T: UITableViewCell>(_ cellClass: T.Type) where T: NibLoadableView & IdentificableView {
+        self.register(cellClass.viewNib, forCellReuseIdentifier: cellClass.viewIdentifier)
     }
     
     /// Registers a class for use in creating new table header or footer views.
@@ -28,8 +28,8 @@ public extension UITableView {
     }
     
     /// Registers a nib object containing a header or footer with the table view under a specified identifier.
-    func register<T: UITableViewHeaderFooterView>(_ viewClass: T.Type) where T: NibLoadableView {
-        self.register(T.nib(), forHeaderFooterViewReuseIdentifier: T.viewIdentifier)
+    func register<T: UITableViewHeaderFooterView>(_ viewClass: T.Type) where T: NibLoadableView & IdentificableView {
+        self.register(viewClass.viewNib, forHeaderFooterViewReuseIdentifier: viewClass.viewIdentifier)
     }
     
 }

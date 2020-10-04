@@ -18,8 +18,8 @@ public extension UICollectionView {
     }
     
     /// Register a nib file for use in creating new collection view cells
-    func register<T: UICollectionViewCell>(_ cellClass: T.Type) where T: NibLoadableView {
-        self.register(cellClass.nib(), forCellWithReuseIdentifier: cellClass.viewIdentifier)
+    func register<T: UICollectionViewCell>(_ cellClass: T.Type) where T: NibLoadableView & IdentificableView {
+        self.register(cellClass.viewNib, forCellWithReuseIdentifier: cellClass.viewIdentifier)
     }
     
     /// Registers a class for use in creating supplementary views for the collection view
@@ -28,8 +28,8 @@ public extension UICollectionView {
     }
     
     /// Registers a nib file for use in creating supplementary views for the collection view
-    func register<T: UICollectionReusableView>(_ viewClass: T.Type, for kind: CollectionViewElementKindSection) where T: NibLoadableView {
-        self.register(viewClass.nib(), forSupplementaryViewOfKind: kind.rawValue, withReuseIdentifier: viewClass.viewIdentifier)
+    func register<T: UICollectionReusableView>(_ viewClass: T.Type, for kind: CollectionViewElementKindSection) where T: NibLoadableView & IdentificableView {
+        self.register(viewClass.viewNib, forSupplementaryViewOfKind: kind.rawValue, withReuseIdentifier: viewClass.viewIdentifier)
     }
     
 }

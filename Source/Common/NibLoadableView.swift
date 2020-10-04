@@ -9,50 +9,18 @@
 import class UIKit.UINib
 import class UIKit.UIView
 
-public protocol NibLoadableView: IdentificableView {
-    
-    /// Default nib name for this view. Default is `IdentificableView.viewIdentifier`
-    static func nibName() -> String
-    
-    /// Default created nib for this view using bunle for `Self`
-    static func nib() -> UINib
-    
-    /// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects. Caution This method may be unsafe!
-    static func loadFromNib() -> Self
-    
-    /// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects. Caution This method may be unsafe!
-    static func loadFromNib(owner: Any) -> Self
-    
-    /// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects. Caution This method may be unsafe!
-    static func loadFromNib(owner: Any, options: [UINib.OptionsKey : Any]?) -> Self
-    
+public protocol NibLoadableView: class {
+    /// Created nib instance for this view
+    static var viewNib: UINib { get }
 }
 
-public extension NibLoadableView {
+public extension NibLoadableView where Self: IdentificableView {
     
-    static func nibName() -> String {
-        return self.viewIdentifier
-    }
-    
-}
-
-public extension NibLoadableView where Self: UIView {
-    
-    static func nib() -> UINib {
+    /// Created nib instance for this view. Will use `viewIdentifier` for nibName and `Bundle(for: Self.self)` for bunlde by default
+    static var viewNib: UINib {
+        let nibName = self.viewIdentifier
         let bundle = Bundle(for: Self.self)
-        return UINib(nibName: self.nibName(), bundle: bundle)
-    }
-    
-    static func loadFromNib() -> Self {
-        return self.loadFromNib(owner: self)
-    }
-    
-    static func loadFromNib(owner: Any) -> Self {
-        return self.loadFromNib(owner: owner, options: nil)
-    }
-    
-    static func loadFromNib(owner: Any, options: [UINib.OptionsKey : Any]?) -> Self {
-        return nib().instantiate(withOwner: owner, options: options).first as! Self
+        return UINib(nibName: nibName, bundle: bundle)
     }
     
 }
