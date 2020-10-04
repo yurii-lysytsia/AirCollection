@@ -2,12 +2,11 @@
 
 [![platform](https://img.shields.io/badge/Platform-iOS%2011+-blue.svg)]()
 [![language](https://img.shields.io/badge/Language-Swift-red.svg)]()
-[![language](https://img.shields.io/badge/pod-1.4.0-blue.svg)]()
+[![language](https://img.shields.io/badge/pod-1.4.1-blue.svg)]()
 [![license](https://img.shields.io/badge/license-MIT-lightgray.svg)]()
 
 Save your coding time with AirCollection written on Swift. It's a great wrapper for UITableView / UICollectionView and VIPER / MVP architecture.
 
-- [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
     - [CocoaPods](#CocoaPods)
@@ -15,15 +14,7 @@ Save your coding time with AirCollection written on Swift. It's a great wrapper 
     - [Reusable View](#reusable-view)
     - [Table view](#table-view)
     - [Collection view](#collection-view)
-- [License](#license)
-
-
-## Features
-- [ ] Collection view documentation
-- [ ] Static table view with from programmatically model
-- [ ] Implement interactor array model to display table view
-- [ ] Example
- 
+- [License](#license) 
  
 ## Requirements
 - iOS 11.0+
