@@ -33,13 +33,13 @@ pod 'AirCollection'
 ## Usage
 
 ### Reusable View
-All about reusable view usage you can read [there](README_VIEW.md)
+All about reusable view, table view cells and collection view cells usage you can read [here](README_VIEW.md)
 
 ### Table view
-All about table view usage you can read [there](README_TABLE.md)
+All about table view usage you can read [here](README_TABLE.md)
 
 ### Collection view
-All about collection view usage you can read [there](README_COLLECTION.md)
+All about collection view usage you can read [here](README_COLLECTION.md)
 
 
 ## License
