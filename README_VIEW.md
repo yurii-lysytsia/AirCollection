@@ -96,9 +96,17 @@ You are able to use already created implementation. But if you won't find anythi
 #### Text Field Configuration
 Configuration for `UITextField` with keyboard and some basic configurations. Use it both with `TextFieldDelegate`
 ```swift
-public protocol TextFieldDelegate: UITextFieldDelegate {
-    func textFieldDidEditingChanged(_ textField: UITextField)
+public protocol TextFieldDelegate: class {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
+    func textFieldDidEndEditing(_ textField: UITextField)
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: Range<String.Index>, replacementString string: String) -> Bool
+    func textFieldShouldClear(_ textField: UITextField) -> Bool
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    func textFieldEditingChanged(_ textField: UITextField)
 }
+
 open class TextFieldConfiguration: TextInputConfiguration {
     /// The auto-capitalization style for the text object. Default is `UITextAutocapitalizationType.sentences`
     public var autocapitalizationType: UITextAutocapitalizationType = .sentences
@@ -176,8 +184,38 @@ public class TextFieldDatePickerConfiguration: TextFieldConfiguration {
     public convenience init(mode: UIDatePicker.Mode, date: Date = Date(), minimumDate: Date? = nil, maximumDate: Date? = nil, delegate: TextFieldDatePickerDelegate)
 ```
 
-- `TextViewConfiguration` for `UITextView` with keyboard and some basic configurations
+#### Text View Configuration
+Configuration for `UITextView` with keyboard and some basic configurations. Use it both with `TextViewDelegate`
+```swift
+public protocol TextViewDelegate: class {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool
+    func textViewDidBeginEditing(_ textView: UITextView)
+    func textViewDidEndEditing(_ textView: UITextView)
+    func textView(_ textView: UITextView, shouldChangeTextIn range: Range<String.Index>, replacementText text: String) -> Bool
+    func textViewDidChange(_ textView: UITextView)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: Range<String.Index>, interaction: UITextItemInteraction) -> Bool
+    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: Range<String.Index>, interaction: UITextItemInteraction) -> Bool
+}
 
+open class TextViewConfiguration: TextInputConfiguration {
+    public var autocapitalizationType: UITextAutocapitalizationType = .sentences
+    public var autocorrectionType: UITextAutocorrectionType = .default
+    public var dataDetectorTypes: UIDataDetectorTypes = .all
+    public var inputView: UIView? = nil
+    public var isSecureTextEntry: Bool = false
+    public var isSelectable: Bool = true
+    public var keyboardAppearance: UIKeyboardAppearance = .default
+    public var keyboardType: UIKeyboardType = .default
+    public var returnKeyType: UIReturnKeyType = .default
+    public var smartDashesType: UITextSmartDashesType = .default
+    public var smartQuotesType: UITextSmartQuotesType = .default
+    public var smartInsertDeleteType: UITextSmartInsertDeleteType = .default
+    public var spellCheckingType: UITextSpellCheckingType = .default
+    public var textContentType: UITextContentType? = nil    
+}
+
+```
 
 
 ## Table view cell
