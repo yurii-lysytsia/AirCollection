@@ -237,8 +237,8 @@ public extension TableViewControllerProtocol {
     }
 
     func indexPathForRow(with view: UIView) -> IndexPath? {
-        let point = view.convert(CGPoint.zero, to: self.tableViewSource)
-        return self.tableViewSource.indexPathForRow(at: point)
+        let rect = view.convert(view.bounds, to: self.tableViewSource)
+        return self.tableViewSource.indexPathsForRows(in: rect)?.first
     }
     
 }

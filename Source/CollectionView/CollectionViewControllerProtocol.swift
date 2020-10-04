@@ -202,8 +202,8 @@ public extension CollectionViewControllerProtocol {
     }
     
     func indexPathForItem(with view: UIView) -> IndexPath? {
-        let point = view.convert(CGPoint.zero, to: self.collectionViewSource)
-        return self.collectionViewSource.indexPathForItem(at: point)
+        let rect = view.convert(view.bounds, to: self.collectionViewSource)
+        return self.collectionViewSource.indexPathForItem(at: rect.origin)
     }
 }
 

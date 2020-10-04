@@ -10,8 +10,8 @@ import UIKit
 import Source
 
 protocol DynamicTableViewInput: TableViewControllerProtocol {
-    func showAlert(title: String, message: String?)
     func showUser(_ user: User)
+    func showStory(_ story: Story)
 }
 
 final class DynamicTableViewController: UIViewController {
@@ -53,15 +53,13 @@ final class DynamicTableViewController: UIViewController {
 // MARK: - StaticTableViewInput
 extension DynamicTableViewController: DynamicTableViewInput {
     
-    func showAlert(title: String, message: String?) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     func showUser(_ user: User) {
         let view = ModuleFabric.createDynamicUserTableModule(user: user)
+        self.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func showStory(_ story: Story) {
+        let view = ModuleFabric.createDynamicStoryTableModule(story: story)
         self.navigationController?.pushViewController(view, animated: true)
     }
     

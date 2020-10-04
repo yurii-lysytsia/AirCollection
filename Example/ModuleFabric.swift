@@ -31,4 +31,11 @@ enum ModuleFabric {
         return view
     }
     
+    static func createDynamicStoryTableModule(story: Story) -> UIViewController {
+        let view = DynamicStoryTableViewController()
+        let presenter = DynamicStoryTablePresenter(story: story, view: view)
+        view.output = presenter
+        return view
+    }
+    
 }

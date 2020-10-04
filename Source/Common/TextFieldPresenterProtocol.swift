@@ -66,7 +66,7 @@ public extension TextFieldPresenterProtocol {
         return true
     }
 
-    func textFieldTextDidChanged(_ text: String, at indexPath: IndexPath) {
+    func textFieldTextDidChanged(_ text: String?, at indexPath: IndexPath) {
         
     }
     

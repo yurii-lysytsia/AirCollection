@@ -92,7 +92,7 @@ extension DynamicTablePresenter: DynamicTableViewOutput {
             self.view.showUser(user)
         case .stories:
             let story = self.stories[indexPath.row]
-            self.view.showAlert(title: story.title, message: story.text)
+            self.view.showStory(story)
         }
     }
     

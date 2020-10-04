@@ -9,7 +9,7 @@
 public protocol TextViewControllerProtocol: TextViewDelegate {
     
     /// Return an instanse of the text view presenter
-    var textViewPresenter: TextFieldPresenterProtocol { get }
+    var textViewPresenter: TextViewPresenterProtocol { get }
     
 }
 

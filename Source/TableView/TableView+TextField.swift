@@ -6,7 +6,7 @@
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
 //
 
-import UIKit.UITextField
+import class UIKit.UITextField
 
 extension TableViewControllerProtocol where Self: TextFieldControllerProtocol {
     
