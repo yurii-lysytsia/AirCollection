@@ -6,9 +6,11 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct Foundation.IndexPath
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGPoint
 import struct CoreGraphics.CGSize
+import class Foundation.NSObject
 import class UIKit.UIScrollView
 import class UIKit.UITableView
 import class UIKit.UITableViewCell

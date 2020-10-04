@@ -6,6 +6,8 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import Foundation.NSAttributedString
+
 // MARK: - PickerViewTitle
 public enum PickerViewTitle {
     case title(String)

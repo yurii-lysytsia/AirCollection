@@ -6,6 +6,7 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct Foundation.IndexPath
 import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
 import class UIKit.UICollectionReusableView

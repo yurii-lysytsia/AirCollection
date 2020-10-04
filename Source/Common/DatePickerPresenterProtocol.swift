@@ -6,6 +6,9 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct Foundation.Date
+import struct Foundation.IndexPath
+
 public protocol DatePickerPresenterProtocol: class {
     /// Called by controller (`DatePickerControllerProtocol`) when the user selects a row with date for index path
     func datePickerDidSelectDate(_ date: Date, at indexPath: IndexPath)

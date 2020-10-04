@@ -8,8 +8,12 @@
 
 import protocol UIKit.UIPickerViewDataSource
 import protocol UIKit.UIPickerViewDelegate
+import class Foundation.NSObject
+import class Foundation.NSAttributedString
 import class UIKit.UITextField
 import class UIKit.UIPickerView
+import func Foundation.objc_getAssociatedObject
+import func Foundation.objc_setAssociatedObject
 
 // MARK: - TextFieldPickerViewDataSource
 public protocol TextFieldPickerViewDataSource: class {

@@ -6,8 +6,12 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct Foundation.Date
+import class Foundation.NSObject
 import class UIKit.UITextField
 import class UIKit.UIDatePicker
+import func Foundation.objc_getAssociatedObject
+import func Foundation.objc_setAssociatedObject
 
 // MARK: - TextFieldDatePickerDelegate
 public protocol TextFieldDatePickerDelegate: class {

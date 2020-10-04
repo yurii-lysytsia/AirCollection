@@ -6,11 +6,15 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct Foundation.IndexPath
+import struct Foundation.IndexSet
 import struct CoreGraphics.CGPoint
 import class UIKit.UIView
 import class UIKit.UITableView
 import class UIKit.UITableViewCell
 import protocol UIKit.UIScrollViewDelegate
+import func Foundation.objc_getAssociatedObject
+import func Foundation.objc_setAssociatedObject
 
 public protocol TableViewControllerProtocol: class {
     

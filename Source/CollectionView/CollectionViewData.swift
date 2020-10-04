@@ -6,11 +6,14 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct Foundation.IndexPath
+import struct Foundation.IndexSet
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGPoint
 import struct CoreGraphics.CGSize
 import struct UIKit.UIEdgeInsets
 import struct UIKit.UILayoutPriority
+import class Foundation.NSObject
 import class UIKit.UIView
 import class UIKit.UIScrollView
 import class UIKit.UICollectionView

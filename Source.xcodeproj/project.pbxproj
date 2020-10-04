@@ -40,7 +40,6 @@
 		5BB7AC85250FECF0004F8394 /* TextInputConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB7AC84250FECF0004F8394 /* TextInputConfigurableView.swift */; };
 		5BB7AC89250FF267004F8394 /* TextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB7AC88250FF267004F8394 /* TextFieldConfiguration.swift */; };
 		5BD5B1C324D803D80065E5DB /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5B1C224D803D80065E5DB /* CollectionViewDelegate.swift */; };
-		DA182C912211757900163B42 /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = DA182C8F2211757900163B42 /* Source.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,7 +77,6 @@
 		5BB7AC88250FF267004F8394 /* TextFieldConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfiguration.swift; sourceTree = "<group>"; };
 		5BD5B1C224D803D80065E5DB /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
 		DA182C8C2211757900163B42 /* Source.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Source.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA182C8F2211757900163B42 /* Source.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
 		DA182C902211757900163B42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -262,7 +260,6 @@
 		DA182C8E2211757900163B42 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				DA182C8F2211757900163B42 /* Source.h */,
 				5B5A8DD724CF47AC0001CB13 /* Common */,
 				5B5A8DD824CF47B30001CB13 /* TableView */,
 				5B5A8DDA24CF47C10001CB13 /* CollectionView */,
@@ -278,7 +275,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA182C912211757900163B42 /* Source.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
