@@ -90,10 +90,94 @@ public protocol TextInputConfiguration {
 }
 ```
 
-#### TextFieldConfiguration
-#### TextFieldPickerViewConfiguration
-#### TextFieldDatePickerConfiguration
-#### TextViewConfiguration
+You are able to use already created implementation. But if you won't find anything suitable could create it or write to author.
+
+#### Text Field Configuration
+Configuration for `UITextField` with keyboard and some basic configurations. Use it both with `TextFieldDelegate`
+```swift
+public protocol TextFieldDelegate: UITextFieldDelegate {
+    func textFieldDidEditingChanged(_ textField: UITextField)
+}
+open class TextFieldConfiguration: TextInputConfiguration {
+    /// The auto-capitalization style for the text object. Default is `UITextAutocapitalizationType.sentences`
+    public var autocapitalizationType: UITextAutocapitalizationType = .sentences
+    /// The autocorrection style for the text object. Default is `UITextAutocorrectionType.default`
+    public var autocorrectionType: UITextAutocorrectionType = .default
+    /// Controls when the standard clear button appears in the text field. Default is `UITextField.ViewMode.never`
+    public var clearButtonMode: UITextField.ViewMode = .never
+    /// The custom input view to display when the text field becomes the first responder. Default is nil
+    public var inputView: UIView? = nil
+    /// Identifies whether the text object should disable text copying and in some cases hide the text being entered. Default is `false`
+    public var isSecureTextEntry: Bool = false
+    /// The appearance style of the keyboard that is associated with the text object. Default is `UIKeyboardAppearance.default`
+    public var keyboardAppearance: UIKeyboardAppearance = .default
+    /// The keyboard style associated with the text object. Default is `UIKeyboardType.default`
+    public var keyboardType: UIKeyboardType = .default
+    /// The visible title of the Return key. Default is `UIReturnKeyType.default`
+    public var returnKeyType: UIReturnKeyType = .default
+    /// The configuration state for smart dashes. Default is `UITextSmartDashesType.default`
+    public var smartDashesType: UITextSmartDashesType = .default
+    /// The configuration state for smart quotes. Default is `UITextSmartQuotesType.default`
+    public var smartQuotesType: UITextSmartQuotesType = .default
+    /// The configuration state for the smart insertion and deletion of space characters. Default is `UITextSmartInsertDeleteType.default`
+    public var smartInsertDeleteType: UITextSmartInsertDeleteType = .default
+    /// The spell-checking style for the text object. Default is `UITextSpellCheckingType.default`
+    public var spellCheckingType: UITextSpellCheckingType = .default
+    /// The semantic meaning expected by a text input area. Default is nil
+    public var textContentType: UITextContentType? = nil
+}
+```
+
+#### Text Field Picker View Configuration
+Configuration for `UITextField` too. But there is `UIPickerView` instead keyboard and some basic configurations. Use it both with `TextFieldPickerViewDelegate` and `TextFieldPickerViewDataSource`
+```swift
+public protocol TextFieldPickerViewDataSource: class {
+    func textField(_ textField: UITextField, numberOfComponentsInPickerView pickerView: UIPickerView) -> Int
+    func textField(_ textField: UITextField, pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    func textField(_ textField: UITextField, pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> PickerViewTitle?
+}
+
+public protocol TextFieldPickerViewDelegate: TextFieldDelegate {
+    func textField(_ textField: UITextField, pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    func textField(_ textField: UITextField, pickerView: UIPickerView, shouldUpdateTextFromRow row: Int, inComponent component: Int) -> Bool
+    func textField(_ textField: UITextField, pickerView: UIPickerView, selectedRowInComponent component: Int) -> Int
+}
+
+public class TextFieldPickerViewConfiguration: TextFieldConfiguration {
+    /// Picker view which will use as text field `inputView`
+    public let pickerView: UIPickerView
+    /// Methods will call by picker view for needed actions
+    public unowned let pickerViewDataSource: TextFieldPickerViewDataSource
+    /// Methods will call by picker view for notify about actions actions
+    public unowned let pickerViewDelegate: TextFieldPickerViewDelegate
+    
+    public init(pickerView: UIPickerView = UIPickerView(), dataSource: TextFieldPickerViewDataSource, delegate: TextFieldPickerViewDelegate)
+    
+    public convenience init(pickerView: UIPickerView = UIPickerView(), controller: TextFieldPickerViewControllerProtocol)
+    
+}
+```
+
+#### Text Field Date Picker Configuration
+Configuration for `UITextField` too. But there is `UIDatePicker` instead keyboard and some basic configurations. Use it both with `TextFieldDatePickerDelegate`
+```swift
+public protocol TextFieldDatePickerDelegate: TextFieldDelegate {
+    func textField(_ textField: UITextField, datePicker: UIDatePicker, didSelectDate date: Date)
+    func textField(_ textField: UITextField, datePicker: UIDatePicker, shouldUpdateTextFromDate date: Date) -> String?
+}
+
+public class TextFieldDatePickerConfiguration: TextFieldConfiguration {
+    public let datePicker: UIDatePicker
+    public unowned let datePickerDelegate: TextFieldDatePickerDelegate
+
+    public init(datePicker: UIDatePicker, delegate: TextFieldDatePickerDelegate)
+    
+    public convenience init(mode: UIDatePicker.Mode, date: Date = Date(), minimumDate: Date? = nil, maximumDate: Date? = nil, delegate: TextFieldDatePickerDelegate)
+```
+
+- `TextViewConfiguration` for `UITextView` with keyboard and some basic configurations
+
+
 
 ## Table view cell
 Table view cell should implement [Identificable View](#identificable-view), one child implementation of [Configurable View](#configurable-view) and optionally [Nib Loadable View](#nib-loadable-view) if cell layouts have `Xib` file.
