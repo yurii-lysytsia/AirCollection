@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-protocol DynamicUserTableViewInput: TableViewControllerProtocol, TextFieldControllerProtocol {
+protocol DynamicUserTableViewInput: TableViewControllerProtocol, TextFieldControllerProtocol, TextFieldDatePickerControllerProtocol, TextFieldPickerViewControllerProtocol {
     
 }
 
@@ -55,4 +55,15 @@ extension DynamicUserTableViewController: DynamicUserTableViewInput {
     var textFieldPresenter: TextFieldPresenterProtocol {
         return self.output
     }
+    
+    // MARK: TextFieldDatePickerControllerProtocol
+    var datePickerPresenter: DatePickerPresenterProtocol {
+        return self.output
+    }
+
+    // MARK: TextFieldPickerViewControllerProtocol
+    var pickerViewPresenter: PickerViewPresenterProtocol {
+        return self.output
+    }
+    
 }

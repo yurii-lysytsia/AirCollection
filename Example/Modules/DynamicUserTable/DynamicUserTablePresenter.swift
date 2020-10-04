@@ -9,7 +9,7 @@
 import Foundation
 import Source
 
-protocol DynamicUserTableViewOutput: TableViewPresenterProtocol, TextFieldPresenterProtocol {
+protocol DynamicUserTableViewOutput: TableViewPresenterProtocol, TextFieldPresenterProtocol, DatePickerPresenterProtocol, PickerViewPresenterProtocol {
     // Add presenter properties which will use by view
 }
 
@@ -17,9 +17,24 @@ final class DynamicUserTablePresenter: NSObject {
     
     // MARK: Stored properties
     private let rows: [[Row]] = [
-        [.name]
+        [.name],
+        [.birthdate],
+        [.gender]
     ]
-        
+    
+    private let birthdateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
+    
+    private let availableGenders: [User.Gender?] = {
+        var genders: [User.Gender?] = User.Gender.allCases
+        genders.insert(nil, at: 0)
+        return genders
+    }()
+    
     // MARK: Dependency properties
     private unowned let user: User
     private unowned let view: DynamicUserTableViewInput
@@ -33,6 +48,8 @@ final class DynamicUserTablePresenter: NSObject {
     // MARK: Helpers
     private enum Row: Int, CaseIterable {
         case name
+        case birthdate
+        case gender
     }
     
 }
@@ -58,8 +75,20 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     }
     
     func tableRowModel(for indexPath: IndexPath) -> Any? {
-        let configuration = TextFieldConfiguration(delegate: self.view)
-        return DynamicUserTableViewCell.Model(title: "Username", text: self.user.name, textInputConfiguration: configuration)
+        switch self.rows[indexPath.section][indexPath.row] {
+        case .name:
+            let configuration = TextFieldConfiguration(delegate: self.view)
+            return DynamicUserTableViewCell.Model(title: "Username", text: self.user.name, textInputConfiguration: configuration)
+        case .birthdate:
+            let text = self.user.birthdate.flatMap({ self.birthdateFormatter.string(from: $0) }) ?? ""
+            let date = self.user.birthdate ?? Date()
+            let configuration = TextFieldDatePickerConfiguration(mode: .date, date: date, maximumDate: Date(), delegate: self.view)
+            return DynamicUserTableViewCell.Model(title: "Birthdate", text: text, textInputConfiguration: configuration)
+        case .gender:
+            let text = self.user.gender?.rawValue ?? ""
+            let configuration = TextFieldPickerViewConfiguration(controller: self.view)
+            return DynamicUserTableViewCell.Model(title: "Gender", text: text, textInputConfiguration: configuration)
+        }
     }
     
     func tableRowDidSelect(at indexPath: IndexPath) {
@@ -71,6 +100,71 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
         switch self.rows[indexPath.section][indexPath.row] {
         case .name:
             self.user.name = text ?? ""
+        default:
+            return
         }
     }
+    
+    // MARK: DatePickerPresenterProtocol
+    func datePickerDidSelectDate(_ date: Date, at indexPath: IndexPath) {
+        switch self.rows[indexPath.section][indexPath.row] {
+        case .birthdate:
+            self.user.birthdate = date
+        default:
+            return
+        }
+    }
+    
+    func datePickerShouldUpdateTextFromDate(_ date: Date, at indexPath: IndexPath) -> String? {
+        switch self.rows[indexPath.section][indexPath.row] {
+        case .birthdate:
+            return self.birthdateFormatter.string(from: date)
+        default:
+            return nil
+        }
+    }
+    
+    // MARK: PickerViewPresenterProtocol
+    func pickerViewNumberOfComponents(at indexPath: IndexPath) -> Int {
+        return 1
+    }
+    
+    func pickerViewNumberOfRows(inComponent component: Int, at indexPath: IndexPath) -> Int {
+        switch self.rows[indexPath.section][indexPath.row] {
+        case .gender:
+            return self.availableGenders.count
+        default:
+            return 0
+        }
+    }
+    
+    func pickerViewTitle(for row: Int, inComponent component: Int, at indexPath: IndexPath) -> PickerViewTitle {
+        switch self.rows[indexPath.section][indexPath.row] {
+        case .gender:
+            let gender = self.availableGenders[row]?.rawValue ?? ""
+            return .title(gender)
+        default:
+            return .title("")
+        }
+    }
+    
+    func pickerViewDidSelectRow(_ row: Int, inComponent component: Int, at indexPath: IndexPath) {
+        switch self.rows[indexPath.section][indexPath.row] {
+        case .gender:
+            self.user.gender = self.availableGenders[row]
+        default:
+            return
+        }
+    }
+    
+    func pickerViewSelectedRow(inComponent component: Int, at indexPath: IndexPath) -> Int {
+        switch self.rows[indexPath.section][indexPath.row] {
+        case .gender:
+            let gender = self.user.gender
+            return self.availableGenders.firstIndex(of: gender) ?? 0
+        default:
+            return 0
+        }
+    }
+    
 }

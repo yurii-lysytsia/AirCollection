@@ -24,6 +24,7 @@ class DynamicUserTableViewCell: UITableViewCell, IdentificableView, NibLoadableV
     func configure(model: Model) {
         self.titleLabel.text = model.title
         self.textField.text = model.text
+        self.textField.placeholder = model.title
     }
     
     // MARK: Helpers
