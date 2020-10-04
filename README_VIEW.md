@@ -10,6 +10,7 @@ All `AirCollection` views (include cells) based on protocols. View able to imple
 - [Table view cell](#table-view-cell)
     - [Code layouts](#code-layouts)
     - [Xib layouts](#xib-layouts)
+    - [Implement `TextInputConfigurableView`](#implement-textinputconfigurableview)
 - [Collection view cell](#collection-view-cell)
 
 ## Base protocols
@@ -246,4 +247,29 @@ struct Model {
 }
 ```
 
+### Implement `TextInputConfigurableView`
+Implementation is similar to previous steps but you have to implement `TextInputConfigurableView` instead `ModelConfigurableView` protocol (e.g we create table view cell with text field)
+```swift
+class TextInputTableViewCell: UITableViewCell, IdentificableView, NibLoadableView, TextInputConfigurableView {
+    @IBOutlet private weak var textField: UITextField!
+}
+```
+
+Next add `textInputView` property implementation and return reference to your text input view (e.g. `textField`)
+```swift
+var textInputView: UITextField {
+    return self.textField
+}
+```
+
+Finally modify your model implementation and add `textInputConfiguration`. It have to one of implementations of `TextInputConfiguration` protocol (e.g. `TextFieldConfiguration` or `TextViewConfiguration`)
+```swift
+struct Model: TextInputConfigurableModel {
+    ...
+    let textInputConfiguration: TextFieldConfiguration
+}
+```
+
+
 ## Collection view cell
+Collection view cell implementation is exactly the same as table view cell. Just use `UICollectionViewCell` instead `UITableViewCell`
