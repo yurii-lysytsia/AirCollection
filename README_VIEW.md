@@ -285,6 +285,8 @@ struct Model {
 }
 ```
 
+There is the simplest example when you need to create table view cell with xib layouts. For more details see [DynamicTitleDescriptionTableViewCell](Example/Modules/DynamicTable/Cell/DynamicTitleDescriptionTableViewCell.swift) in my project example
+
 ### Implement `TextInputConfigurableView`
 Implementation is similar to previous steps but you have to implement `TextInputConfigurableView` instead `ModelConfigurableView` protocol (e.g we create table view cell with text field)
 ```swift
@@ -307,7 +309,7 @@ struct Model: TextInputConfigurableModel {
     let textInputConfiguration: TextFieldConfiguration
 }
 ```
-
+There is the simplest example when you need to create table view cell with text input. For more details see [DynamicUserTableViewCell](Example/Modules/DynamicUserTable/Cell/DynamicUserTableViewCell.swift) and [DynamicStoryTableViewCell](Example/Modules/DynamicStoryTable/Cell/DynamicStoryTableViewCell.swift) in my project example
 
 ## Collection view cell
 Collection view cell implementation is exactly the same as table view cell. Just use `UICollectionViewCell` instead `UITableViewCell`
