@@ -8,6 +8,8 @@ All `AirCollection` views (include cells) based on protocols. View able to imple
     - [Model Configurable View](#model-configurable-view)
     - [Text Input Configurable View](#text-input-configurable-view)
 - [Table view cell](#table-view-cell)
+    - [Code layouts](#code-layouts)
+    - [Xib layouts](#xib-layouts)
 - [Collection view cell](#collection-view-cell)
 
 ## Base protocols
@@ -107,5 +109,30 @@ struct Model {
 
 There is the simplest example when you need to create table view cell with code layouts. For more details see [StaticTableViewCell](Example/Modules/StaticTable/Cell/StaticTableViewCell.swift) in my project example
 
+### Xib layouts
+First of all create your `UITableViewCell` class and implement `IdentificableView`, `NibLoadableView` and `ModelConfigurableView` protocols.
+```swift
+class NibTableViewCell: UITableViewCell, IdentificableView, NibLoadableView, ModelConfigurableView
+```
+
+Than add outlets for subviews and `.xib` file for layouts. In my example it `titleLabel` and `descriptionLabel`
+```swift
+@IBOutlet private weak var titleLabel: UILabel!
+@IBOutlet private weak var descriptionLabel: UILabel!
+```
+
+Finally implement `ModelConfigurableView`. Create predefined model for configuration (in my example is `struct Model`) with needed primitive properties (in my example is `let title: String` and `let description: String?`) and add required `configure(model:)` method where configure all needed subviews by predefined model properties. **Caution!** Make sure you are using a `configure(model: Model)` and `configure(_ model: Any)`.
+```swift
+func configure(model: Model) {
+    self.titleLabel.text = model.title
+    self.descriptionLabel.text = model.description
+    self.descriptionLabel.isHidden = model.description == nil
+}
+   
+struct Model {
+    let title: String
+    let description: String?
+}
+```
 
 ## Collection view cell
