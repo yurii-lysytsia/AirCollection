@@ -24,7 +24,7 @@ public protocol TableViewControllerProtocol: class {
     /// Return an instanse of the table view presenter
     var tableViewPresenter: TableViewPresenterProtocol { get }
     
-    /// Configure `UITableViewDataSource` and `UITableViewDelegate` for specific table view data model
+    /// Configure `UITableViewDataSource` and `UITableViewDelegate` for specific table view and presenter. Also automatically add `TableViewDelegate` to current view controller if implemented.
     /// - Parameter configurator: Use this block to set up the table view. You should register table view cell, headers and footer is this case
     func configureTableView(configurator: (UITableView) -> Void)
     
@@ -101,6 +101,10 @@ public extension TableViewControllerProtocol {
     func configureTableView(configurator: (UITableView) -> Void) {
         self.tableViewSource.dataSource = self.tableViewData
         self.tableViewSource.delegate = self.tableViewData
+        if let delegate = self as? TableViewDelegate {
+            // Forward available table view delegates to current view controller.
+            self.tableViewData.tableViewDelegate = delegate
+        }
         configurator(self.tableViewSource)
     }
     
@@ -259,16 +263,6 @@ public extension TableViewControllerProtocol {
     func indexPathForRow(with view: UIView) -> IndexPath? {
         let rect = view.convert(view.bounds, to: self.tableViewSource)
         return self.tableViewSource.indexPathsForRows(in: rect)?.first
-    }
-    
-}
-
-// MARK: - UIScrollViewDelegateForward
-public extension TableViewControllerProtocol where Self: TableViewDelegate {
-    
-    /// Forward available table view delegates to current view controller.
-    func forwardTableViewDelegate() {
-        self.tableViewData.tableViewDelegate = self
     }
     
 }

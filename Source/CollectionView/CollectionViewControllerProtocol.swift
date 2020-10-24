@@ -23,7 +23,7 @@ public protocol CollectionViewControllerProtocol: class {
     /// Return an instanse of the collection view present
     var collectionViewPresenter: CollectionViewPresenterProtocol { get }
     
-    /// Configure `UICollectionViewDataSource` and `UICollectionViewDelegate` for specific collection view data model
+    /// Configure `UICollectionViewDataSource` and `UICollectionViewDelegate` for specific collection view and presenter. Also automatically add `CollectionViewDelegate` to current view controller if implemented.
     /// - Parameter configurator: Use this block to set up the collection view. You should register collection view cell, headers and footer is this block
     func configureCollectionView(configurator: (UICollectionView) -> Void)
     
@@ -97,6 +97,10 @@ public extension CollectionViewControllerProtocol {
     func configureCollectionView(configurator: (UICollectionView) -> Void) {
         self.collectionViewSource.dataSource = self.collectionViewData
         self.collectionViewSource.delegate = self.collectionViewData
+        if let delegate = self as? CollectionViewDelegate {
+            // Forward available collection view delegate to current view controller.
+            self.collectionViewData.collectionViewDelegate = delegate
+        }
         configurator(self.collectionViewSource)
     }
 
@@ -225,16 +229,6 @@ public extension CollectionViewControllerProtocol {
         let rect = view.convert(view.bounds, to: self.collectionViewSource)
         return self.collectionViewSource.indexPathForItem(at: rect.origin)
     }
-}
-
-// MARK: - CollectionViewDelegateForward
-public extension CollectionViewControllerProtocol where Self: CollectionViewDelegate {
-    
-    /// Forward all collection view `UIScrollViewDelegate` to current view controller.
-    func forwardCollectionViewDelegate() {
-        self.collectionViewData.collectionViewDelegate = self
-    }
-    
 }
 
 // MARK: - CollectionViewData
