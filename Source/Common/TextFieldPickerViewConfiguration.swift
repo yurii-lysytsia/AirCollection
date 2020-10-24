@@ -87,7 +87,7 @@ public class TextFieldPickerViewConfiguration: TextFieldConfiguration {
 fileprivate class TextFieldPickerViewData: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
     private unowned let textField: UITextField
-    private unowned let pickerView: UIPickerView
+    private let pickerView: UIPickerView
     private unowned let dataSource: TextFieldPickerViewDataSource
     private unowned let delegate: TextFieldPickerViewDelegate
     

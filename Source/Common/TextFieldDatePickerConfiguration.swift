@@ -65,7 +65,7 @@ public class TextFieldDatePickerConfiguration: TextFieldConfiguration {
 fileprivate class TextFieldDatePickerData: NSObject {
     
     private unowned let textField: UITextField
-    private unowned let datePicker: UIDatePicker
+    private let datePicker: UIDatePicker
     private unowned let delegate: TextFieldDatePickerDelegate
     
     init(textField: UITextField, datePicker: UIDatePicker, delegate: TextFieldDatePickerDelegate) {
