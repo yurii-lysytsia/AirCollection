@@ -63,6 +63,12 @@ public protocol TableViewControllerProtocol: class {
     /// Deselects a given row identified by index path, with an option to animate the deselection.
     func deselectTableViewRow(at indexPath: IndexPath, animated: Bool)
     
+    /// Make a row input view in the table view identified by index path the first responder in its window at.
+    func becomeTableViewRowFirstResponder(at indexPath: IndexPath)
+    
+    /// Notifies a row input view in the table view identified by index path that it has been asked to relinquish its status as first responder in its window.
+    func resignTableViewRowFirstResponder(at indexPath: IndexPath)
+    
     /// Reloads the specified sections using a given animation effect
     func reloadTableViewSections(_ sections: [Int], with animation: UITableView.RowAnimation)
     
@@ -181,6 +187,20 @@ public extension TableViewControllerProtocol {
     
     func deselectTableViewRow(at indexPath: IndexPath, animated: Bool) {
         self.tableViewSource.deselectRow(at: indexPath, animated: animated)
+    }
+    
+    func becomeTableViewRowFirstResponder(at indexPath: IndexPath) {
+        guard let cell = self.tableViewSource.cellForRow(at: indexPath) as? InputConfigurableView else {
+            return
+        }
+        cell.becomeInputViewFirstResponder()
+    }
+    
+    func resignTableViewRowFirstResponder(at indexPath: IndexPath) {
+        guard let cell = self.tableViewSource.cellForRow(at: indexPath) as? InputConfigurableView else {
+            return
+        }
+        cell.resignInputViewFirstResponder()
     }
     
     // MARK: Sections

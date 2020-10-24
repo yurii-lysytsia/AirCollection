@@ -82,6 +82,11 @@ extension DynamicStoryTablePresenter: DynamicStoryTableViewOutput {
         }
     }
     
+    func tableRowDidSelect(at indexPath: IndexPath) {
+        self.view.deselectTableViewRow(at: indexPath, animated: true)
+        self.view.becomeTableViewRowFirstResponder(at: indexPath)
+    }
+    
     // MARK: TextFieldPresenterProtocol
     func textFieldTextDidChanged(_ text: String?, at indexPath: IndexPath) {
         switch self.rows[indexPath.section][indexPath.row] {
@@ -90,6 +95,11 @@ extension DynamicStoryTablePresenter: DynamicStoryTableViewOutput {
         default:
             return
         }
+    }
+    
+    func textFieldShouldReturn(at indexPath: IndexPath) -> Bool {
+        self.view.resignTableViewRowFirstResponder(at: indexPath)
+        return true
     }
     
     // MARK: TextViewPresenterProtocol
@@ -101,4 +111,5 @@ extension DynamicStoryTablePresenter: DynamicStoryTableViewOutput {
             return
         }
     }
+    
 }

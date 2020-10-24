@@ -40,18 +40,41 @@ public protocol TextInputConfigurableModel {
     
 }
 
+/// Abstract protocol implementation and defines new method to become or resign input view.
+public protocol InputConfigurableView: class {
+    
+    /// Asks UIKit to make this input view the first responder in its window.
+    @discardableResult func becomeInputViewFirstResponder() -> Bool
+    
+    /// Notifies this input view that it has been asked to relinquish its status as first responder in its window
+    @discardableResult func resignInputViewFirstResponder() -> Bool
+
+}
+
 /// Child `ModelConfigurableView` protocol implementation and defines new property *textInputView* and associated *TextInputView* type.
 ///
 /// Use this protocol when you need observe some text input subview (e.g. *UITextField* or *UITextView*) inside your reusable view.
 ///
 /// **Important!** This protocol is able to implement only for `Model` which implement [TextInputConfigurableModel](https://github.com/YuriFox/AirCollection/blob/master/README_VIEW.md#text-input-configurable-model).
-public protocol TextInputConfigurableView: ModelConfigurableView where Model: TextInputConfigurableModel {
+public protocol TextInputConfigurableView: ModelConfigurableView, InputConfigurableView where Model: TextInputConfigurableModel {
     
     /// Predefined text input view type for configure this view.
     associatedtype TextInputView: UIView
     
     /// Reference for text input view.
     var textInputView: TextInputView { get }
+    
+}
+
+public extension TextInputConfigurableView {
+    
+    @discardableResult func becomeInputViewFirstResponder() -> Bool {
+        return self.textInputView.becomeFirstResponder()
+    }
+    
+    @discardableResult func resignInputViewFirstResponder() -> Bool {
+        return self.textInputView.resignFirstResponder()
+    }
     
 }
 

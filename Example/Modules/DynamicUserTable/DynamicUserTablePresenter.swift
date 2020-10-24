@@ -89,6 +89,7 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     
     func tableRowDidSelect(at indexPath: IndexPath) {
         self.view.deselectTableViewRow(at: indexPath, animated: true)
+        self.view.becomeTableViewRowFirstResponder(at: indexPath)
     }
     
     func tableFooterIdentifier(for section: Int) -> String? {
@@ -118,6 +119,11 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
         default:
             return
         }
+    }
+    
+    func textFieldShouldReturn(at indexPath: IndexPath) -> Bool {
+        self.view.resignTableViewRowFirstResponder(at: indexPath)
+        return true
     }
     
     // MARK: DatePickerPresenterProtocol

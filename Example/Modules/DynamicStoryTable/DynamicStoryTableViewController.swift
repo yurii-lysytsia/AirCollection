@@ -10,7 +10,7 @@ import UIKit
 import Source
 
 protocol DynamicStoryTableViewInput: TableViewControllerProtocol, TextFieldControllerProtocol, TextViewControllerProtocol {
-    
+
 }
 
 final class DynamicStoryTableViewController: UIViewController {
