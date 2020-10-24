@@ -6,11 +6,15 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct Foundation.IndexPath
+import struct Foundation.IndexSet
 import struct CoreGraphics.CGPoint
 import class UIKit.UIView
 import class UIKit.UITableView
 import class UIKit.UITableViewCell
 import protocol UIKit.UIScrollViewDelegate
+import func Foundation.objc_getAssociatedObject
+import func Foundation.objc_setAssociatedObject
 
 public protocol TableViewControllerProtocol: class {
     
@@ -20,7 +24,7 @@ public protocol TableViewControllerProtocol: class {
     /// Return an instanse of the table view presenter
     var tableViewPresenter: TableViewPresenterProtocol { get }
     
-    /// Configure `UITableViewDataSource` and `UITableViewDelegate` for specific table view data model
+    /// Configure `UITableViewDataSource` and `UITableViewDelegate` for specific table view and presenter. Also automatically add `TableViewDelegate` to current view controller if implemented.
     /// - Parameter configurator: Use this block to set up the table view. You should register table view cell, headers and footer is this case
     func configureTableView(configurator: (UITableView) -> Void)
     
@@ -59,6 +63,12 @@ public protocol TableViewControllerProtocol: class {
     /// Deselects a given row identified by index path, with an option to animate the deselection.
     func deselectTableViewRow(at indexPath: IndexPath, animated: Bool)
     
+    /// Make a row input view in the table view identified by index path the first responder in its window at.
+    func becomeTableViewRowFirstResponder(at indexPath: IndexPath)
+    
+    /// Notifies a row input view in the table view identified by index path that it has been asked to relinquish its status as first responder in its window.
+    func resignTableViewRowFirstResponder(at indexPath: IndexPath)
+    
     /// Reloads the specified sections using a given animation effect
     func reloadTableViewSections(_ sections: [Int], with animation: UITableView.RowAnimation)
     
@@ -91,6 +101,10 @@ public extension TableViewControllerProtocol {
     func configureTableView(configurator: (UITableView) -> Void) {
         self.tableViewSource.dataSource = self.tableViewData
         self.tableViewSource.delegate = self.tableViewData
+        if let delegate = self as? TableViewDelegate {
+            // Forward available table view delegates to current view controller.
+            self.tableViewData.tableViewDelegate = delegate
+        }
         configurator(self.tableViewSource)
     }
     
@@ -179,6 +193,20 @@ public extension TableViewControllerProtocol {
         self.tableViewSource.deselectRow(at: indexPath, animated: animated)
     }
     
+    func becomeTableViewRowFirstResponder(at indexPath: IndexPath) {
+        guard let cell = self.tableViewSource.cellForRow(at: indexPath) as? InputConfigurableView else {
+            return
+        }
+        cell.becomeInputViewFirstResponder()
+    }
+    
+    func resignTableViewRowFirstResponder(at indexPath: IndexPath) {
+        guard let cell = self.tableViewSource.cellForRow(at: indexPath) as? InputConfigurableView else {
+            return
+        }
+        cell.resignInputViewFirstResponder()
+    }
+    
     // MARK: Sections
     func reloadTableViewSections(_ sections: [Int], with animation: UITableView.RowAnimation) {
         self.tableViewData.reloadSections(sections)
@@ -233,18 +261,8 @@ public extension TableViewControllerProtocol {
     }
 
     func indexPathForRow(with view: UIView) -> IndexPath? {
-        let point = view.convert(CGPoint.zero, to: self.tableViewSource)
-        return self.tableViewSource.indexPathForRow(at: point)
-    }
-    
-}
-
-// MARK: - UIScrollViewDelegateForward
-public extension TableViewControllerProtocol where Self: TableViewDelegate {
-    
-    /// Forward available table view delegates to current view controller.
-    func forwardTableViewDelegate() {
-        self.tableViewData.tableViewDelegate = self
+        let rect = view.convert(view.bounds, to: self.tableViewSource)
+        return self.tableViewSource.indexPathsForRows(in: rect)?.first
     }
     
 }

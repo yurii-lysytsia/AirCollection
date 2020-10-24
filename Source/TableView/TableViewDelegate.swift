@@ -6,6 +6,7 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct Foundation.IndexPath
 import class UIKit.UIView
 import class UIKit.UITableView
 import class UIKit.UITableViewCell

@@ -6,10 +6,14 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct Foundation.IndexPath
+import struct Foundation.IndexSet
 import struct CoreGraphics.CGPoint
 import class UIKit.UIView
 import class UIKit.UICollectionView
 import protocol UIKit.UIScrollViewDelegate
+import func Foundation.objc_getAssociatedObject
+import func Foundation.objc_setAssociatedObject
 
 public protocol CollectionViewControllerProtocol: class {
 
@@ -19,7 +23,7 @@ public protocol CollectionViewControllerProtocol: class {
     /// Return an instanse of the collection view present
     var collectionViewPresenter: CollectionViewPresenterProtocol { get }
     
-    /// Configure `UICollectionViewDataSource` and `UICollectionViewDelegate` for specific collection view data model
+    /// Configure `UICollectionViewDataSource` and `UICollectionViewDelegate` for specific collection view and presenter. Also automatically add `CollectionViewDelegate` to current view controller if implemented.
     /// - Parameter configurator: Use this block to set up the collection view. You should register collection view cell, headers and footer is this block
     func configureCollectionView(configurator: (UICollectionView) -> Void)
     
@@ -58,6 +62,12 @@ public protocol CollectionViewControllerProtocol: class {
     /// Deselects the collection view item at the specified index.
     func deselectCollectionViewItem(at indexPath: IndexPath, animated: Bool)
     
+    /// Make an item input view in the collection view identified by index path the first responder in its window at.
+    func becomeCollectionViewRowFirstResponder(at indexPath: IndexPath)
+    
+    /// Notifies an item input view in the collection view identified by index path that it has been asked to relinquish its status as first responder in its window.
+    func resignCollectionViewRowFirstResponder(at indexPath: IndexPath)
+    
     /// Reloads the data in the specified sections of the collection view.
     func reloadCollectionViewSections(_ sections: [Int])
     
@@ -87,6 +97,10 @@ public extension CollectionViewControllerProtocol {
     func configureCollectionView(configurator: (UICollectionView) -> Void) {
         self.collectionViewSource.dataSource = self.collectionViewData
         self.collectionViewSource.delegate = self.collectionViewData
+        if let delegate = self as? CollectionViewDelegate {
+            // Forward available collection view delegate to current view controller.
+            self.collectionViewData.collectionViewDelegate = delegate
+        }
         configurator(self.collectionViewSource)
     }
 
@@ -159,6 +173,20 @@ public extension CollectionViewControllerProtocol {
         self.collectionViewSource.deselectItem(at: indexPath, animated: animated)
     }
 
+    func becomeTableViewRowFirstResponder(at indexPath: IndexPath) {
+        guard let cell = self.collectionViewSource.cellForItem(at: indexPath) as? InputConfigurableView else {
+            return
+        }
+        cell.becomeInputViewFirstResponder()
+    }
+    
+    func resignTableViewRowFirstResponder(at indexPath: IndexPath) {
+        guard let cell = self.collectionViewSource.cellForItem(at: indexPath) as? InputConfigurableView else {
+            return
+        }
+        cell.resignInputViewFirstResponder()
+    }
+    
     // MARK: Sections
     func reloadCollectionViewSections(_ sections: [Int]) {
         self.collectionViewData.reloadSections(sections)
@@ -198,19 +226,9 @@ public extension CollectionViewControllerProtocol {
     }
     
     func indexPathForItem(with view: UIView) -> IndexPath? {
-        let point = view.convert(CGPoint.zero, to: self.collectionViewSource)
-        return self.collectionViewSource.indexPathForItem(at: point)
+        let rect = view.convert(view.bounds, to: self.collectionViewSource)
+        return self.collectionViewSource.indexPathForItem(at: rect.origin)
     }
-}
-
-// MARK: - CollectionViewDelegateForward
-public extension CollectionViewControllerProtocol where Self: CollectionViewDelegate {
-    
-    /// Forward all collection view `UIScrollViewDelegate` to current view controller.
-    func forwardCollectionViewDelegate() {
-        self.collectionViewData.collectionViewDelegate = self
-    }
-    
 }
 
 // MARK: - CollectionViewData

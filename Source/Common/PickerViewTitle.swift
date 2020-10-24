@@ -3,8 +3,10 @@
 //  AirCollection
 //
 //  Created by Lysytsia Yurii on 19.09.2020.
-//  Copyright © 2020 Developer Lysytsia. All rights reserved.
+//  Copyright © 2020 Lysytsia Yurii. All rights reserved.
 //
+
+import Foundation.NSAttributedString
 
 // MARK: - PickerViewTitle
 public enum PickerViewTitle {

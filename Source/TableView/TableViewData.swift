@@ -6,9 +6,11 @@
 //  Copyright © 2020 Developer Lysytsia. All rights reserved.
 //
 
+import struct Foundation.IndexPath
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGPoint
 import struct CoreGraphics.CGSize
+import class Foundation.NSObject
 import class UIKit.UIScrollView
 import class UIKit.UITableView
 import class UIKit.UITableViewCell
@@ -172,7 +174,7 @@ class TableViewData: NSObject {
             assertionFailure("For use `TableViewData.configureCell(_:for:)`and configure cell you must implement `ConfigurableView` protocol for cell type `\(type(of: cell))`")
             return
         }
-        configurableCell.configure(model: model)
+        configurableCell.configure(model)
     }
     
     /// Configure table header view with some model. Header view must implement `ConfigurableView` protocol.
@@ -184,7 +186,7 @@ class TableViewData: NSObject {
             assertionFailure("For use `TableViewData.configureHeaderView(_:for:)`and configure header view you must implement `ConfigurableView` protocol for header view type `\(type(of: view))`")
             return
         }
-        configurableView.configure(model: model)
+        configurableView.configure(model)
     }
     
     /// Configure table footer view with some model. Footer view must implement `ConfigurableView` protocol.
@@ -196,7 +198,7 @@ class TableViewData: NSObject {
             assertionFailure("For use `TableViewData.configureFooterView(_:for:)`and configure footer view you must implement `ConfigurableView` protocol for footer view type `\(type(of: view))`")
             return
         }
-        configurableView.configure(model: model)
+        configurableView.configure(model)
     }
     
 }
@@ -318,7 +320,13 @@ extension TableViewData: UITableViewDelegate {
             return height
             
         case .flexible:
-            return UITableView.automaticDimension
+            guard let view = self.tableView(tableView, viewForHeaderInSection: section) else {
+                return UITableView.automaticDimension
+            }
+            view.layoutIfNeeded()
+            let targetSize = CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude)
+            let prefferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+            return prefferedSize.height
         }
     }
     
@@ -363,12 +371,16 @@ extension TableViewData: UITableViewDelegate {
         switch self.output.tableFooterHeight(for: section) {
         case .none:
             return 0
-            
         case .fixed(let height):
             return height
-            
         case .flexible:
-            return UITableView.automaticDimension
+            guard let view = self.tableView(tableView, viewForFooterInSection: section) else {
+                return UITableView.automaticDimension
+            }
+            view.layoutIfNeeded()
+            let targetSize = CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude)
+            let prefferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+            return prefferedSize.height
         }
     }
     

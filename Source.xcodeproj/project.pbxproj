@@ -13,6 +13,17 @@
 		5B0D9FA7251567CE000C6673 /* PickerViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FA6251567CE000C6673 /* PickerViewControllerProtocol.swift */; };
 		5B0D9FA9251567E2000C6673 /* PickerViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */; };
 		5B0D9FAE25156F66000C6673 /* PickerViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FAD25156F66000C6673 /* PickerViewTitle.swift */; };
+		5B2D23C3254404ED007DB77D /* collection.md in Resources */ = {isa = PBXBuildFile; fileRef = 5B2D23C0254404ED007DB77D /* collection.md */; };
+		5B2D23C4254404ED007DB77D /* view.md in Resources */ = {isa = PBXBuildFile; fileRef = 5B2D23C1254404ED007DB77D /* view.md */; };
+		5B2D23C5254404ED007DB77D /* table.md in Resources */ = {isa = PBXBuildFile; fileRef = 5B2D23C2254404ED007DB77D /* table.md */; };
+		5B491788252A7220006D5837 /* CollectionView+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B491787252A7220006D5837 /* CollectionView+TextView.swift */; };
+		5B4C37952529BC4800A53EE0 /* ModelConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37942529BC4800A53EE0 /* ModelConfigurableView.swift */; };
+		5B4C37D52529FD4C00A53EE0 /* TextFieldControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37D42529FD4C00A53EE0 /* TextFieldControllerProtocol.swift */; };
+		5B4C37D82529FE3A00A53EE0 /* TextFieldPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37D72529FE3A00A53EE0 /* TextFieldPresenterProtocol.swift */; };
+		5B4C37DB252A07A900A53EE0 /* TableView+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37DA252A07A900A53EE0 /* TableView+TextField.swift */; };
+		5B4C37DF252A286A00A53EE0 /* TextViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37DE252A286A00A53EE0 /* TextViewConfiguration.swift */; };
+		5B4C37E4252A2DFB00A53EE0 /* TextViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37E3252A2DFB00A53EE0 /* TextViewControllerProtocol.swift */; };
+		5B4C37E7252A2E2300A53EE0 /* TextViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37E6252A2E2300A53EE0 /* TextViewPresenterProtocol.swift */; };
 		5B4ED7A625167DC00027E92A /* DatePickerControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4ED7A525167DC00027E92A /* DatePickerControllerProtocol.swift */; };
 		5B4ED7A825167E030027E92A /* DatePickerPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4ED7A725167E030027E92A /* DatePickerPresenterProtocol.swift */; };
 		5B4ED7AD251682D10027E92A /* TableView+TextFieldDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4ED7AC251682D10027E92A /* TableView+TextFieldDatePicker.swift */; };
@@ -23,18 +34,14 @@
 		5B5A8DEC24CF49510001CB13 /* TableViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */; };
 		5B5A8DEF24CF49670001CB13 /* TableViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DEE24CF49670001CB13 /* TableViewControllerProtocol.swift */; };
 		5B8BA20524D35BFB0070CC77 /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8BA20424D35BFB0070CC77 /* TableViewDelegate.swift */; };
-		5B8BA20924D365750070CC77 /* AirCollection.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 5B8BA20824D365750070CC77 /* AirCollection.podspec */; };
 		5B94A91E24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B94A91D24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift */; };
+		5B9B16BA252A63BB00C19CD7 /* CollectionView+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9B16B9252A63BB00C19CD7 /* CollectionView+TextField.swift */; };
+		5B9B16BE252A642500C19CD7 /* TableView+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9B16BD252A642500C19CD7 /* TableView+TextView.swift */; };
 		5BAB775C2517DE10002961AF /* CollectionView+TextFieldPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAB775B2517DE10002961AF /* CollectionView+TextFieldPickerView.swift */; };
 		5BAB775E2517DE5F002961AF /* CollectionView+TextFieldDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAB775D2517DE5F002961AF /* CollectionView+TextFieldDatePicker.swift */; };
-		5BAB77602517DF63002961AF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB775F2517DF62002961AF /* README.md */; };
-		5BAB77642517DF6A002961AF /* README_COLLECTION.md in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB77612517DF6A002961AF /* README_COLLECTION.md */; };
-		5BAB77652517DF6A002961AF /* README_VIEW.md in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB77622517DF6A002961AF /* README_VIEW.md */; };
-		5BAB77662517DF6A002961AF /* README_TABLE.md in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB77632517DF6A002961AF /* README_TABLE.md */; };
 		5BB3298C24BF1E4A00323F11 /* IdentificableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */; };
 		5BB3298E24BF1E8A00323F11 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */; };
 		5BB3299024BF1E9800323F11 /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */; };
-		5BB3299424BF1EDB00323F11 /* TextViewInputModelConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3299324BF1EDB00323F11 /* TextViewInputModelConfigurable.swift */; };
 		5BB3299A24BF1F2900323F11 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3299924BF1F2900323F11 /* Array+Extension.swift */; };
 		5BB329A524BF239C00323F11 /* CollectionViewItemSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329A424BF239C00323F11 /* CollectionViewItemSize.swift */; };
 		5BB329A924BF29B400323F11 /* CollectionViewSupplementaryViewHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB329A824BF29B400323F11 /* CollectionViewSupplementaryViewHeight.swift */; };
@@ -45,7 +52,6 @@
 		5BB7AC85250FECF0004F8394 /* TextInputConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB7AC84250FECF0004F8394 /* TextInputConfigurableView.swift */; };
 		5BB7AC89250FF267004F8394 /* TextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB7AC88250FF267004F8394 /* TextFieldConfiguration.swift */; };
 		5BD5B1C324D803D80065E5DB /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5B1C224D803D80065E5DB /* CollectionViewDelegate.swift */; };
-		DA182C912211757900163B42 /* AirCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = DA182C8F2211757900163B42 /* AirCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +61,17 @@
 		5B0D9FA6251567CE000C6673 /* PickerViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewControllerProtocol.swift; sourceTree = "<group>"; };
 		5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B0D9FAD25156F66000C6673 /* PickerViewTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewTitle.swift; sourceTree = "<group>"; };
+		5B2D23C0254404ED007DB77D /* collection.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = collection.md; sourceTree = "<group>"; };
+		5B2D23C1254404ED007DB77D /* view.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = view.md; sourceTree = "<group>"; };
+		5B2D23C2254404ED007DB77D /* table.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = table.md; sourceTree = "<group>"; };
+		5B491787252A7220006D5837 /* CollectionView+TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+TextView.swift"; sourceTree = "<group>"; };
+		5B4C37942529BC4800A53EE0 /* ModelConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConfigurableView.swift; sourceTree = "<group>"; };
+		5B4C37D42529FD4C00A53EE0 /* TextFieldControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldControllerProtocol.swift; sourceTree = "<group>"; };
+		5B4C37D72529FE3A00A53EE0 /* TextFieldPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPresenterProtocol.swift; sourceTree = "<group>"; };
+		5B4C37DA252A07A900A53EE0 /* TableView+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+TextField.swift"; sourceTree = "<group>"; };
+		5B4C37DE252A286A00A53EE0 /* TextViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewConfiguration.swift; sourceTree = "<group>"; };
+		5B4C37E3252A2DFB00A53EE0 /* TextViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewControllerProtocol.swift; sourceTree = "<group>"; };
+		5B4C37E6252A2E2300A53EE0 /* TextViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B4ED7A525167DC00027E92A /* DatePickerControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerControllerProtocol.swift; sourceTree = "<group>"; };
 		5B4ED7A725167E030027E92A /* DatePickerPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B4ED7AC251682D10027E92A /* TableView+TextFieldDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+TextFieldDatePicker.swift"; sourceTree = "<group>"; };
@@ -65,18 +82,14 @@
 		5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B5A8DEE24CF49670001CB13 /* TableViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerProtocol.swift; sourceTree = "<group>"; };
 		5B8BA20424D35BFB0070CC77 /* TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
-		5B8BA20824D365750070CC77 /* AirCollection.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = AirCollection.podspec; sourceTree = "<group>"; };
 		5B94A91D24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewElementKindSection.swift; sourceTree = "<group>"; };
+		5B9B16B9252A63BB00C19CD7 /* CollectionView+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+TextField.swift"; sourceTree = "<group>"; };
+		5B9B16BD252A642500C19CD7 /* TableView+TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+TextView.swift"; sourceTree = "<group>"; };
 		5BAB775B2517DE10002961AF /* CollectionView+TextFieldPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+TextFieldPickerView.swift"; sourceTree = "<group>"; };
 		5BAB775D2517DE5F002961AF /* CollectionView+TextFieldDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+TextFieldDatePicker.swift"; sourceTree = "<group>"; };
-		5BAB775F2517DF62002961AF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		5BAB77612517DF6A002961AF /* README_COLLECTION.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README_COLLECTION.md; sourceTree = "<group>"; };
-		5BAB77622517DF6A002961AF /* README_VIEW.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README_VIEW.md; sourceTree = "<group>"; };
-		5BAB77632517DF6A002961AF /* README_TABLE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README_TABLE.md; sourceTree = "<group>"; };
 		5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificableView.swift; sourceTree = "<group>"; };
 		5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
 		5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
-		5BB3299324BF1EDB00323F11 /* TextViewInputModelConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewInputModelConfigurable.swift; sourceTree = "<group>"; };
 		5BB3299924BF1F2900323F11 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		5BB329A424BF239C00323F11 /* CollectionViewItemSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewItemSize.swift; sourceTree = "<group>"; };
 		5BB329A824BF29B400323F11 /* CollectionViewSupplementaryViewHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSupplementaryViewHeight.swift; sourceTree = "<group>"; };
@@ -87,8 +100,7 @@
 		5BB7AC84250FECF0004F8394 /* TextInputConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputConfigurableView.swift; sourceTree = "<group>"; };
 		5BB7AC88250FF267004F8394 /* TextFieldConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfiguration.swift; sourceTree = "<group>"; };
 		5BD5B1C224D803D80065E5DB /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
-		DA182C8C2211757900163B42 /* AirCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AirCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA182C8F2211757900163B42 /* AirCollection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirCollection.h; sourceTree = "<group>"; };
+		DA182C8C2211757900163B42 /* Source.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Source.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA182C902211757900163B42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +123,16 @@
 				5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */,
 			);
 			name = PickerView;
+			sourceTree = "<group>";
+		};
+		5B2D23BF254404ED007DB77D /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				5B2D23C1254404ED007DB77D /* view.md */,
+				5B2D23C2254404ED007DB77D /* table.md */,
+				5B2D23C0254404ED007DB77D /* collection.md */,
+			);
+			path = Documents;
 			sourceTree = "<group>";
 		};
 		5B4ED7A425167DA90027E92A /* DatePicker */ = {
@@ -157,6 +179,7 @@
 				5BB3298B24BF1E4A00323F11 /* IdentificableView.swift */,
 				5BB3298D24BF1E8A00323F11 /* NibLoadableView.swift */,
 				5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */,
+				5B4C37942529BC4800A53EE0 /* ModelConfigurableView.swift */,
 				5BB7AC84250FECF0004F8394 /* TextInputConfigurableView.swift */,
 				5BB7AC86250FED97004F8394 /* TextField */,
 				5BB7AC87250FEE5B004F8394 /* TextView */,
@@ -199,8 +222,10 @@
 			isa = PBXGroup;
 			children = (
 				5BB329B124BF2D4F00323F11 /* CollectionView+Extension.swift */,
+				5B9B16B9252A63BB00C19CD7 /* CollectionView+TextField.swift */,
 				5BAB775B2517DE10002961AF /* CollectionView+TextFieldPickerView.swift */,
 				5BAB775D2517DE5F002961AF /* CollectionView+TextFieldDatePicker.swift */,
+				5B491787252A7220006D5837 /* CollectionView+TextView.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -209,8 +234,10 @@
 			isa = PBXGroup;
 			children = (
 				5B5A8DE124CF48FE0001CB13 /* TableView+Extension.swift */,
+				5B4C37DA252A07A900A53EE0 /* TableView+TextField.swift */,
 				5B0D9FA325156155000C6673 /* TableView+TextFieldPickerView.swift */,
 				5B4ED7AC251682D10027E92A /* TableView+TextFieldDatePicker.swift */,
+				5B9B16BD252A642500C19CD7 /* TableView+TextView.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -241,6 +268,8 @@
 				5BB7AC88250FF267004F8394 /* TextFieldConfiguration.swift */,
 				5B0D9F9C2515476D000C6673 /* TextFieldPickerViewConfiguration.swift */,
 				5B0D9F9E251555FB000C6673 /* TextFieldDatePickerConfiguration.swift */,
+				5B4C37D42529FD4C00A53EE0 /* TextFieldControllerProtocol.swift */,
+				5B4C37D72529FE3A00A53EE0 /* TextFieldPresenterProtocol.swift */,
 			);
 			name = TextField;
 			sourceTree = "<group>";
@@ -248,7 +277,9 @@
 		5BB7AC87250FEE5B004F8394 /* TextView */ = {
 			isa = PBXGroup;
 			children = (
-				5BB3299324BF1EDB00323F11 /* TextViewInputModelConfigurable.swift */,
+				5B4C37DE252A286A00A53EE0 /* TextViewConfiguration.swift */,
+				5B4C37E3252A2DFB00A53EE0 /* TextViewControllerProtocol.swift */,
+				5B4C37E6252A2E2300A53EE0 /* TextViewPresenterProtocol.swift */,
 			);
 			name = TextView;
 			sourceTree = "<group>";
@@ -256,12 +287,8 @@
 		DA182C822211757900163B42 = {
 			isa = PBXGroup;
 			children = (
-				5B8BA20824D365750070CC77 /* AirCollection.podspec */,
-				5BAB775F2517DF62002961AF /* README.md */,
-				5BAB77622517DF6A002961AF /* README_VIEW.md */,
-				5BAB77632517DF6A002961AF /* README_TABLE.md */,
-				5BAB77612517DF6A002961AF /* README_COLLECTION.md */,
 				DA182C8E2211757900163B42 /* Source */,
+				5B2D23BF254404ED007DB77D /* Documents */,
 				DA182C8D2211757900163B42 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -269,7 +296,7 @@
 		DA182C8D2211757900163B42 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA182C8C2211757900163B42 /* AirCollection.framework */,
+				DA182C8C2211757900163B42 /* Source.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -277,7 +304,6 @@
 		DA182C8E2211757900163B42 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				DA182C8F2211757900163B42 /* AirCollection.h */,
 				5B5A8DD724CF47AC0001CB13 /* Common */,
 				5B5A8DD824CF47B30001CB13 /* TableView */,
 				5B5A8DDA24CF47C10001CB13 /* CollectionView */,
@@ -293,16 +319,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA182C912211757900163B42 /* AirCollection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		DA182C8B2211757900163B42 /* AirCollection */ = {
+		DA182C8B2211757900163B42 /* Source */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA182C942211757900163B42 /* Build configuration list for PBXNativeTarget "AirCollection" */;
+			buildConfigurationList = DA182C942211757900163B42 /* Build configuration list for PBXNativeTarget "Source" */;
 			buildPhases = (
 				DA182C872211757900163B42 /* Headers */,
 				DA182C882211757900163B42 /* Sources */,
@@ -313,9 +338,9 @@
 			);
 			dependencies = (
 			);
-			name = AirCollection;
+			name = Source;
 			productName = AirCollection;
-			productReference = DA182C8C2211757900163B42 /* AirCollection.framework */;
+			productReference = DA182C8C2211757900163B42 /* Source.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -324,8 +349,8 @@
 		DA182C832211757900163B42 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = "Developer Lysytsia";
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = "Lysytsia Yurii";
 				TargetAttributes = {
 					DA182C8B2211757900163B42 = {
 						CreatedOnToolsVersion = 10.1;
@@ -333,7 +358,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DA182C862211757900163B42 /* Build configuration list for PBXProject "AirCollection" */;
+			buildConfigurationList = DA182C862211757900163B42 /* Build configuration list for PBXProject "Source" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -346,7 +371,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DA182C8B2211757900163B42 /* AirCollection */,
+				DA182C8B2211757900163B42 /* Source */,
 			);
 		};
 /* End PBXProject section */
@@ -356,11 +381,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BAB77602517DF63002961AF /* README.md in Resources */,
-				5BAB77652517DF6A002961AF /* README_VIEW.md in Resources */,
-				5BAB77642517DF6A002961AF /* README_COLLECTION.md in Resources */,
-				5BAB77662517DF6A002961AF /* README_TABLE.md in Resources */,
-				5B8BA20924D365750070CC77 /* AirCollection.podspec in Resources */,
+				5B2D23C3254404ED007DB77D /* collection.md in Resources */,
+				5B2D23C4254404ED007DB77D /* view.md in Resources */,
+				5B2D23C5254404ED007DB77D /* table.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B4C37DF252A286A00A53EE0 /* TextViewConfiguration.swift in Sources */,
 				5B0D9F9D2515476D000C6673 /* TextFieldPickerViewConfiguration.swift in Sources */,
 				5B8BA20524D35BFB0070CC77 /* TableViewDelegate.swift in Sources */,
 				5B0D9FA7251567CE000C6673 /* PickerViewControllerProtocol.swift in Sources */,
@@ -382,25 +406,33 @@
 				5B5A8DEA24CF49440001CB13 /* TableViewData.swift in Sources */,
 				5BB3298C24BF1E4A00323F11 /* IdentificableView.swift in Sources */,
 				5BB329B024BF2AC000323F11 /* CollectionViewPresenterProtocol.swift in Sources */,
+				5B491788252A7220006D5837 /* CollectionView+TextView.swift in Sources */,
 				5B5A8DEC24CF49510001CB13 /* TableViewPresenterProtocol.swift in Sources */,
-				5BB3299424BF1EDB00323F11 /* TextViewInputModelConfigurable.swift in Sources */,
 				5B94A91E24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift in Sources */,
 				5BB3298E24BF1E8A00323F11 /* NibLoadableView.swift in Sources */,
 				5BD5B1C324D803D80065E5DB /* CollectionViewDelegate.swift in Sources */,
 				5BB3299A24BF1F2900323F11 /* Array+Extension.swift in Sources */,
 				5BAB775C2517DE10002961AF /* CollectionView+TextFieldPickerView.swift in Sources */,
+				5B4C37E4252A2DFB00A53EE0 /* TextViewControllerProtocol.swift in Sources */,
+				5B4C37DB252A07A900A53EE0 /* TableView+TextField.swift in Sources */,
+				5B9B16BA252A63BB00C19CD7 /* CollectionView+TextField.swift in Sources */,
 				5B0D9F9F251555FB000C6673 /* TextFieldDatePickerConfiguration.swift in Sources */,
+				5B9B16BE252A642500C19CD7 /* TableView+TextView.swift in Sources */,
 				5BB3299024BF1E9800323F11 /* ConfigurableView.swift in Sources */,
+				5B4C37D52529FD4C00A53EE0 /* TextFieldControllerProtocol.swift in Sources */,
 				5B5A8DE224CF48FE0001CB13 /* TableView+Extension.swift in Sources */,
 				5BAB775E2517DE5F002961AF /* CollectionView+TextFieldDatePicker.swift in Sources */,
 				5B5A8DEF24CF49670001CB13 /* TableViewControllerProtocol.swift in Sources */,
 				5BB7AC89250FF267004F8394 /* TextFieldConfiguration.swift in Sources */,
 				5BB7AC85250FECF0004F8394 /* TextInputConfigurableView.swift in Sources */,
+				5B4C37952529BC4800A53EE0 /* ModelConfigurableView.swift in Sources */,
 				5BB329AE24BF2AB900323F11 /* CollectionViewControllerProtocol.swift in Sources */,
 				5B0D9FAE25156F66000C6673 /* PickerViewTitle.swift in Sources */,
 				5BB329A924BF29B400323F11 /* CollectionViewSupplementaryViewHeight.swift in Sources */,
 				5B4ED7AD251682D10027E92A /* TableView+TextFieldDatePicker.swift in Sources */,
 				5B4ED7A825167E030027E92A /* DatePickerPresenterProtocol.swift in Sources */,
+				5B4C37D82529FE3A00A53EE0 /* TextFieldPresenterProtocol.swift in Sources */,
+				5B4C37E7252A2E2300A53EE0 /* TextViewPresenterProtocol.swift in Sources */,
 				5BB329AC24BF2A6C00323F11 /* CollectionViewData.swift in Sources */,
 				5B5A8DE824CF49330001CB13 /* TableViewHeaderFooterViewHeight.swift in Sources */,
 				5B0D9FA425156155000C6673 /* TableView+TextFieldPickerView.swift in Sources */,
@@ -436,6 +468,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -500,6 +533,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -551,7 +585,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "lysytsia.yurii.air-collection";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -581,7 +615,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "lysytsia.yurii.air-collection";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -594,7 +628,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DA182C862211757900163B42 /* Build configuration list for PBXProject "AirCollection" */ = {
+		DA182C862211757900163B42 /* Build configuration list for PBXProject "Source" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA182C922211757900163B42 /* Debug */,
@@ -603,7 +637,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA182C942211757900163B42 /* Build configuration list for PBXNativeTarget "AirCollection" */ = {
+		DA182C942211757900163B42 /* Build configuration list for PBXNativeTarget "Source" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA182C952211757900163B42 /* Debug */,

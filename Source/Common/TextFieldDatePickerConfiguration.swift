@@ -3,14 +3,19 @@
 //  AirCollection
 //
 //  Created by Lysytsia Yurii on 18.09.2020.
-//  Copyright © 2020 Developer Lysytsia. All rights reserved.
+//  Copyright © 2020 Lysytsia Yurii. All rights reserved.
 //
 
+import struct Foundation.Date
+import class Foundation.NSObject
 import class UIKit.UITextField
 import class UIKit.UIDatePicker
+import enum UIKit.UIDatePickerStyle
+import func Foundation.objc_getAssociatedObject
+import func Foundation.objc_setAssociatedObject
 
 // MARK: - TextFieldDatePickerDelegate
-public protocol TextFieldDatePickerDelegate: class {
+public protocol TextFieldDatePickerDelegate: TextFieldDelegate {
     /// Called by the text field date picker when the user selects a row with date
     func textField(_ textField: UITextField, datePicker: UIDatePicker, didSelectDate date: Date)
     
@@ -32,6 +37,7 @@ public class TextFieldDatePickerConfiguration: TextFieldConfiguration {
     public init(datePicker: UIDatePicker, delegate: TextFieldDatePickerDelegate) {
         self.datePicker = datePicker
         self.datePickerDelegate = delegate
+        super.init(delegate: delegate)
     }
     
     public convenience init(mode: UIDatePicker.Mode, date: Date = Date(), minimumDate: Date? = nil, maximumDate: Date? = nil, delegate: TextFieldDatePickerDelegate) {
@@ -40,13 +46,16 @@ public class TextFieldDatePickerConfiguration: TextFieldConfiguration {
         datePicker.date = date
         datePicker.minimumDate = minimumDate
         datePicker.maximumDate = maximumDate
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
         self.init(datePicker: datePicker, delegate: delegate)
     }
     
     public override func configure(textInputView: UITextField) {
         let data = TextFieldDatePickerData(textField: textInputView, datePicker: self.datePicker, delegate: self.datePickerDelegate)
         self.inputView = self.datePicker
-        textInputView.datePickerData = data
+        textInputView.textFieldDatePickerData = data
         super.configure(textInputView: textInputView)
     }
     
@@ -56,7 +65,7 @@ public class TextFieldDatePickerConfiguration: TextFieldConfiguration {
 fileprivate class TextFieldDatePickerData: NSObject {
     
     private unowned let textField: UITextField
-    private unowned let datePicker: UIDatePicker
+    private let datePicker: UIDatePicker
     private unowned let delegate: TextFieldDatePickerDelegate
     
     init(textField: UITextField, datePicker: UIDatePicker, delegate: TextFieldDatePickerDelegate) {
@@ -82,11 +91,11 @@ fileprivate class TextFieldDatePickerData: NSObject {
 }
 
 // MARK: - Wrapper Associated Object
-fileprivate var textFieldDatePickerDataKey: String = "TextFieldDatePickerData.textField"
+fileprivate var textFieldDatePickerDataKey: String = "UITextField.textFieldDatePickerData"
 fileprivate extension UITextField {
     
     /// Get associated `TextFieldDatePickerData` object with this text field
-    var datePickerData: TextFieldDatePickerData? {
+    var textFieldDatePickerData: TextFieldDatePickerData? {
         set {
             objc_setAssociatedObject(self, &textFieldDatePickerDataKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
