@@ -320,7 +320,13 @@ extension TableViewData: UITableViewDelegate {
             return height
             
         case .flexible:
-            return UITableView.automaticDimension
+            guard let view = self.tableView(tableView, viewForHeaderInSection: section) else {
+                return UITableView.automaticDimension
+            }
+            view.layoutIfNeeded()
+            let targetSize = CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude)
+            let prefferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+            return prefferedSize.height
         }
     }
     
@@ -365,12 +371,16 @@ extension TableViewData: UITableViewDelegate {
         switch self.output.tableFooterHeight(for: section) {
         case .none:
             return 0
-            
         case .fixed(let height):
             return height
-            
         case .flexible:
-            return UITableView.automaticDimension
+            guard let view = self.tableView(tableView, viewForFooterInSection: section) else {
+                return UITableView.automaticDimension
+            }
+            view.layoutIfNeeded()
+            let targetSize = CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude)
+            let prefferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+            return prefferedSize.height
         }
     }
     
