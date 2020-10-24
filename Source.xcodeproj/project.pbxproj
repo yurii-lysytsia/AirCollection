@@ -13,6 +13,9 @@
 		5B0D9FA7251567CE000C6673 /* PickerViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FA6251567CE000C6673 /* PickerViewControllerProtocol.swift */; };
 		5B0D9FA9251567E2000C6673 /* PickerViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */; };
 		5B0D9FAE25156F66000C6673 /* PickerViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D9FAD25156F66000C6673 /* PickerViewTitle.swift */; };
+		5B2D23C3254404ED007DB77D /* collection.md in Resources */ = {isa = PBXBuildFile; fileRef = 5B2D23C0254404ED007DB77D /* collection.md */; };
+		5B2D23C4254404ED007DB77D /* view.md in Resources */ = {isa = PBXBuildFile; fileRef = 5B2D23C1254404ED007DB77D /* view.md */; };
+		5B2D23C5254404ED007DB77D /* table.md in Resources */ = {isa = PBXBuildFile; fileRef = 5B2D23C2254404ED007DB77D /* table.md */; };
 		5B491788252A7220006D5837 /* CollectionView+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B491787252A7220006D5837 /* CollectionView+TextView.swift */; };
 		5B4C37952529BC4800A53EE0 /* ModelConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37942529BC4800A53EE0 /* ModelConfigurableView.swift */; };
 		5B4C37D52529FD4C00A53EE0 /* TextFieldControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37D42529FD4C00A53EE0 /* TextFieldControllerProtocol.swift */; };
@@ -58,6 +61,9 @@
 		5B0D9FA6251567CE000C6673 /* PickerViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewControllerProtocol.swift; sourceTree = "<group>"; };
 		5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B0D9FAD25156F66000C6673 /* PickerViewTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewTitle.swift; sourceTree = "<group>"; };
+		5B2D23C0254404ED007DB77D /* collection.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = collection.md; sourceTree = "<group>"; };
+		5B2D23C1254404ED007DB77D /* view.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = view.md; sourceTree = "<group>"; };
+		5B2D23C2254404ED007DB77D /* table.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = table.md; sourceTree = "<group>"; };
 		5B491787252A7220006D5837 /* CollectionView+TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+TextView.swift"; sourceTree = "<group>"; };
 		5B4C37942529BC4800A53EE0 /* ModelConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConfigurableView.swift; sourceTree = "<group>"; };
 		5B4C37D42529FD4C00A53EE0 /* TextFieldControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldControllerProtocol.swift; sourceTree = "<group>"; };
@@ -117,6 +123,16 @@
 				5B0D9FA8251567E2000C6673 /* PickerViewPresenterProtocol.swift */,
 			);
 			name = PickerView;
+			sourceTree = "<group>";
+		};
+		5B2D23BF254404ED007DB77D /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				5B2D23C1254404ED007DB77D /* view.md */,
+				5B2D23C2254404ED007DB77D /* table.md */,
+				5B2D23C0254404ED007DB77D /* collection.md */,
+			);
+			path = Documents;
 			sourceTree = "<group>";
 		};
 		5B4ED7A425167DA90027E92A /* DatePicker */ = {
@@ -272,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				DA182C8E2211757900163B42 /* Source */,
+				5B2D23BF254404ED007DB77D /* Documents */,
 				DA182C8D2211757900163B42 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -364,6 +381,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B2D23C3254404ED007DB77D /* collection.md in Resources */,
+				5B2D23C4254404ED007DB77D /* view.md in Resources */,
+				5B2D23C5254404ED007DB77D /* table.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

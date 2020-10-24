@@ -9,15 +9,6 @@
       location = "group:README.md">
    </FileRef>
    <FileRef
-      location = "group:README_VIEW.md">
-   </FileRef>
-   <FileRef
-      location = "group:README_TABLE.md">
-   </FileRef>
-   <FileRef
-      location = "group:README_COLLECTION.md">
-   </FileRef>
-   <FileRef
       location = "group:/Users/lysytsia/Developer/Frameworks/air-collection/Source.xcodeproj">
    </FileRef>
    <FileRef

@@ -16,6 +16,7 @@ Save your coding time with AirCollection written on Swift. It's a great wrapper 
     - [Collection view](#collection-view)
 - [License](#license) 
  
+ 
 ## Requirements
 - iOS 11.0+
 - Xcode 11+
@@ -33,14 +34,13 @@ pod 'AirCollection'
 ## Usage
 
 ### Reusable View
-All about reusable view, table view cells and collection view cells usage you can read [here](README_VIEW.md)
+All about reusable view, table view cells and collection view cells usage you can read [here](Documents/view.md)
 
 ### Table view
-All about table view usage you can read [here](README_TABLE.md)
+All about table view usage you can read [here](Documents/table.md)
 
 ### Collection view
-All about collection view usage you can read [here](README_COLLECTION.md)
-
+All about collection view usage you can read [here](Documents/collection.md)
 
 ## License
 Released under the MIT license. See [LICENSE](LICENSE) for details.
