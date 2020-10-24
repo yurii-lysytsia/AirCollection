@@ -16,11 +16,7 @@ protocol DynamicUserTableViewOutput: TableViewPresenterProtocol, TextFieldPresen
 final class DynamicUserTablePresenter: NSObject {
     
     // MARK: Stored properties
-    private let rows: [[Row]] = [
-        [.name],
-        [.birthdate],
-        [.gender]
-    ]
+    private let sections: [Section] = Section.allCases
     
     private let birthdateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -46,7 +42,7 @@ final class DynamicUserTablePresenter: NSObject {
     }
     
     // MARK: Helpers
-    private enum Row: Int, CaseIterable {
+    private enum Section: Int, CaseIterable {
         case name
         case birthdate
         case gender
@@ -59,11 +55,11 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     
     // MARK: TableViewPresenterProtocol
     var tableSections: Int {
-        return self.rows.count
+        return self.sections.count
     }
     
     func tableRows(for section: Int) -> Int {
-        return self.rows[section].count
+        return 1
     }
     
     func tableRowIdentifier(for indexPath: IndexPath) -> String {
@@ -75,7 +71,7 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     }
     
     func tableRowModel(for indexPath: IndexPath) -> Any? {
-        switch self.rows[indexPath.section][indexPath.row] {
+        switch self.sections[indexPath.section] {
         case .name:
             let configuration = TextFieldConfiguration(delegate: self.view)
             return DynamicUserTableViewCell.Model(title: "Username", text: self.user.name, textInputConfiguration: configuration)
@@ -95,9 +91,28 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
         self.view.deselectTableViewRow(at: indexPath, animated: true)
     }
     
+    func tableFooterIdentifier(for section: Int) -> String? {
+        return DynamicUserFooterView.viewIdentifier
+    }
+    
+    func tableFooterHeight(for section: Int) -> TableViewHeaderFooterViewHeight {
+        return .flexible
+    }
+    
+    func tableFooterModel(for section: Int) -> Any? {
+        switch self.sections[section] {
+        case .name:
+            return DynamicUserFooterView.Model(title: "You can enter any name you want")
+        case .birthdate:
+            return DynamicUserFooterView.Model(title: "Please select correct date of birth")
+        case .gender:
+            return DynamicUserFooterView.Model(title: "Select gender if you want")
+        }
+    }
+    
     // MARK: TextFieldPresenterProtocol
     func textFieldTextDidChanged(_ text: String?, at indexPath: IndexPath) {
-        switch self.rows[indexPath.section][indexPath.row] {
+        switch self.sections[indexPath.section] {
         case .name:
             self.user.name = text ?? ""
         default:
@@ -107,7 +122,7 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     
     // MARK: DatePickerPresenterProtocol
     func datePickerDidSelectDate(_ date: Date, at indexPath: IndexPath) {
-        switch self.rows[indexPath.section][indexPath.row] {
+        switch self.sections[indexPath.section] {
         case .birthdate:
             self.user.birthdate = date
         default:
@@ -116,7 +131,7 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     }
     
     func datePickerShouldUpdateTextFromDate(_ date: Date, at indexPath: IndexPath) -> String? {
-        switch self.rows[indexPath.section][indexPath.row] {
+        switch self.sections[indexPath.section] {
         case .birthdate:
             return self.birthdateFormatter.string(from: date)
         default:
@@ -130,7 +145,7 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     }
     
     func pickerViewNumberOfRows(inComponent component: Int, at indexPath: IndexPath) -> Int {
-        switch self.rows[indexPath.section][indexPath.row] {
+        switch self.sections[indexPath.section] {
         case .gender:
             return self.availableGenders.count
         default:
@@ -139,7 +154,7 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     }
     
     func pickerViewTitle(for row: Int, inComponent component: Int, at indexPath: IndexPath) -> PickerViewTitle {
-        switch self.rows[indexPath.section][indexPath.row] {
+        switch self.sections[indexPath.section] {
         case .gender:
             let gender = self.availableGenders[row]?.rawValue ?? ""
             return .title(gender)
@@ -149,7 +164,7 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     }
     
     func pickerViewDidSelectRow(_ row: Int, inComponent component: Int, at indexPath: IndexPath) {
-        switch self.rows[indexPath.section][indexPath.row] {
+        switch self.sections[indexPath.section] {
         case .gender:
             self.user.gender = self.availableGenders[row]
         default:
@@ -158,7 +173,7 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     }
     
     func pickerViewSelectedRow(inComponent component: Int, at indexPath: IndexPath) -> Int {
-        switch self.rows[indexPath.section][indexPath.row] {
+        switch self.sections[indexPath.section] {
         case .gender:
             let gender = self.user.gender
             return self.availableGenders.firstIndex(of: gender) ?? 0
