@@ -38,6 +38,13 @@ enum ModuleFabric {
         return view
     }
     
+    static func createTableHighlightAndSelectModule() -> UIViewController {
+        let view = TableHighlightAndSelectViewController()
+        let presenter = TableHighlightAndSelectPresenter(view: view)
+        view.output = presenter
+        return view
+    }
+    
     static func createCollectionHighlightAndSelectModule() -> UIViewController {
         let view = CollectionHighlightAndSelectViewController()
         let presenter = CollectionHighlightAndSelectPresenter(view: view)

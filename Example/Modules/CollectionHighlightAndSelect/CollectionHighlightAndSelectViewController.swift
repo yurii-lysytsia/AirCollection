@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-protocol DynamicCollectionViewInput: CollectionViewControllerProtocol {
+protocol CollectionHighlightAndSelectViewInput: CollectionViewControllerProtocol {
     // Add public methods which will use by presenter
 }
 
@@ -32,7 +32,7 @@ final class CollectionHighlightAndSelectViewController: UIViewController {
         self.collectionView.frame = self.view.bounds
         self.collectionView.allowsMultipleSelection = true
         self.configureCollectionView { (collectionView) in
-            collectionView.register(DynamicTitleCollectionViewCell.self)
+            collectionView.register(CollectionHighlightAndSelectCollectionViewCell.self)
         }
     }
     
@@ -40,13 +40,12 @@ final class CollectionHighlightAndSelectViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         self.collectionView.frame = self.view.bounds
-        
     }
     
 }
 
-// MARK: - DynamicCollectionViewInput
-extension CollectionHighlightAndSelectViewController: DynamicCollectionViewInput {    
+// MARK: - CollectionHighlightAndSelectViewInput
+extension CollectionHighlightAndSelectViewController: CollectionHighlightAndSelectViewInput {
     
     // MARK: CollectionViewControllerProtocol
     var collectionViewSource: UICollectionView {

@@ -14,6 +14,6 @@ public protocol HighlightableView: class {
     /// - Parameters:
     ///   - highlighted: `true` to set the cell as highlighted, `false` to set it as unhighlighted.
     ///   - animated: `true` to animate the transition between highlighted states, `false` to make the transition immediate.
-    func setHighlighted(_ highlighted: Bool, animated: Bool)
+    func didSetHighlighted(_ highlighted: Bool, animated: Bool)
     
 }

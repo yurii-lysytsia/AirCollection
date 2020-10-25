@@ -1,5 +1,5 @@
 //
-//  DynamicTitleCollectionViewCell.swift
+//  CollectionHighlightAndSelectCollectionViewCell.swift
 //  Example
 //
 //  Created by Lysytsia Yurii on 25.10.2020.
@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-class DynamicTitleCollectionViewCell: UICollectionViewCell, IdentificableView, ModelConfigurableView, HighlightableView, SelectableView {
+class CollectionHighlightAndSelectCollectionViewCell: UICollectionViewCell, IdentificableView, ModelConfigurableView, HighlightableView, SelectableView {
     
     // MARK: Stored properties
     private let contentViewColor = UIColor.systemBlue.withAlphaComponent(0.1)
@@ -56,11 +56,11 @@ class DynamicTitleCollectionViewCell: UICollectionViewCell, IdentificableView, M
     func configure(model: Model) {
         self.titleLabel.text = model.title
         // Update appearance for current highlighted and selected states. It's required because without it appearance won't be correct
-        self.setHighlighted(self.isHighlighted, animated: false)
-        self.setSelected(self.isSelected, animated: false)
+        self.didSetHighlighted(self.isHighlighted, animated: false)
+        self.didSetSelected(self.isSelected, animated: false)
     }
     
-    func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    func didSetHighlighted(_ highlighted: Bool, animated: Bool) {
         let duration = animated ? CATransaction.animationDuration() : 0
         UIView.animate(withDuration: duration) {
             self.titleLabel.textColor = highlighted ? self.titleLabelHighlightedColor : self.titleLabelColor
@@ -68,7 +68,7 @@ class DynamicTitleCollectionViewCell: UICollectionViewCell, IdentificableView, M
         }
     }
     
-    func setSelected(_ selected: Bool, animated: Bool) {
+    func didSetSelected(_ selected: Bool, animated: Bool) {
         let duration = animated ? CATransaction.animationDuration() : 0
         UIView.animate(withDuration: duration) {
             self.titleLabel.textColor = selected ? self.titleLabelSelectedColor : self.titleLabelColor

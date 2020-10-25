@@ -16,16 +16,12 @@ protocol CollectionHighlightAndSelectViewOutput: CollectionViewPresenterProtocol
 final class CollectionHighlightAndSelectPresenter: NSObject {
     
     // MARK: Dependency properties
-    private unowned let view: DynamicCollectionViewInput
+    private unowned let view: CollectionHighlightAndSelectViewInput
     
     // MARK: Lifecycle
-    init(view: DynamicCollectionViewInput) {
+    init(view: CollectionHighlightAndSelectViewInput) {
         self.view = view
     }
-    
-    // MARK: Functions
-    
-    // MARK: Helpers
     
 }
 
@@ -42,7 +38,7 @@ extension CollectionHighlightAndSelectPresenter: CollectionHighlightAndSelectVie
     }
     
     func collectionItemIdentifier(for indexPath: IndexPath) -> String {
-        return DynamicTitleCollectionViewCell.viewIdentifier
+        return CollectionHighlightAndSelectCollectionViewCell.viewIdentifier
     }
     
     func collectionItemSize(for indexPath: IndexPath) -> CollectionViewItemSize {
@@ -51,7 +47,7 @@ extension CollectionHighlightAndSelectPresenter: CollectionHighlightAndSelectVie
     
     func collectionItemModel(for indexPath: IndexPath) -> Any? {
         let title = "\(indexPath.row)"
-        return DynamicTitleCollectionViewCell.Model(title: title)
+        return CollectionHighlightAndSelectCollectionViewCell.Model(title: title)
     }
     
     func collectionInset(for section: Int) -> UIEdgeInsets {

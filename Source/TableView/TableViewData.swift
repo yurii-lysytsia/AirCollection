@@ -279,11 +279,39 @@ extension TableViewData: UITableViewDelegate {
         self.tableViewDelegate?.tableViewDidEndDisplayingCell(cell, forRowAt: indexPath)
     }
     
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return self.output.tableRowShouldHighlight(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let highlightableView = tableView.cellForRow(at: indexPath) as? HighlightableView {
+            highlightableView.didSetHighlighted(true, animated: UIView.areAnimationsEnabled)
+        }
+        self.output.tableDidHighlight(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let highlightableView = tableView.cellForRow(at: indexPath) as? HighlightableView {
+            highlightableView.didSetHighlighted(false, animated: UIView.areAnimationsEnabled)
+        }
+        self.output.tableDidUnhighlight(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return output.tableRowShouldSelect(at: indexPath) ? indexPath : nil
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let selectableView = tableView.cellForRow(at: indexPath) as? SelectableView {
+            selectableView.didSetSelected(true, animated: UIView.areAnimationsEnabled)
+        }
         self.output.tableRowDidSelect(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let selectableView = tableView.cellForRow(at: indexPath) as? SelectableView {
+            selectableView.didSetSelected(false, animated: UIView.areAnimationsEnabled)
+        }
         self.output.tableRowDidDeselect(at: indexPath)
     }
     

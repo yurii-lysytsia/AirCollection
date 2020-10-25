@@ -11,6 +11,7 @@ import Source
 
 protocol StaticTableViewInput: TableViewControllerProtocol {
     func showDynamicTableView()
+    func showTableHighlightAndSelect()
     func showCollectionHighlightAndSelect()
 }
 
@@ -20,7 +21,7 @@ final class StaticTableViewController: UIViewController {
     var output: StaticTableViewOutput!
     
     // MARK: Outlet properties
-    private let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -30,6 +31,7 @@ final class StaticTableViewController: UIViewController {
         
         self.configureTableView { (tableView) in
             tableView.register(StaticTableViewCell.self)
+            tableView.register(StaticTableHeaderFooterView.self)
         }
         
     }
@@ -56,6 +58,11 @@ extension StaticTableViewController: StaticTableViewInput {
 
     func showDynamicTableView() {
         let viewController = ModuleFabric.createDynamicTableModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showTableHighlightAndSelect() {
+        let viewController = ModuleFabric.createTableHighlightAndSelectModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     

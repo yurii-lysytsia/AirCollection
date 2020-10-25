@@ -17,7 +17,7 @@ final class StaticTablePresenter {
     
     // MARK: Stored properties
     private let sections: [Section] = [
-        Section(identifier: .table, rows: [.dynamicTableView]),
+        Section(identifier: .table, rows: Section.Row.allCases),
         Section(identifier: .collection, rows: [.highlightAndSelect])
     ]
     
@@ -64,6 +64,7 @@ final class StaticTablePresenter {
 // MARK: - HomeViewOutput
 extension StaticTablePresenter: StaticTableViewOutput {
     
+    // MARK: TableViewPresenterProtocol
     var tableSections: Int {
         return self.sections.count
     }
@@ -96,7 +97,7 @@ extension StaticTablePresenter: StaticTableViewOutput {
             case .dynamicTableView:
                 self.view.showDynamicTableView()
             case .highlightAndSelect:
-                return
+                self.view.showTableHighlightAndSelect()
             }
             
         case .collection:
@@ -107,6 +108,19 @@ extension StaticTablePresenter: StaticTableViewOutput {
             self.view.showCollectionHighlightAndSelect()
             }
         }
+    }
+    
+    func tableHeaderIdentifier(for section: Int) -> String? {
+        return StaticTableHeaderFooterView.viewIdentifier
+    }
+    
+    func tableHeaderHeight(for section: Int) -> TableViewHeaderFooterViewHeight {
+        return .flexible
+    }
+    
+    func tableHeaderModel(for section: Int) -> Any? {
+        let section = self.section(at: section)
+        return StaticTableHeaderFooterView.Model(title: section.identifier.rawValue)
     }
     
 }

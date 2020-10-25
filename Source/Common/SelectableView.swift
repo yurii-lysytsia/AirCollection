@@ -14,6 +14,6 @@ public protocol SelectableView: class {
     /// - Parameters:
     ///   - selected: `true` to set the cell as selected, `false` to set it as unselected.
     ///   - animated: `true` to animate the transition between selected states, `false` to make the transition immediate.
-    func setSelected(_ selected: Bool, animated: Bool)
+    func didSetSelected(_ selected: Bool, animated: Bool)
     
 }

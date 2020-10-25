@@ -321,13 +321,13 @@ extension CollectionViewData: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         if let highlightableView = collectionView.cellForItem(at: indexPath) as? HighlightableView {
-            highlightableView.setHighlighted(true, animated: UIView.areAnimationsEnabled)
+            highlightableView.didSetHighlighted(true, animated: UIView.areAnimationsEnabled)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         if let highlightableView = collectionView.cellForItem(at: indexPath) as? HighlightableView {
-            highlightableView.setHighlighted(false, animated: UIView.areAnimationsEnabled)
+            highlightableView.didSetHighlighted(false, animated: UIView.areAnimationsEnabled)
         }
     }
     
@@ -338,14 +338,14 @@ extension CollectionViewData: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectableView = collectionView.cellForItem(at: indexPath) as? SelectableView {
-            selectableView.setSelected(true, animated: UIView.areAnimationsEnabled)
+            selectableView.didSetSelected(true, animated: UIView.areAnimationsEnabled)
         }
         self.output.collectionItemDidSelect(at: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let selectableView = collectionView.cellForItem(at: indexPath) as? SelectableView {
-            selectableView.setSelected(false, animated: UIView.areAnimationsEnabled)
+            selectableView.didSetSelected(false, animated: UIView.areAnimationsEnabled)
         }
         self.output.collectionItemDidDeselect(at: indexPath)
     }

@@ -27,6 +27,18 @@ public protocol TableViewPresenterProtocol: class {
     /// Model to use for a row in a specified location of the table view for index path
     func tableRowModel(for indexPath: IndexPath) -> Any?
     
+    /// Asks if the specified row should be highlighted
+    func tableRowShouldHighlight(at indexPath: IndexPath) -> Bool
+    
+    /// Tells the specified row was highlighted
+    func tableDidHighlight(at indexPath: IndexPath)
+    
+    /// Tells the highlight was removed from the row at the specified index path
+    func tableDidUnhighlight(at indexPath: IndexPath)
+    
+    /// Asks if the specified row should be selected
+    func tableRowShouldSelect(at indexPath: IndexPath) -> Bool
+    
     /// Tells when the specified row is now selected
     func tableRowDidSelect(at indexPath: IndexPath)
     
@@ -65,6 +77,22 @@ public protocol TableViewPresenterProtocol: class {
 public extension TableViewPresenterProtocol {
     
     // MARK: Row
+    func tableRowShouldHighlight(at indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableDidHighlight(at indexPath: IndexPath) {
+        
+    }
+    
+    func tableDidUnhighlight(at indexPath: IndexPath) {
+        
+    }
+    
+    func tableRowShouldSelect(at indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     func tableRowDidSelect(at indexPath: IndexPath) {
         
     }
