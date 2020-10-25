@@ -1,6 +1,6 @@
 //
 //  HighlightableView.swift
-//  Source
+//  AirCollection
 //
 //  Created by Lysytsia Yurii on 25.10.2020.
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Protocol for views that need observe highlight state and defines one property `isHighlight` and one method `didSetHighlighted(_:,:)`. **Do not confuse** `didSetHighlighted(_:,:)` method with `UITableViewCell.setHighlighted(_:,animated:)` method.
+///
+/// You can implement this protocol that observe highlight state change and you can set appearance for your `UITableViewCell` or `UICollectionViewCell`
 public protocol HighlightableView: class {
     
     /// A Boolean value that indicates whether the view is selected.

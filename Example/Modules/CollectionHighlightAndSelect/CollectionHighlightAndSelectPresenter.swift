@@ -1,6 +1,6 @@
 //
 //  CollectionHighlightAndSelectPresenter.swift
-//  Example
+//  AirCollection
 //
 //  Created by Lysytsia Yurii on 25.10.2020.
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
@@ -10,7 +10,7 @@ import UIKit
 import Source
 
 protocol CollectionHighlightAndSelectViewOutput: CollectionViewPresenterProtocol {
-    // Add presenter properties which will use by view
+    func didLoad()
 }
 
 final class CollectionHighlightAndSelectPresenter: NSObject {
@@ -21,6 +21,13 @@ final class CollectionHighlightAndSelectPresenter: NSObject {
     // MARK: Lifecycle
     init(view: CollectionHighlightAndSelectViewInput) {
         self.view = view
+    }
+    
+    func didLoad() {
+        [50, 20, 10, 5, 2, 0].forEach { (index) in
+            let indexPath = IndexPath(row: index, section: 0)
+            self.view.selectCollectionViewItem(at: indexPath, animated: false, scrollPosition: .top)
+        }
     }
     
 }

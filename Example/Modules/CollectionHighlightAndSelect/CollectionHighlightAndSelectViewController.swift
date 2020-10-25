@@ -1,6 +1,6 @@
 //
 //  CollectionHighlightAndSelectViewController.swift
-//  Example
+//  AirCollection
 //
 //  Created by Lysytsia Yurii on 25.10.2020.
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
@@ -34,6 +34,8 @@ final class CollectionHighlightAndSelectViewController: UIViewController {
         self.configureCollectionView { (collectionView) in
             collectionView.register(CollectionHighlightAndSelectCollectionViewCell.self)
         }
+        
+        self.output.didLoad()
     }
     
     override func viewDidLayoutSubviews() {

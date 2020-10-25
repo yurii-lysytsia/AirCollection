@@ -1,6 +1,6 @@
 //
 //  ScrollRefreshConfiguration.swift
-//  Source
+//  AirCollection
 //
 //  Created by Lysytsia Yurii on 25.10.2020.
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.

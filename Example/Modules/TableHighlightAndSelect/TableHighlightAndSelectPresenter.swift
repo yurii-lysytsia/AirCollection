@@ -1,6 +1,6 @@
 //
 //  TableHighlightAndSelectPresenter.swift
-//  Example
+//  AirCollection
 //
 //  Created by Lysytsia Yurii on 25.10.2020.
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
@@ -10,7 +10,7 @@ import Foundation
 import Source
 
 protocol TableHighlightAndSelectViewOutput: TableViewPresenterProtocol {
-    // Add presenter properties which will use by view
+    func didLoad()
 }
 
 final class TableHighlightAndSelectPresenter: NSObject {
@@ -21,6 +21,13 @@ final class TableHighlightAndSelectPresenter: NSObject {
     // MARK: Lifecycle
     init(view: TableHighlightAndSelectViewInput) {
         self.view = view
+    }
+    
+    func didLoad() {
+        [0, 2, 5, 10, 20, 50].forEach { (index) in
+            let indexPath = IndexPath(row: index, section: 0)
+            self.view.selectTableViewRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
     }
     
 }

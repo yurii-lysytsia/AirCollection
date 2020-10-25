@@ -1,6 +1,6 @@
 //
 //  DynamicUserFooterView.swift
-//  Example
+//  AirCollection
 //
 //  Created by Lysytsia Yurii on 24.10.2020.
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
