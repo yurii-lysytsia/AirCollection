@@ -7,12 +7,24 @@
 //
 
 import protocol UIKit.UITextViewDelegate
-import enum UIKit.UITextItemInteraction
-import struct Foundation.URL
-import struct Foundation.NSRange
+import class UIKit.UIView
 import class UIKit.NSTextAttachment
 import class Foundation.NSObject
 import class UIKit.UITextView
+import struct UIKit.UITextContentType
+import struct UIKit.UIDataDetectorTypes
+import struct Foundation.URL
+import struct Foundation.NSRange
+import enum UIKit.UITextAutocapitalizationType
+import enum UIKit.UITextAutocorrectionType
+import enum UIKit.UIKeyboardAppearance
+import enum UIKit.UIKeyboardType
+import enum UIKit.UIReturnKeyType
+import enum UIKit.UITextSmartDashesType
+import enum UIKit.UITextSmartQuotesType
+import enum UIKit.UITextSmartInsertDeleteType
+import enum UIKit.UITextSpellCheckingType
+import enum UIKit.UITextItemInteraction
 import func Foundation.objc_getAssociatedObject
 import func Foundation.objc_setAssociatedObject
 
@@ -79,20 +91,6 @@ public extension TextViewDelegate {
     }
     
 }
-
-
-import class UIKit.UIView
-import struct UIKit.UITextContentType
-import struct UIKit.UIDataDetectorTypes
-import enum UIKit.UITextAutocapitalizationType
-import enum UIKit.UITextAutocorrectionType
-import enum UIKit.UIKeyboardAppearance
-import enum UIKit.UIKeyboardType
-import enum UIKit.UIReturnKeyType
-import enum UIKit.UITextSmartDashesType
-import enum UIKit.UITextSmartQuotesType
-import enum UIKit.UITextSmartInsertDeleteType
-import enum UIKit.UITextSpellCheckingType
 
 open class TextViewConfiguration: TextInputConfiguration {
     

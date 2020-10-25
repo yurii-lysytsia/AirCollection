@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-protocol DynamicTableViewInput: TableViewControllerProtocol {
+protocol DynamicTableViewInput: TableViewControllerProtocol, ScrollRefreshControllerProtocol {
     func showUser(_ user: User)
     func showStory(_ story: Story)
 }
@@ -32,6 +32,8 @@ final class DynamicTableViewController: UIViewController {
             tableView.register(DynamicTitleDescriptionTableViewCell.self)
         }
         
+        let scrollRefreshConfiguration = ScrollRefreshConfiguration(tintColor: UIColor.systemBlue, attributedTitle: nil)
+        self.configureScrollRefresh(for: self.tableView, using: self.output, configuration: scrollRefreshConfiguration)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +65,7 @@ extension DynamicTableViewController: DynamicTableViewInput {
         self.navigationController?.pushViewController(view, animated: true)
     }
     
+    // MARK: TableViewControllerProtocol
     var tableViewSource: UITableView {
         return self.tableView
     }
@@ -70,6 +73,7 @@ extension DynamicTableViewController: DynamicTableViewInput {
     var tableViewPresenter: TableViewPresenterProtocol {
         return self.output
     }
+
+    // MARK: ScrollRefreshControllerProtocol
     
 }
-

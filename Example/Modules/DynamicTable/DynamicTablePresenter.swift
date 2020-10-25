@@ -9,7 +9,7 @@
 import Foundation
 import Source
 
-protocol DynamicTableViewOutput: TableViewPresenterProtocol {
+protocol DynamicTableViewOutput: TableViewPresenterProtocol, ScrollRefreshPresenterProtocol {
 
 }
 
@@ -49,6 +49,7 @@ final class DynamicTablePresenter {
 // MARK: - HomeViewOutput
 extension DynamicTablePresenter: DynamicTableViewOutput {
     
+    // MARK: TableViewPresenterProtocol
     var tableSections: Int {
         return self.sections.count
     }
@@ -93,6 +94,14 @@ extension DynamicTablePresenter: DynamicTableViewOutput {
         case .stories:
             let story = self.stories[indexPath.row]
             self.view.showStory(story)
+        }
+    }
+    
+    // MARK: ScrollRefreshPresenterProtocol
+    func scrollDidShowRefreshControl() {
+        // Use delay and hide refresh control.
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+            self?.view.hideScrollRefreshControl()
         }
     }
     
