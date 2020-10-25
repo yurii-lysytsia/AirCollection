@@ -2,7 +2,7 @@
 
 [![platform](https://img.shields.io/badge/Platform-iOS%2011+-blue.svg)]()
 [![language](https://img.shields.io/badge/Language-Swift-red.svg)]()
-[![language](https://img.shields.io/badge/pod-1.4.1-blue.svg)]()
+[![language](https://img.shields.io/badge/pod-1.5.0-blue.svg)]()
 [![license](https://img.shields.io/badge/license-MIT-lightgray.svg)]()
 
 Save your coding time with AirCollection written on Swift. It's a great wrapper for UITableView / UICollectionView and VIPER / MVP architecture.
