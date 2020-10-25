@@ -38,6 +38,17 @@ extension ModelConfigurableView {
             return
         }
         self.configure(model: predefinedModel)
+        
+        if let highlightableView = self as? HighlightableView {
+            // Update appearance for current highlight states. It's required because without it appearance won't be correct for reusable views.
+            highlightableView.didSetHighlighted(highlightableView.isHighlighted, animated: false)
+        }
+        
+        if let selectableView = self as? SelectableView {
+            // Update appearance for current selected states. It's required because without it appearance won't be correct for reusable views.
+            selectableView.didSetSelected(selectableView.isSelected, animated: false)
+        }
+
     }
     
 }

@@ -55,9 +55,6 @@ class CollectionHighlightAndSelectCollectionViewCell: UICollectionViewCell, Iden
     // MARK: Functions
     func configure(model: Model) {
         self.titleLabel.text = model.title
-        // Update appearance for current highlighted and selected states. It's required because without it appearance won't be correct
-        self.didSetHighlighted(self.isHighlighted, animated: false)
-        self.didSetSelected(self.isSelected, animated: false)
     }
     
     func didSetHighlighted(_ highlighted: Bool, animated: Bool) {

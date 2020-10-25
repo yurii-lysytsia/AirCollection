@@ -10,6 +10,9 @@ import Foundation
 
 public protocol HighlightableView: class {
     
+    /// A Boolean value that indicates whether the view is selected.
+    var isHighlighted: Bool { get }
+    
     /// Sets the highlighted state of the cell, optionally animating the transition between states.
     /// - Parameters:
     ///   - highlighted: `true` to set the cell as highlighted, `false` to set it as unhighlighted.

@@ -10,6 +10,9 @@ import Foundation
 
 public protocol SelectableView: class {
     
+    /// A Boolean value that indicates whether the view is selected.
+    var isSelected: Bool { get }
+    
     /// Sets the selected state of the cell, optionally animating the transition between states.
     /// - Parameters:
     ///   - selected: `true` to set the cell as selected, `false` to set it as unselected.
