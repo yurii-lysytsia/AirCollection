@@ -1,6 +1,6 @@
 //
 //  ModuleFabric.swift
-//  Example
+//  AirCollection
 //
 //  Created by Lysytsia Yurii on 04.10.2020.
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
@@ -34,6 +34,20 @@ enum ModuleFabric {
     static func createDynamicStoryTableModule(story: Story) -> UIViewController {
         let view = DynamicStoryTableViewController()
         let presenter = DynamicStoryTablePresenter(story: story, view: view)
+        view.output = presenter
+        return view
+    }
+    
+    static func createTableHighlightAndSelectModule() -> UIViewController {
+        let view = TableHighlightAndSelectViewController()
+        let presenter = TableHighlightAndSelectPresenter(view: view)
+        view.output = presenter
+        return view
+    }
+    
+    static func createCollectionHighlightAndSelectModule() -> UIViewController {
+        let view = CollectionHighlightAndSelectViewController()
+        let presenter = CollectionHighlightAndSelectPresenter(view: view)
         view.output = presenter
         return view
     }

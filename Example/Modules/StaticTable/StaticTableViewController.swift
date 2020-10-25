@@ -1,6 +1,6 @@
 //
 //  StaticTableViewController.swift
-//  Example
+//  AirCollection
 //
 //  Created by Lysytsia Yurii on 04.10.2020.
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
@@ -10,7 +10,9 @@ import UIKit
 import Source
 
 protocol StaticTableViewInput: TableViewControllerProtocol {
-    func showDynamicViewController()
+    func showDynamicTableView()
+    func showTableHighlightAndSelect()
+    func showCollectionHighlightAndSelect()
 }
 
 final class StaticTableViewController: UIViewController {
@@ -19,7 +21,7 @@ final class StaticTableViewController: UIViewController {
     var output: StaticTableViewOutput!
     
     // MARK: Outlet properties
-    private let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -29,6 +31,7 @@ final class StaticTableViewController: UIViewController {
         
         self.configureTableView { (tableView) in
             tableView.register(StaticTableViewCell.self)
+            tableView.register(StaticTableHeaderFooterView.self)
         }
         
     }
@@ -53,8 +56,18 @@ extension StaticTableViewController: StaticTableViewInput {
         return self.output
     }
 
-    func showDynamicViewController() {
+    func showDynamicTableView() {
         let viewController = ModuleFabric.createDynamicTableModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showTableHighlightAndSelect() {
+        let viewController = ModuleFabric.createTableHighlightAndSelectModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showCollectionHighlightAndSelect() {
+        let viewController = ModuleFabric.createCollectionHighlightAndSelectModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     

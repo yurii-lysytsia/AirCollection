@@ -1,15 +1,15 @@
 //
-//  DynamicUserFooterView.swift
+//  StaticTableHeaderFooterView.swift
 //  AirCollection
 //
-//  Created by Lysytsia Yurii on 24.10.2020.
+//  Created by Lysytsia Yurii on 25.10.2020.
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
 //
 
 import UIKit
 import Source
 
-class DynamicUserFooterView: UITableViewHeaderFooterView, IdentificableView, NibLoadableView, ModelConfigurableView {
+class StaticTableHeaderFooterView: UITableViewHeaderFooterView, IdentificableView, NibLoadableView, ModelConfigurableView {
 
     // MARK: Outlet properties
     @IBOutlet private weak var titleLabel: UILabel!

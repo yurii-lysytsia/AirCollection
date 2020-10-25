@@ -27,6 +27,18 @@ public protocol CollectionViewPresenterProtocol: class {
     /// Model to use for a row in a specified location of the table view for index path
     func collectionItemModel(for indexPath: IndexPath) -> Any?
     
+    /// Asks the item should be highlighted during tracking
+    func collectionItemShouldHighlight(at indexPath: IndexPath) -> Bool
+    
+    /// Tells the item at the specified index path was highlighted
+    func collectionItemDidHighlight(at indexPath: IndexPath)
+    
+    /// Tells the highlight was removed from the item at the specified index path
+    func collectionItemDidUnhighlightItem(at indexPath: IndexPath)
+    
+    /// Asks if the specified item should be selected
+    func collectionItemShouldSelect(at indexPath: IndexPath) -> Bool
+    
     /// Tells when the specified item is now selected
     func collectionItemDidSelect(at indexPath: IndexPath)
     
@@ -65,6 +77,22 @@ public protocol CollectionViewPresenterProtocol: class {
 public extension CollectionViewPresenterProtocol {
     
     // MARK: Item
+    func collectionItemShouldHighlight(at indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionItemDidHighlight(at indexPath: IndexPath) {
+        
+    }
+    
+    func collectionItemDidUnhighlightItem(at indexPath: IndexPath) {
+        
+    }
+    
+    func collectionItemShouldSelect(at indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     func collectionItemDidSelect(at indexPath: IndexPath) {
         
     }

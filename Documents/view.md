@@ -7,6 +7,8 @@ All `AirCollection` views (include cells) based on protocols. View able to imple
     - [Configurable View](#configurable-view)
     - [Model Configurable View](#model-configurable-view)
     - [Text Input Configurable View](#text-input-configurable-view)
+    - [Selectable View](#selectable-view)
+    - [Highlightable View](#highlightable-view)
 - [Table view cell](#table-view-cell)
     - [Code layouts](#code-layouts)
     - [Xib layouts](#xib-layouts)
@@ -217,6 +219,27 @@ open class TextViewConfiguration: TextInputConfiguration {
 
 ```
 
+### Selectable view
+Protocol for views that need observe selection state and defines one property `isSelected` and one method `didSetSelected(_:,:)`. **Do not confuse** `didSetSelected(_:,:)` method with `UITableViewCell.setSelected(_:,animated:)` method.
+
+You can implement this protocol that observe selection state change and you can set appearance for your `UITableViewCell` or `UICollectionViewCell` 
+```swift
+func didSetSelected(_ selected: Bool, animated: Bool) {
+  self.titleLabel.textColor = selected ? self.titleLabelSelectedColor : self.titleLabelColor
+  self.backgroundColor = selected ? self.contentViewSelectedColor : self.contentViewColor
+}
+```
+
+### Highlightable View
+Protocol for views that need observe highlight state and defines one property `isHighlight` and one method `didSetHighlighted(_:,:)`. **Do not confuse** `didSetHighlighted(_:,:)` method with `UITableViewCell.setHighlighted(_:,animated:)` method.
+
+You can implement this protocol that observe highlight state change and you can set appearance for your `UITableViewCell` or `UICollectionViewCell` 
+```swift
+func didSetHighlighted(_ highlighted: Bool, animated: Bool) {
+  self.titleLabel.textColor = highlighted ? self.titleLabelHighlightedColor : self.titleLabelColor
+  self.backgroundColor = highlighted ? self.contentViewHighlightedColor : self.contentViewColor
+}
+```
 
 ## Table view cell
 Table view cell should implement [Identificable View](#identificable-view), one child implementation of [Configurable View](#configurable-view) and optionally [Nib Loadable View](#nib-loadable-view) if cell layouts have `Xib` file.

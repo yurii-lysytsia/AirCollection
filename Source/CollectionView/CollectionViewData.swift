@@ -314,11 +314,39 @@ extension CollectionViewData: UIScrollViewDelegate {
 // MARK: - UICollectionViewDelegate
 extension CollectionViewData: UICollectionViewDelegate {
     
+    // MARK: Highlight
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return self.output.collectionItemShouldHighlight(at: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if let highlightableView = collectionView.cellForItem(at: indexPath) as? HighlightableView {
+            highlightableView.didSetHighlighted(true, animated: UIView.areAnimationsEnabled)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let highlightableView = collectionView.cellForItem(at: indexPath) as? HighlightableView {
+            highlightableView.didSetHighlighted(false, animated: UIView.areAnimationsEnabled)
+        }
+    }
+    
+    // MARK: Selected
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return self.output.collectionItemShouldSelect(at: indexPath)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectableView = collectionView.cellForItem(at: indexPath) as? SelectableView {
+            selectableView.didSetSelected(true, animated: UIView.areAnimationsEnabled)
+        }
         self.output.collectionItemDidSelect(at: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let selectableView = collectionView.cellForItem(at: indexPath) as? SelectableView {
+            selectableView.didSetSelected(false, animated: UIView.areAnimationsEnabled)
+        }
         self.output.collectionItemDidDeselect(at: indexPath)
     }
     

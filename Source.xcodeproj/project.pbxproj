@@ -52,6 +52,12 @@
 		5BB7AC85250FECF0004F8394 /* TextInputConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB7AC84250FECF0004F8394 /* TextInputConfigurableView.swift */; };
 		5BB7AC89250FF267004F8394 /* TextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB7AC88250FF267004F8394 /* TextFieldConfiguration.swift */; };
 		5BD5B1C324D803D80065E5DB /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5B1C224D803D80065E5DB /* CollectionViewDelegate.swift */; };
+		5BDDC338254560E4004C39CA /* ScrollRefreshPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDDC337254560E4004C39CA /* ScrollRefreshPresenterProtocol.swift */; };
+		5BDDC33C25456125004C39CA /* ScrollRefreshControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDDC33B25456125004C39CA /* ScrollRefreshControllerProtocol.swift */; };
+		5BDDC33F254562AF004C39CA /* ScrollRefreshConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDDC33E254562AF004C39CA /* ScrollRefreshConfiguration.swift */; };
+		5BDDC34525456517004C39CA /* UIRefreshControl+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDDC34425456517004C39CA /* UIRefreshControl+Extension.swift */; };
+		5BDDC34825456EA2004C39CA /* SelectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDDC34725456EA2004C39CA /* SelectableView.swift */; };
+		5BDDC34B25456F97004C39CA /* HighlightableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDDC34A25456F97004C39CA /* HighlightableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +106,12 @@
 		5BB7AC84250FECF0004F8394 /* TextInputConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputConfigurableView.swift; sourceTree = "<group>"; };
 		5BB7AC88250FF267004F8394 /* TextFieldConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfiguration.swift; sourceTree = "<group>"; };
 		5BD5B1C224D803D80065E5DB /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
+		5BDDC337254560E4004C39CA /* ScrollRefreshPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollRefreshPresenterProtocol.swift; sourceTree = "<group>"; };
+		5BDDC33B25456125004C39CA /* ScrollRefreshControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollRefreshControllerProtocol.swift; sourceTree = "<group>"; };
+		5BDDC33E254562AF004C39CA /* ScrollRefreshConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollRefreshConfiguration.swift; sourceTree = "<group>"; };
+		5BDDC34425456517004C39CA /* UIRefreshControl+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Extension.swift"; sourceTree = "<group>"; };
+		5BDDC34725456EA2004C39CA /* SelectableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableView.swift; sourceTree = "<group>"; };
+		5BDDC34A25456F97004C39CA /* HighlightableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableView.swift; sourceTree = "<group>"; };
 		DA182C8C2211757900163B42 /* Source.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Source.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA182C902211757900163B42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +193,8 @@
 				5BB3298F24BF1E9800323F11 /* ConfigurableView.swift */,
 				5B4C37942529BC4800A53EE0 /* ModelConfigurableView.swift */,
 				5BB7AC84250FECF0004F8394 /* TextInputConfigurableView.swift */,
+				5BDDC34725456EA2004C39CA /* SelectableView.swift */,
+				5BDDC34A25456F97004C39CA /* HighlightableView.swift */,
 				5BB7AC86250FED97004F8394 /* TextField */,
 				5BB7AC87250FEE5B004F8394 /* TextView */,
 				5B0D9FAC25156C43000C6673 /* PickerView */,
@@ -284,6 +298,41 @@
 			name = TextView;
 			sourceTree = "<group>";
 		};
+		5BDDC3322545608C004C39CA /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				5BDDC334254560AC004C39CA /* Protocols */,
+			);
+			path = ScrollView;
+			sourceTree = "<group>";
+		};
+		5BDDC334254560AC004C39CA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5BDDC34325456509004C39CA /* Extension */,
+				5BDDC335254560B4004C39CA /* Refresh */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		5BDDC335254560B4004C39CA /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				5BDDC33E254562AF004C39CA /* ScrollRefreshConfiguration.swift */,
+				5BDDC337254560E4004C39CA /* ScrollRefreshPresenterProtocol.swift */,
+				5BDDC33B25456125004C39CA /* ScrollRefreshControllerProtocol.swift */,
+			);
+			name = Refresh;
+			sourceTree = "<group>";
+		};
+		5BDDC34325456509004C39CA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5BDDC34425456517004C39CA /* UIRefreshControl+Extension.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
 		DA182C822211757900163B42 = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				5B5A8DD724CF47AC0001CB13 /* Common */,
+				5BDDC3322545608C004C39CA /* ScrollView */,
 				5B5A8DD824CF47B30001CB13 /* TableView */,
 				5B5A8DDA24CF47C10001CB13 /* CollectionView */,
 				DA182C902211757900163B42 /* Info.plist */,
@@ -400,8 +450,10 @@
 				5B0D9FA7251567CE000C6673 /* PickerViewControllerProtocol.swift in Sources */,
 				5B0D9FA9251567E2000C6673 /* PickerViewPresenterProtocol.swift in Sources */,
 				5BB329B224BF2D4F00323F11 /* CollectionView+Extension.swift in Sources */,
+				5BDDC338254560E4004C39CA /* ScrollRefreshPresenterProtocol.swift in Sources */,
 				5B4ED7A625167DC00027E92A /* DatePickerControllerProtocol.swift in Sources */,
 				5B5A8DE624CF49250001CB13 /* TableViewRowHeight.swift in Sources */,
+				5BDDC34B25456F97004C39CA /* HighlightableView.swift in Sources */,
 				5BB329A524BF239C00323F11 /* CollectionViewItemSize.swift in Sources */,
 				5B5A8DEA24CF49440001CB13 /* TableViewData.swift in Sources */,
 				5BB3298C24BF1E4A00323F11 /* IdentificableView.swift in Sources */,
@@ -413,6 +465,7 @@
 				5BD5B1C324D803D80065E5DB /* CollectionViewDelegate.swift in Sources */,
 				5BB3299A24BF1F2900323F11 /* Array+Extension.swift in Sources */,
 				5BAB775C2517DE10002961AF /* CollectionView+TextFieldPickerView.swift in Sources */,
+				5BDDC34525456517004C39CA /* UIRefreshControl+Extension.swift in Sources */,
 				5B4C37E4252A2DFB00A53EE0 /* TextViewControllerProtocol.swift in Sources */,
 				5B4C37DB252A07A900A53EE0 /* TableView+TextField.swift in Sources */,
 				5B9B16BA252A63BB00C19CD7 /* CollectionView+TextField.swift in Sources */,
@@ -421,6 +474,7 @@
 				5BB3299024BF1E9800323F11 /* ConfigurableView.swift in Sources */,
 				5B4C37D52529FD4C00A53EE0 /* TextFieldControllerProtocol.swift in Sources */,
 				5B5A8DE224CF48FE0001CB13 /* TableView+Extension.swift in Sources */,
+				5BDDC34825456EA2004C39CA /* SelectableView.swift in Sources */,
 				5BAB775E2517DE5F002961AF /* CollectionView+TextFieldDatePicker.swift in Sources */,
 				5B5A8DEF24CF49670001CB13 /* TableViewControllerProtocol.swift in Sources */,
 				5BB7AC89250FF267004F8394 /* TextFieldConfiguration.swift in Sources */,
@@ -433,8 +487,10 @@
 				5B4ED7A825167E030027E92A /* DatePickerPresenterProtocol.swift in Sources */,
 				5B4C37D82529FE3A00A53EE0 /* TextFieldPresenterProtocol.swift in Sources */,
 				5B4C37E7252A2E2300A53EE0 /* TextViewPresenterProtocol.swift in Sources */,
+				5BDDC33C25456125004C39CA /* ScrollRefreshControllerProtocol.swift in Sources */,
 				5BB329AC24BF2A6C00323F11 /* CollectionViewData.swift in Sources */,
 				5B5A8DE824CF49330001CB13 /* TableViewHeaderFooterViewHeight.swift in Sources */,
+				5BDDC33F254562AF004C39CA /* ScrollRefreshConfiguration.swift in Sources */,
 				5B0D9FA425156155000C6673 /* TableView+TextFieldPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

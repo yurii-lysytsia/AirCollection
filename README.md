@@ -2,7 +2,7 @@
 
 [![platform](https://img.shields.io/badge/Platform-iOS%2011+-blue.svg)]()
 [![language](https://img.shields.io/badge/Language-Swift-red.svg)]()
-[![language](https://img.shields.io/badge/pod-1.4.1-blue.svg)]()
+[![language](https://img.shields.io/badge/pod-1.5.0-blue.svg)]()
 [![license](https://img.shields.io/badge/license-MIT-lightgray.svg)]()
 
 Save your coding time with AirCollection written on Swift. It's a great wrapper for UITableView / UICollectionView and VIPER / MVP architecture.
@@ -25,7 +25,7 @@ Save your coding time with AirCollection written on Swift. It's a great wrapper 
 
 ## Installation
 ### CocoaPods
-[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate Alamofire into your Xcode project using CocoaPods, specify it in your `Podfile`:
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate AirCollection into your Xcode project using CocoaPods, specify it in your `Podfile`:
 ```ruby
 pod 'AirCollection'
 ```
