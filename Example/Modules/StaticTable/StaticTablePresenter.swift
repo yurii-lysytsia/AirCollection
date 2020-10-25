@@ -16,8 +16,9 @@ protocol StaticTableViewOutput: TableViewPresenterProtocol {
 final class StaticTablePresenter {
     
     // MARK: Stored properties
-    private let rows: [[Row]] = [
-        [.dynamicTableView]
+    private let sections: [Section] = [
+        Section(identifier: .table, rows: [.dynamicTableView]),
+        Section(identifier: .collection, rows: [.highlightAndSelect])
     ]
     
     // MARK: Dependency properties
@@ -29,8 +30,33 @@ final class StaticTablePresenter {
     }
     
     // MARK: Helpers
-    private enum Row: String, CaseIterable {
-        case dynamicTableView = "Dynamic table view"
+    private struct Section: Equatable {
+        let identifier: Identifier
+        let rows: [Row]
+        
+        enum Identifier: String {
+            case table = "Table view"
+            case collection = "Collection view"
+        }
+        
+        enum Row: String, CaseIterable {
+            case dynamicTableView = "Dynamic table view"
+            case highlightAndSelect = "Highlight and select states"
+        }
+    }
+    
+    private func section(at sectionIndex: Int) -> Section {
+        return self.sections[sectionIndex]
+    }
+    
+    private func rows(at sectionIndex: Int) -> [Section.Row] {
+        let section = self.section(at: sectionIndex)
+        return section.rows
+    }
+    
+    private func row(at indexPath: IndexPath) -> Section.Row {
+        let rows = self.rows(at: indexPath.section)
+        return rows[indexPath.row]
     }
     
 }
@@ -39,11 +65,12 @@ final class StaticTablePresenter {
 extension StaticTablePresenter: StaticTableViewOutput {
     
     var tableSections: Int {
-        return self.rows.count
+        return self.sections.count
     }
     
     func tableRows(for section: Int) -> Int {
-        return self.rows[section].count
+        let rows = self.rows(at: section)
+        return rows.count
     }
     
     func tableRowIdentifier(for indexPath: IndexPath) -> String {
@@ -55,15 +82,30 @@ extension StaticTablePresenter: StaticTableViewOutput {
     }
     
     func tableRowModel(for indexPath: IndexPath) -> Any? {
-        let row = self.rows[indexPath.section][indexPath.row]
+        let row = self.row(at: indexPath)
         return StaticTableViewCell.Model(title: row.rawValue)
     }
     
     func tableRowDidSelect(at indexPath: IndexPath) {
         self.view.deselectTableViewRow(at: indexPath, animated: true)
-        switch self.rows[indexPath.section][indexPath.row] {
-        case .dynamicTableView:
-            self.view.showDynamicViewController()
+        
+        let section = self.section(at: indexPath.section)
+        switch section.identifier {
+        case .table:
+            switch section.rows[indexPath.row] {
+            case .dynamicTableView:
+                self.view.showDynamicTableView()
+            case .highlightAndSelect:
+                return
+            }
+            
+        case .collection:
+            switch section.rows[indexPath.row] {
+            case .dynamicTableView:
+                return
+            case .highlightAndSelect:
+            self.view.showCollectionHighlightAndSelect()
+            }
         }
     }
     

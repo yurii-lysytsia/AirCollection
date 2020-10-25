@@ -10,7 +10,8 @@ import UIKit
 import Source
 
 protocol StaticTableViewInput: TableViewControllerProtocol {
-    func showDynamicViewController()
+    func showDynamicTableView()
+    func showCollectionHighlightAndSelect()
 }
 
 final class StaticTableViewController: UIViewController {
@@ -53,8 +54,13 @@ extension StaticTableViewController: StaticTableViewInput {
         return self.output
     }
 
-    func showDynamicViewController() {
+    func showDynamicTableView() {
         let viewController = ModuleFabric.createDynamicTableModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showCollectionHighlightAndSelect() {
+        let viewController = ModuleFabric.createCollectionHighlightAndSelectModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     

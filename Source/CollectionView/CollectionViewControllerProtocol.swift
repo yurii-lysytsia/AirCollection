@@ -63,10 +63,10 @@ public protocol CollectionViewControllerProtocol: class {
     func deselectCollectionViewItem(at indexPath: IndexPath, animated: Bool)
     
     /// Make an item input view in the collection view identified by index path the first responder in its window at.
-    func becomeCollectionViewRowFirstResponder(at indexPath: IndexPath)
+    func becomeCollectionViewItemFirstResponder(at indexPath: IndexPath)
     
     /// Notifies an item input view in the collection view identified by index path that it has been asked to relinquish its status as first responder in its window.
-    func resignCollectionViewRowFirstResponder(at indexPath: IndexPath)
+    func resignCollectionViewItemFirstResponder(at indexPath: IndexPath)
     
     /// Reloads the data in the specified sections of the collection view.
     func reloadCollectionViewSections(_ sections: [Int])
@@ -173,14 +173,14 @@ public extension CollectionViewControllerProtocol {
         self.collectionViewSource.deselectItem(at: indexPath, animated: animated)
     }
 
-    func becomeTableViewRowFirstResponder(at indexPath: IndexPath) {
+    func becomeCollectionViewItemFirstResponder(at indexPath: IndexPath) {
         guard let cell = self.collectionViewSource.cellForItem(at: indexPath) as? InputConfigurableView else {
             return
         }
         cell.becomeInputViewFirstResponder()
     }
     
-    func resignTableViewRowFirstResponder(at indexPath: IndexPath) {
+    func resignCollectionViewItemFirstResponder(at indexPath: IndexPath) {
         guard let cell = self.collectionViewSource.cellForItem(at: indexPath) as? InputConfigurableView else {
             return
         }

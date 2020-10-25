@@ -33,6 +33,9 @@
 		5B4C37F1252A5AB400A53EE0 /* DynamicStoryTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C37ED252A5AB400A53EE0 /* DynamicStoryTablePresenter.swift */; };
 		5B9B16B7252A5DEE00C19CD7 /* DynamicStoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B9B16B5252A5DEE00C19CD7 /* DynamicStoryTableViewCell.xib */; };
 		5B9B16B8252A5DEE00C19CD7 /* DynamicStoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9B16B6252A5DEE00C19CD7 /* DynamicStoryTableViewCell.swift */; };
+		5BDDC353254570F1004C39CA /* CollectionHighlightAndSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDDC34E254570F1004C39CA /* CollectionHighlightAndSelectViewController.swift */; };
+		5BDDC357254570F1004C39CA /* CollectionHighlightAndSelectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDDC352254570F1004C39CA /* CollectionHighlightAndSelectPresenter.swift */; };
+		5BDDC35A25457270004C39CA /* DynamicTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDDC35925457270004C39CA /* DynamicTitleCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,6 +80,9 @@
 		5B4C37ED252A5AB400A53EE0 /* DynamicStoryTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicStoryTablePresenter.swift; sourceTree = "<group>"; };
 		5B9B16B5252A5DEE00C19CD7 /* DynamicStoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DynamicStoryTableViewCell.xib; sourceTree = "<group>"; };
 		5B9B16B6252A5DEE00C19CD7 /* DynamicStoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicStoryTableViewCell.swift; sourceTree = "<group>"; };
+		5BDDC34E254570F1004C39CA /* CollectionHighlightAndSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHighlightAndSelectViewController.swift; sourceTree = "<group>"; };
+		5BDDC352254570F1004C39CA /* CollectionHighlightAndSelectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHighlightAndSelectPresenter.swift; sourceTree = "<group>"; };
+		5BDDC35925457270004C39CA /* DynamicTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTitleCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,7 @@
 				5B4C37B12529DBF300A53EE0 /* DynamicTable */,
 				5B4C37C62529EBC600A53EE0 /* DynamicUserTable */,
 				5B4C37E9252A59E300A53EE0 /* DynamicStoryTable */,
+				5BDDC34D254570D7004C39CA /* DynamicCollection */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -244,6 +251,24 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		5BDDC34D254570D7004C39CA /* DynamicCollection */ = {
+			isa = PBXGroup;
+			children = (
+				5BDDC352254570F1004C39CA /* CollectionHighlightAndSelectPresenter.swift */,
+				5BDDC34E254570F1004C39CA /* CollectionHighlightAndSelectViewController.swift */,
+				5BDDC35825457257004C39CA /* Cells */,
+			);
+			path = DynamicCollection;
+			sourceTree = "<group>";
+		};
+		5BDDC35825457257004C39CA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5BDDC35925457270004C39CA /* DynamicTitleCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -322,6 +347,7 @@
 			files = (
 				5B4C37912529A0E000A53EE0 /* StaticTableViewCell.swift in Sources */,
 				5B4C37B02529C90700A53EE0 /* ModuleFabric.swift in Sources */,
+				5BDDC353254570F1004C39CA /* CollectionHighlightAndSelectViewController.swift in Sources */,
 				5B4C37F1252A5AB400A53EE0 /* DynamicStoryTablePresenter.swift in Sources */,
 				5B9B16B8252A5DEE00C19CD7 /* DynamicStoryTableViewCell.swift in Sources */,
 				5B4C37CB2529EBE200A53EE0 /* DynamicUserTableViewController.swift in Sources */,
@@ -330,11 +356,13 @@
 				5B4C37EE252A5AB400A53EE0 /* DynamicStoryTableViewController.swift in Sources */,
 				5B4C37BB2529DD0D00A53EE0 /* DynamicTitleDescriptionTableViewCell.swift in Sources */,
 				5B4C37D32529ECB200A53EE0 /* DynamicUserTableViewCell.swift in Sources */,
+				5BDDC357254570F1004C39CA /* CollectionHighlightAndSelectPresenter.swift in Sources */,
 				5B4C37BE2529E53E00A53EE0 /* User.swift in Sources */,
 				5B4C377F25299E4000A53EE0 /* StaticTablePresenter.swift in Sources */,
 				5B4C37B32529DC1D00A53EE0 /* DynamicTableViewController.swift in Sources */,
 				5B4C37CE2529EBE200A53EE0 /* DynamicUserTablePresenter.swift in Sources */,
 				5B4C377B25299E4000A53EE0 /* StaticTableViewController.swift in Sources */,
+				5BDDC35A25457270004C39CA /* DynamicTitleCollectionViewCell.swift in Sources */,
 				5B2D23CD25441059007DB77D /* DynamicUserFooterView.swift in Sources */,
 				5B4C37C02529E56800A53EE0 /* Story.swift in Sources */,
 			);
