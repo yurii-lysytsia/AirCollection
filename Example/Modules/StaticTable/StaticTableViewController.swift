@@ -26,21 +26,27 @@ final class StaticTableViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.addSubview(self.tableView)
-        
-        self.configureTableView { (tableView) in
+        // Configure view
+        view.addSubview(tableView)
+        // Configure table view
+        tableView.tableHeaderView = StaticTableHeaderView()
+        tableView.tableFooterView = StaticTableFooterView.loadFromNib()
+        configureTableView { (tableView) in
             tableView.register(StaticTableViewCell.self)
-            tableView.register(StaticTableHeaderFooterView.self)
+            tableView.register(StaticTableSectionHeaderView.self)
+            tableView.register(StaticTableSectionFooterView.self)
         }
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        // Resize table view
         self.tableView.frame = self.view.bounds
-        
+        // Resize table view table header view
+        self.tableView.fitHeaderTableViewHeight()
+        // Resize table view table footer view
+        self.tableView.fitFooterViewHeight()
     }
     
 }

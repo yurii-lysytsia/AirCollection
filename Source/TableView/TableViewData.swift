@@ -348,13 +348,12 @@ extension TableViewData: UITableViewDelegate {
             return height
             
         case .flexible:
-            guard let view = self.tableView(tableView, viewForHeaderInSection: section) else {
-                return UITableView.automaticDimension
+            guard let view = self.tableView(tableView, viewForHeaderInSection: section), tableView.frame.width > 0 else {
+                return 0
             }
-            view.layoutIfNeeded()
             let targetSize = CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude)
-            let prefferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-            return prefferedSize.height
+            let preferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+            return preferedSize.height
         }
     }
     
@@ -395,17 +394,15 @@ extension TableViewData: UITableViewDelegate {
                 return height
             }
         }
-        
         switch self.output.tableFooterHeight(for: section) {
         case .none:
             return 0
         case .fixed(let height):
             return height
         case .flexible:
-            guard let view = self.tableView(tableView, viewForFooterInSection: section) else {
-                return UITableView.automaticDimension
+            guard let view = self.tableView(tableView, viewForFooterInSection: section), tableView.frame.width > 0 else {
+                return 0
             }
-            view.layoutIfNeeded()
             let targetSize = CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude)
             let prefferedSize = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
             return prefferedSize.height

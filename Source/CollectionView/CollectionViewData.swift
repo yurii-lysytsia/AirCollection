@@ -499,14 +499,12 @@ extension CollectionViewData: UICollectionViewDelegateFlowLayout {
                 self.cachedReusableCell[identifier] = cell
                 return cell
             }()
-            
             // Configure cell for actual data
             self.configureCell(cell, for: indexPath)
-            
             // Calculate dynamic size for item
             let horizontalFittingPriority: UILayoutPriority = flexibleWidth ? .fittingSizeLevel : .required
             let verticalFittingPriority: UILayoutPriority = flexibleHeight ? .fittingSizeLevel : .required
-            targetSize = cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+            targetSize = cell.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
         }
         
         if aspectRatioWidth && aspectRatioHeight {

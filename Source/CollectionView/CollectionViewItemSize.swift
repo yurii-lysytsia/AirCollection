@@ -14,7 +14,7 @@ public struct CollectionViewItemSize {
     public let width: Distribution
     public let height: Distribution
     
-    init(width: Distribution, height: Distribution) {
+    public init(width: Distribution, height: Distribution) {
         self.width = width
         self.height = height
     }

@@ -111,7 +111,7 @@ extension StaticTablePresenter: StaticTableViewOutput {
     }
     
     func tableHeaderIdentifier(for section: Int) -> String? {
-        return StaticTableHeaderFooterView.viewIdentifier
+        return StaticTableSectionHeaderView.viewIdentifier
     }
     
     func tableHeaderHeight(for section: Int) -> TableViewHeaderFooterViewHeight {
@@ -120,7 +120,20 @@ extension StaticTablePresenter: StaticTableViewOutput {
     
     func tableHeaderModel(for section: Int) -> Any? {
         let section = self.section(at: section)
-        return StaticTableHeaderFooterView.Model(title: section.identifier.rawValue)
+        return StaticTableSectionHeaderView.Model(title: section.identifier.rawValue)
+    }
+    
+    func tableFooterIdentifier(for section: Int) -> String? {
+        return StaticTableSectionFooterView.viewIdentifier
+    }
+    
+    func tableFooterHeight(for section: Int) -> TableViewHeaderFooterViewHeight {
+        return .flexible
+    }
+    
+    func tableFooterModel(for section: Int) -> Any? {
+        let sectionModel = self.section(at: section)
+        return StaticTableSectionFooterView.Model(title: "Section `\(sectionModel.identifier.rawValue)` ended, so section number `\(section)` footer visible")
     }
     
 }

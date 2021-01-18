@@ -31,5 +31,3 @@ public extension CollectionViewControllerProtocol where Self: DatePickerControll
     }
     
 }
-
-
