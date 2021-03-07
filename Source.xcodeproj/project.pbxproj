@@ -33,6 +33,9 @@
 		5B5A8DEA24CF49440001CB13 /* TableViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DE924CF49440001CB13 /* TableViewData.swift */; };
 		5B5A8DEC24CF49510001CB13 /* TableViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */; };
 		5B5A8DEF24CF49670001CB13 /* TableViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8DEE24CF49670001CB13 /* TableViewControllerProtocol.swift */; };
+		5B7FAA5725B64D0F0041DC45 /* DisplayCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FAA5625B64D0F0041DC45 /* DisplayCollection.swift */; };
+		5B7FAA5A25B64D2F0041DC45 /* DisplaySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FAA5925B64D2F0041DC45 /* DisplaySection.swift */; };
+		5B7FAA5E25B64D410041DC45 /* DisplayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FAA5D25B64D410041DC45 /* DisplayRow.swift */; };
 		5B8BA20524D35BFB0070CC77 /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8BA20424D35BFB0070CC77 /* TableViewDelegate.swift */; };
 		5B94A91E24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B94A91D24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift */; };
 		5B9B16BA252A63BB00C19CD7 /* CollectionView+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9B16B9252A63BB00C19CD7 /* CollectionView+TextField.swift */; };
@@ -87,6 +90,9 @@
 		5B5A8DE924CF49440001CB13 /* TableViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewData.swift; sourceTree = "<group>"; };
 		5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B5A8DEE24CF49670001CB13 /* TableViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerProtocol.swift; sourceTree = "<group>"; };
+		5B7FAA5625B64D0F0041DC45 /* DisplayCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCollection.swift; sourceTree = "<group>"; };
+		5B7FAA5925B64D2F0041DC45 /* DisplaySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySection.swift; sourceTree = "<group>"; };
+		5B7FAA5D25B64D410041DC45 /* DisplayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayRow.swift; sourceTree = "<group>"; };
 		5B8BA20424D35BFB0070CC77 /* TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
 		5B94A91D24BF7D0A00B2D01B /* CollectionViewElementKindSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewElementKindSection.swift; sourceTree = "<group>"; };
 		5B9B16B9252A63BB00C19CD7 /* CollectionView+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+TextField.swift"; sourceTree = "<group>"; };
@@ -161,6 +167,7 @@
 			children = (
 				5B5A8DDE24CF481D0001CB13 /* Extension */,
 				5B5A8DDB24CF47CD0001CB13 /* Protocols */,
+				5B7FAA5525B64CFF0041DC45 /* Models */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -274,6 +281,16 @@
 				5B5A8DEB24CF49510001CB13 /* TableViewPresenterProtocol.swift */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		5B7FAA5525B64CFF0041DC45 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5B7FAA5D25B64D410041DC45 /* DisplayRow.swift */,
+				5B7FAA5925B64D2F0041DC45 /* DisplaySection.swift */,
+				5B7FAA5625B64D0F0041DC45 /* DisplayCollection.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		5BB7AC86250FED97004F8394 /* TextField */ = {
@@ -475,10 +492,13 @@
 				5B4C37D52529FD4C00A53EE0 /* TextFieldControllerProtocol.swift in Sources */,
 				5B5A8DE224CF48FE0001CB13 /* TableView+Extension.swift in Sources */,
 				5BDDC34825456EA2004C39CA /* SelectableView.swift in Sources */,
+				5B7FAA5725B64D0F0041DC45 /* DisplayCollection.swift in Sources */,
+				5B7FAA5E25B64D410041DC45 /* DisplayRow.swift in Sources */,
 				5BAB775E2517DE5F002961AF /* CollectionView+TextFieldDatePicker.swift in Sources */,
 				5B5A8DEF24CF49670001CB13 /* TableViewControllerProtocol.swift in Sources */,
 				5BB7AC89250FF267004F8394 /* TextFieldConfiguration.swift in Sources */,
 				5BB7AC85250FECF0004F8394 /* TextInputConfigurableView.swift in Sources */,
+				5B7FAA5A25B64D2F0041DC45 /* DisplaySection.swift in Sources */,
 				5B4C37952529BC4800A53EE0 /* ModelConfigurableView.swift in Sources */,
 				5BB329AE24BF2AB900323F11 /* CollectionViewControllerProtocol.swift in Sources */,
 				5B0D9FAE25156F66000C6673 /* PickerViewTitle.swift in Sources */,

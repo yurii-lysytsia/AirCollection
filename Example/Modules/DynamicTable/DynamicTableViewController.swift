@@ -26,28 +26,23 @@ final class DynamicTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(self.tableView)
+        view.addSubview(tableView)
         
-        self.configureTableView { (tableView) in
-            tableView.register(DynamicTitleDescriptionTableViewCell.self)
-        }
+        tableView.register(DynamicTitleDescriptionTableViewCell.self)
+        configureTableView(tableView, with: output)
         
         let scrollRefreshConfiguration = ScrollRefreshConfiguration(tintColor: UIColor.systemBlue, attributedTitle: nil)
-        self.configureScrollRefresh(for: self.tableView, using: self.output, configuration: scrollRefreshConfiguration)
+        configureScrollRefresh(for: tableView, using: output, configuration: scrollRefreshConfiguration)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.reloadTableView()
-        
+        reloadTableView()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        self.tableView.frame = self.view.bounds
-        
+        tableView.frame = self.view.bounds
     }
     
 }
@@ -57,21 +52,12 @@ extension DynamicTableViewController: DynamicTableViewInput {
     
     func showUser(_ user: User) {
         let view = ModuleFabric.createDynamicUserTableModule(user: user)
-        self.navigationController?.pushViewController(view, animated: true)
+        navigationController?.pushViewController(view, animated: true)
     }
     
     func showStory(_ story: Story) {
         let view = ModuleFabric.createDynamicStoryTableModule(story: story)
-        self.navigationController?.pushViewController(view, animated: true)
-    }
-    
-    // MARK: TableViewControllerProtocol
-    var tableViewSource: UITableView {
-        return self.tableView
-    }
-    
-    var tableViewPresenter: TableViewPresenterProtocol {
-        return self.output
+        navigationController?.pushViewController(view, animated: true)
     }
 
     // MARK: ScrollRefreshControllerProtocol

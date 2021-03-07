@@ -18,15 +18,10 @@ import func Foundation.objc_setAssociatedObject
 
 public protocol TableViewControllerProtocol: class {
     
-    /// Return an instanse of the table view. This table view will be use by presenter
-    var tableViewSource: UITableView { get }
-    
-    /// Return an instanse of the table view presenter
-    var tableViewPresenter: TableViewPresenterProtocol { get }
-    
     /// Configure `UITableViewDataSource` and `UITableViewDelegate` for specific table view and presenter. Also automatically add `TableViewDelegate` to current view controller if implemented.
-    /// - Parameter configurator: Use this block to set up the table view. You should register table view cell, headers and footer is this case
-    func configureTableView(configurator: (UITableView) -> Void)
+    /// - Parameter tableView: Instanse of the table view source that will be use by presenter.
+    /// - Parameter presenter: Instanse of the table view presenter.
+    func configureTableView(_ tableView: UITableView, with presenter: TableViewPresenterProtocol)
     
     /// Reloads the rows and sections of the table view
     func reloadTableView()
@@ -98,25 +93,29 @@ public protocol TableViewControllerProtocol: class {
 public extension TableViewControllerProtocol {
     
     // MARK: Configure
-    func configureTableView(configurator: (UITableView) -> Void) {
-        self.tableViewSource.dataSource = self.tableViewData
-        self.tableViewSource.delegate = self.tableViewData
+    
+    func configureTableView(_ tableView: UITableView, with presenter: TableViewPresenterProtocol) {
+        tableViewSource = tableView
+        tableViewPresenter = presenter
+        tableViewSource.dataSource = tableViewData
+        tableViewSource.delegate = tableViewData
         if let delegate = self as? TableViewDelegate {
             // Forward available table view delegates to current view controller.
-            self.tableViewData.tableViewDelegate = delegate
+            tableViewData.tableViewDelegate = delegate
         }
-        configurator(self.tableViewSource)
     }
     
     // MARK: Reload
+    
     func reloadTableView() {
-        self.tableViewData.reloadAll()
-        self.tableViewSource.reloadData()
+        tableViewData.reloadAll()
+        tableViewSource.reloadData()
     }
     
     // MARK: Update
+    
     func updateTableView(updates: () -> Void, completion: ((Bool) -> Void)?) {
-        self.tableViewSource.performBatchUpdates({
+        tableViewSource.performBatchUpdates({
             updates()
         }, completion: { (finished) in
             completion?(finished)
@@ -124,7 +123,7 @@ public extension TableViewControllerProtocol {
     }
     
     func updateTableView(updates: () -> Void) {
-        self.updateTableView(updates: updates, completion: nil)
+        updateTableView(updates: updates, completion: nil)
     }
     
     func updateTableView(deletions: [Int], insertions: [Int], modifications: [Int], forSection section: Int, with animation: UITableView.RowAnimation, completion: ((Bool) -> Void)?) {
@@ -132,76 +131,76 @@ public extension TableViewControllerProtocol {
             assertionFailure("\(#function) deletions, insertions or modifications can't be empty. One of them must contains element")
             return
         }
-        self.updateTableView(updates: {
+        updateTableView(updates: {
             if !deletions.isEmpty {
                 let indexPaths = deletions.map { IndexPath(row: $0, section: section) }
-                self.deleteTableViewRows(at: indexPaths, with: animation)
+                deleteTableViewRows(at: indexPaths, with: animation)
             }
             if !insertions.isEmpty {
                 let indexPaths = insertions.map { IndexPath(row: $0, section: section) }
-                self.insertTableViewRows(at: indexPaths, with: animation)
+                insertTableViewRows(at: indexPaths, with: animation)
             }
             if !modifications.isEmpty {
                 let indexPaths = modifications.map { IndexPath(row: $0, section: section) }
-                self.reloadTableViewRows(at: indexPaths, with: animation)
+                reloadTableViewRows(at: indexPaths, with: animation)
             }
         }, completion: completion)
     }
     
     func updateTableView(deletions: [Int], insertions: [Int], modifications: [Int], forSection section: Int, completion: ((Bool) -> Void)? = nil) {
-        self.updateTableView(deletions: deletions, insertions: insertions, modifications: modifications, forSection: section, with: .automatic, completion: completion)
+        updateTableView(deletions: deletions, insertions: insertions, modifications: modifications, forSection: section, with: .automatic, completion: completion)
     }
     
     // MARK: Rows
     func reloadTableViewRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-        self.tableViewData.reloadRows(at: indexPaths)
-        self.tableViewSource.reloadRows(at: indexPaths, with: animation)
+        tableViewData.reloadRows(at: indexPaths)
+        tableViewSource.reloadRows(at: indexPaths, with: animation)
     }
     
     func reloadTableViewRows(at indexPaths: [IndexPath]) {
-        self.reloadTableViewRows(at: indexPaths, with: .automatic)
+        reloadTableViewRows(at: indexPaths, with: .automatic)
     }
     
     func deleteTableViewRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-        self.tableViewData.removeRows(at: indexPaths)
-        self.tableViewSource.deleteRows(at: indexPaths, with: animation)
+        tableViewData.removeRows(at: indexPaths)
+        tableViewSource.deleteRows(at: indexPaths, with: animation)
     }
     
     func deleteTableViewRows(at indexPaths: [IndexPath]) {
-        self.deleteTableViewRows(at: indexPaths, with: .automatic)
+        deleteTableViewRows(at: indexPaths, with: .automatic)
     }
     
     func insertTableViewRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-        self.tableViewData.insertRows(at: indexPaths)
-        self.tableViewSource.insertRows(at: indexPaths, with: animation)
+        tableViewData.insertRows(at: indexPaths)
+        tableViewSource.insertRows(at: indexPaths, with: animation)
     }
     
     func insertTableViewRows(at indexPaths: [IndexPath]) {
-        self.insertTableViewRows(at: indexPaths, with: .automatic)
+        insertTableViewRows(at: indexPaths, with: .automatic)
     }
     
     func moveTableViewRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
-        self.tableViewData.moveRow(from: indexPath, to: newIndexPath)
-        self.tableViewSource.moveRow(at: indexPath, to: newIndexPath)
+        tableViewData.moveRow(from: indexPath, to: newIndexPath)
+        tableViewSource.moveRow(at: indexPath, to: newIndexPath)
     }
     
     func selectTableViewRow(at indexPath: IndexPath, animated: Bool, scrollPosition: UITableView.ScrollPosition) {
-        self.tableViewSource.selectRow(at: indexPath, animated: animated, scrollPosition: scrollPosition)
+        tableViewSource.selectRow(at: indexPath, animated: animated, scrollPosition: scrollPosition)
     }
     
     func deselectTableViewRow(at indexPath: IndexPath, animated: Bool) {
-        self.tableViewSource.deselectRow(at: indexPath, animated: animated)
+        tableViewSource.deselectRow(at: indexPath, animated: animated)
     }
     
     func becomeTableViewRowFirstResponder(at indexPath: IndexPath) {
-        guard let cell = self.tableViewSource.cellForRow(at: indexPath) as? InputConfigurableView else {
+        guard let cell = tableViewSource.cellForRow(at: indexPath) as? InputConfigurableView else {
             return
         }
         cell.becomeInputViewFirstResponder()
     }
     
     func resignTableViewRowFirstResponder(at indexPath: IndexPath) {
-        guard let cell = self.tableViewSource.cellForRow(at: indexPath) as? InputConfigurableView else {
+        guard let cell = tableViewSource.cellForRow(at: indexPath) as? InputConfigurableView else {
             return
         }
         cell.resignInputViewFirstResponder()
@@ -209,79 +208,111 @@ public extension TableViewControllerProtocol {
     
     // MARK: Sections
     func reloadTableViewSections(_ sections: [Int], with animation: UITableView.RowAnimation) {
-        self.tableViewData.reloadSections(sections)
+        tableViewData.reloadSections(sections)
         let indexSet = IndexSet(sections)
-        self.tableViewSource.reloadSections(indexSet, with: animation)
+        tableViewSource.reloadSections(indexSet, with: animation)
     }
     
     func reloadTableViewSection(_ section: Int) {
-        self.reloadTableViewSections([section], with: .automatic)
+        reloadTableViewSections([section], with: .automatic)
     }
     
     func deleteTableViewSections(_ sections: [Int], with animation: UITableView.RowAnimation) {
-        self.tableViewData.removeSections(sections)
+        tableViewData.removeSections(sections)
         let indexSet = IndexSet(sections)
-        self.tableViewSource.deleteSections(indexSet, with: animation)
+        tableViewSource.deleteSections(indexSet, with: animation)
     }
     
     func deleteTableViewSections(_ sections: [Int]) {
-        self.deleteTableViewSections(sections, with: .automatic)
+        deleteTableViewSections(sections, with: .automatic)
     }
     
     func insertTableViewSections(_ sections: [Int], with animation: UITableView.RowAnimation) {
-        self.tableViewData.insertSections(sections)
+        tableViewData.insertSections(sections)
         let indexSet = IndexSet(sections)
-        self.tableViewSource.insertSections(indexSet, with: animation)
+        tableViewSource.insertSections(indexSet, with: animation)
     }
     
     func insertTableViewSections(_ sections: [Int]) {
-        self.insertTableViewSections(sections, with: .automatic)
+        insertTableViewSections(sections, with: .automatic)
     }
     
     func moveTableViewSection(from section: Int, to newSection: Int) {
-        self.tableViewData.moveSection(from: section, to: newSection)
-        self.tableViewSource.moveSection(section, toSection: newSection)
+        tableViewData.moveSection(from: section, to: newSection)
+        tableViewSource.moveSection(section, toSection: newSection)
     }
 
     // MARK: Scroll
     func scrollTableViewToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) {
-        self.tableViewSource.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
+        tableViewSource.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
     }
     
     func scrollTableViewToNearestSelectedRow(at scrollPosition: UITableView.ScrollPosition, animated: Bool) {
-        self.tableViewSource.scrollToNearestSelectedRow(at: scrollPosition, animated: animated)
+        tableViewSource.scrollToNearestSelectedRow(at: scrollPosition, animated: animated)
     }
     
     // MARK: Configuration
     func reconfigureTableViewCellForRow(at indexPath: IndexPath) {
-        guard let cell = self.tableViewSource.cellForRow(at: indexPath) else {
+        guard let cell = tableViewSource.cellForRow(at: indexPath) else {
             return
         }
-        self.tableViewData.configureCell(cell, for: indexPath)
+        tableViewData.configureCell(cell, for: indexPath)
     }
 
     func indexPathForRow(with view: UIView) -> IndexPath? {
-        let rect = view.convert(view.bounds, to: self.tableViewSource)
-        return self.tableViewSource.indexPathsForRows(in: rect)?.first
+        let rect = view.convert(view.bounds, to: tableViewSource)
+        return tableViewSource.indexPathsForRows(in: rect)?.first
     }
     
 }
 
 // MARK: - TableViewData
-fileprivate var tableViewDataKey: String = "TableViewControllerProtocol.tableViewData"
+
+fileprivate enum TableViewControllerProtocolAssociatedKey {
+    static var tableViewSource: String = "TableViewControllerProtocol.tableViewSource"
+    static var tableViewPresenter: String = "TableViewControllerProtocol.tableViewPresenter"
+    static var tableViewData: String = "TableViewControllerProtocol.tableViewData"
+}
+
 fileprivate extension TableViewControllerProtocol {
+    
+    /// Get associated `UITableView` object with this table view controller.
+    var tableViewSource: UITableView {
+        get {
+            guard let tableView = objc_getAssociatedObject(self, &TableViewControllerProtocolAssociatedKey.tableViewSource) as? UITableView else {
+                assertionFailure("Table view haven't set for view controller. Please use `configureTableView(:,with:)` before use other `TableViewControllerProtocol` methods")
+                return UITableView(frame: .zero, style: .plain)
+            }
+            return tableView
+        }
+        set {
+            objc_setAssociatedObject(self, &TableViewControllerProtocolAssociatedKey.tableViewSource, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
+    
+    /// Get associated `TableViewPresenterProtocol` object with this table view controller
+    var tableViewPresenter: TableViewPresenterProtocol {
+        get {
+            guard let presenter = objc_getAssociatedObject(self, &TableViewControllerProtocolAssociatedKey.tableViewPresenter) as? TableViewPresenterProtocol else {
+                fatalError("Table view presenter haven't set for view controller. Please use `configureTableView(:,with:)` before use other `TableViewControllerProtocol` methods")
+            }
+            return presenter
+        }
+        set {
+            objc_setAssociatedObject(self, &TableViewControllerProtocolAssociatedKey.tableViewPresenter, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
     
     /// Get associated `TableViewData` object with this table view controller. Will create new one if associated object is nil
     var tableViewData: TableViewData {
-        if let data = objc_getAssociatedObject(self, &tableViewDataKey) as? TableViewData {
+        if let data = objc_getAssociatedObject(self, &TableViewControllerProtocolAssociatedKey.tableViewData) as? TableViewData {
             return data
         } else {
             // Create new `tableViewData` model
-            let tableViewData = TableViewData(input: self, output: self.tableViewPresenter)
-            objc_setAssociatedObject(self, &tableViewDataKey, tableViewData, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            let tableViewData = TableViewData(input: self, output: tableViewPresenter)
+            objc_setAssociatedObject(self, &TableViewControllerProtocolAssociatedKey.tableViewData, tableViewData, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return tableViewData
         }
     }
     
 }
-

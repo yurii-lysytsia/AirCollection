@@ -25,18 +25,16 @@ final class DynamicStoryTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(self.tableView)
+        view.addSubview(tableView)
         
-        self.configureTableView { (tableView) in
-            tableView.register(DynamicUserTableViewCell.self)
-            tableView.register(DynamicStoryTableViewCell.self)
-        }
-        
+        tableView.register(DynamicUserTableViewCell.self)
+        tableView.register(DynamicStoryTableViewCell.self)
+        configureTableView(tableView, with: output)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView.frame = self.view.bounds
+        tableView.frame = view.bounds
     }
     
 }
@@ -44,23 +42,14 @@ final class DynamicStoryTableViewController: UIViewController {
 // MARK: - DynamicStoryTableViewInput
 extension DynamicStoryTableViewController: DynamicStoryTableViewInput {
     
-    // MARK: TableViewControllerProtocol
-    var tableViewSource: UITableView {
-        return self.tableView
-    }
-    
-    var tableViewPresenter: TableViewPresenterProtocol {
-        return self.output
-    }
-    
     // MARK: TextFieldControllerProtocol
     var textFieldPresenter: TextFieldPresenterProtocol {
-        return self.output
+        return output
     }
     
     // MARK: TextViewControllerProtocol
     var textViewPresenter: TextViewPresenterProtocol {
-        return self.output
+        return output
     }
     
 }

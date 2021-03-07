@@ -25,17 +25,16 @@ final class DynamicUserTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(self.tableView)
+        view.addSubview(tableView)
         
-        self.configureTableView { (tableView) in
-            tableView.register(DynamicUserTableViewCell.self)
-            tableView.register(DynamicUserFooterView.self)
-        }
+        tableView.register(DynamicUserTableViewCell.self)
+        tableView.register(DynamicUserFooterView.self)
+        configureTableView(tableView, with: output)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView.frame = self.view.bounds
+        tableView.frame = view.bounds
     }
     
 }
@@ -43,28 +42,19 @@ final class DynamicUserTableViewController: UIViewController {
 // MARK: - DynamicUserTableViewInput
 extension DynamicUserTableViewController: DynamicUserTableViewInput {
     
-    // MARK: TableViewControllerProtocol
-    var tableViewSource: UITableView {
-        return self.tableView
-    }
-    
-    var tableViewPresenter: TableViewPresenterProtocol {
-        return self.output
-    }
-    
     // MARK: TextFieldControllerProtocol
     var textFieldPresenter: TextFieldPresenterProtocol {
-        return self.output
+        return output
     }
     
     // MARK: TextFieldDatePickerControllerProtocol
     var datePickerPresenter: DatePickerPresenterProtocol {
-        return self.output
+        return output
     }
 
     // MARK: TextFieldPickerViewControllerProtocol
     var pickerViewPresenter: PickerViewPresenterProtocol {
-        return self.output
+        return output
     }
     
 }

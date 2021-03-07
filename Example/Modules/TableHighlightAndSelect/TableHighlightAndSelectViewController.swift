@@ -16,46 +16,36 @@ protocol TableHighlightAndSelectViewInput: TableViewControllerProtocol {
 final class TableHighlightAndSelectViewController: UIViewController {
     
     // MARK: Stored properties
+    
     var output: TableHighlightAndSelectViewOutput!
     
     // MARK: Outlet properties
+    
     private let tableView = UITableView(frame: .zero, style: .plain)
+    
     // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(self.tableView)
+        view.addSubview(tableView)
         
-        self.tableView.frame = self.view.bounds
-        self.tableView.allowsMultipleSelection = true
-        self.configureTableView { (tableView) in
-            tableView.register(TableHightlightAndSelectTableViewCell.self)
-        }
+        tableView.frame = self.view.bounds
+        tableView.allowsMultipleSelection = true
+        tableView.register(TableHightlightAndSelectTableViewCell.self)
+        configureTableView(tableView, with: output)
         
-        self.output.didLoad()
+        output.didLoad()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView.frame = self.view.bounds
+        tableView.frame = view.bounds
     }
-    
-    // MARK: Functions
-    
-    // MARK: Helpers
     
 }
 
 // MARK: - TableHighlightAndSelectViewInput
 extension TableHighlightAndSelectViewController: TableHighlightAndSelectViewInput {
-    
-    // MARK: TableViewControllerProtocol
-    var tableViewSource: UITableView {
-        return self.tableView
-    }
-    
-    var tableViewPresenter: TableViewPresenterProtocol {
-        return self.output
-    }
     
 }

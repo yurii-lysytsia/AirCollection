@@ -31,12 +31,10 @@ final class StaticTableViewController: UIViewController {
         // Configure table view
         tableView.tableHeaderView = StaticTableHeaderView()
         tableView.tableFooterView = StaticTableFooterView.loadFromNib()
-        configureTableView { (tableView) in
-            tableView.register(StaticTableViewCell.self)
-            tableView.register(StaticTableSectionHeaderView.self)
-            tableView.register(StaticTableSectionFooterView.self)
-        }
-        
+        tableView.register(StaticTableViewCell.self)
+        tableView.register(StaticTableSectionHeaderView.self)
+        tableView.register(StaticTableSectionFooterView.self)
+        configureTableView(tableView, with: output)
     }
     
     override func viewDidLayoutSubviews() {
@@ -54,14 +52,6 @@ final class StaticTableViewController: UIViewController {
 // MARK: - StaticTableViewInput
 extension StaticTableViewController: StaticTableViewInput {
     
-    var tableViewSource: UITableView {
-        return self.tableView
-    }
-    
-    var tableViewPresenter: TableViewPresenterProtocol {
-        return self.output
-    }
-
     func showDynamicTableView() {
         let viewController = ModuleFabric.createDynamicTableModule()
         self.navigationController?.pushViewController(viewController, animated: true)

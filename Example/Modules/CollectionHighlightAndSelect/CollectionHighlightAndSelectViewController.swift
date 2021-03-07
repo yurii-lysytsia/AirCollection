@@ -25,37 +25,27 @@ final class CollectionHighlightAndSelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
-        self.view.addSubview(self.collectionView)
+        view.backgroundColor = UIColor.white
+        view.addSubview(collectionView)
         
-        self.collectionView.backgroundColor = UIColor.white
-        self.collectionView.frame = self.view.bounds
-        self.collectionView.allowsMultipleSelection = true
-        self.configureCollectionView { (collectionView) in
-            collectionView.register(CollectionHighlightAndSelectCollectionViewCell.self)
-        }
+        collectionView.backgroundColor = UIColor.white
+        collectionView.frame = view.bounds
+        collectionView.allowsMultipleSelection = true
+        collectionView.register(CollectionHighlightAndSelectCollectionViewCell.self)
+        configureCollectionView(collectionView, with: output)
         
-        self.output.didLoad()
+        output.didLoad()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.collectionView.frame = self.view.bounds
+        collectionView.frame = view.bounds
     }
     
 }
 
 // MARK: - CollectionHighlightAndSelectViewInput
 extension CollectionHighlightAndSelectViewController: CollectionHighlightAndSelectViewInput {
-    
-    // MARK: CollectionViewControllerProtocol
-    var collectionViewSource: UICollectionView {
-        return self.collectionView
-    }
-    
-    var collectionViewPresenter: CollectionViewPresenterProtocol {
-        return self.output
-    }
     
 }
