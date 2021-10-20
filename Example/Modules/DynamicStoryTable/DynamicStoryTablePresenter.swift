@@ -54,9 +54,9 @@ extension DynamicStoryTablePresenter: DynamicStoryTableViewOutput {
     func tableRowIdentifier(for indexPath: IndexPath) -> String {
         switch self.rows[indexPath.section][indexPath.row] {
         case .title:
-            return DynamicUserTableViewCell.viewIdentifier
+            return "DynamicUserTableViewCell"
         case .text:
-            return DynamicStoryTableViewCell.viewIdentifier
+            return "DynamicStoryTableViewCell"
         }
     }
     

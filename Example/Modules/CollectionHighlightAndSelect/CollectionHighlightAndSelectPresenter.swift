@@ -45,7 +45,7 @@ extension CollectionHighlightAndSelectPresenter: CollectionHighlightAndSelectVie
     }
     
     func collectionItemIdentifier(for indexPath: IndexPath) -> String {
-        return CollectionHighlightAndSelectCollectionViewCell.viewIdentifier
+        return "CollectionHighlightAndSelectCollectionViewCell"
     }
     
     func collectionItemSize(for indexPath: IndexPath) -> CollectionViewItemSize {

@@ -41,7 +41,7 @@ public protocol TextInputConfigurableModel {
 }
 
 /// Abstract protocol implementation and defines new method to become or resign input view.
-public protocol InputConfigurableView: class {
+public protocol InputConfigurableView: AnyObject {
     
     /// Asks UIKit to make this input view the first responder in its window.
     @discardableResult func becomeInputViewFirstResponder() -> Bool
@@ -78,7 +78,7 @@ public extension TextInputConfigurableView {
     
 }
 
-public extension TextInputConfigurableView where Model: TextInputConfigurableModel, TextInputView == Model.Configuration.TextInputView {
+public extension TextInputConfigurableView where TextInputView == Model.Configuration.TextInputView {
 
     /// Overridden abstract method that called when view have to update.
     ///

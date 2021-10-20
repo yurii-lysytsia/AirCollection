@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-class DynamicUserTableViewCell: UITableViewCell, IdentificableView, NibLoadableView, TextInputConfigurableView {
+class DynamicUserTableViewCell: UITableViewCell, TextInputConfigurableView {
     
     // MARK: Outlet properties
     @IBOutlet private weak var titleLabel: UILabel!

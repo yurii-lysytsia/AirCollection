@@ -8,7 +8,7 @@
 
 import struct Foundation.IndexPath
 
-public protocol PickerViewPresenterProtocol: class {
+public protocol PickerViewPresenterProtocol: AnyObject {
     /// Called by controller (`PickerViewControllerProtocol`) when picker view needs the number of components for index path
     func pickerViewNumberOfComponents(at indexPath: IndexPath) -> Int
     

@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-class CollectionHighlightAndSelectCollectionViewCell: UICollectionViewCell, IdentificableView, ModelConfigurableView, HighlightableView, SelectableView {
+class CollectionHighlightAndSelectCollectionViewCell: UICollectionViewCell, ModelConfigurableView, HighlightableView, SelectableView {
     
     // MARK: Stored properties
     private let contentViewColor = UIColor.systemBlue.withAlphaComponent(0.1)

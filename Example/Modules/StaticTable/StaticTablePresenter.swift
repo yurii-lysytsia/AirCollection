@@ -75,7 +75,7 @@ extension StaticTablePresenter: StaticTableViewOutput {
     }
     
     func tableRowIdentifier(for indexPath: IndexPath) -> String {
-        return StaticTableViewCell.viewIdentifier
+        return "StaticTableViewCell"
     }
     
     func tableRowHeight(for indexPath: IndexPath) -> TableViewRowHeight {
@@ -111,7 +111,7 @@ extension StaticTablePresenter: StaticTableViewOutput {
     }
     
     func tableHeaderIdentifier(for section: Int) -> String? {
-        return StaticTableSectionHeaderView.viewIdentifier
+        return "StaticTableSectionHeaderView"
     }
     
     func tableHeaderHeight(for section: Int) -> TableViewHeaderFooterViewHeight {
@@ -124,7 +124,7 @@ extension StaticTablePresenter: StaticTableViewOutput {
     }
     
     func tableFooterIdentifier(for section: Int) -> String? {
-        return StaticTableSectionFooterView.viewIdentifier
+        return "StaticTableSectionFooterView"
     }
     
     func tableFooterHeight(for section: Int) -> TableViewHeaderFooterViewHeight {

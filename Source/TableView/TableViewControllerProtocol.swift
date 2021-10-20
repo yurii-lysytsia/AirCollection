@@ -16,7 +16,7 @@ import protocol UIKit.UIScrollViewDelegate
 import func Foundation.objc_getAssociatedObject
 import func Foundation.objc_setAssociatedObject
 
-public protocol TableViewControllerProtocol: class {
+public protocol TableViewControllerProtocol: AnyObject {
     
     /// Return an instanse of the table view. This table view will be use by presenter
     var tableViewSource: UITableView { get }

@@ -26,7 +26,7 @@ import enum UIKit.NSTextAlignment
 import func Foundation.objc_getAssociatedObject
 import func Foundation.objc_setAssociatedObject
 
-public protocol TextFieldDelegate: class {
+public protocol TextFieldDelegate: AnyObject {
     /// Asks the delegate if editing should begin in the specified text field
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
     

@@ -28,8 +28,7 @@ final class DynamicUserTableViewController: UIViewController {
         self.view.addSubview(self.tableView)
         
         self.configureTableView { (tableView) in
-            tableView.register(DynamicUserTableViewCell.self)
-            tableView.register(DynamicUserFooterView.self)
+            tableView.register(DynamicUserTableViewCell.self, forCellReuseIdentifier: "DynamicUserTableViewCell")
         }
     }
     

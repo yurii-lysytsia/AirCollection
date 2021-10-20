@@ -32,7 +32,7 @@ final class CollectionHighlightAndSelectViewController: UIViewController {
         self.collectionView.frame = self.view.bounds
         self.collectionView.allowsMultipleSelection = true
         self.configureCollectionView { (collectionView) in
-            collectionView.register(CollectionHighlightAndSelectCollectionViewCell.self)
+            collectionView.register(CollectionHighlightAndSelectCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionHighlightAndSelectCollectionViewCell")
         }
         
         self.output.didLoad()

@@ -29,12 +29,9 @@ final class StaticTableViewController: UIViewController {
         // Configure view
         view.addSubview(tableView)
         // Configure table view
-        tableView.tableHeaderView = StaticTableHeaderView()
-        tableView.tableFooterView = StaticTableFooterView.loadFromNib()
         configureTableView { (tableView) in
-            tableView.register(StaticTableViewCell.self)
-            tableView.register(StaticTableSectionHeaderView.self)
-            tableView.register(StaticTableSectionFooterView.self)
+            tableView.register(StaticTableViewCell.self, forCellReuseIdentifier: "StaticTableViewCell")
+
         }
         
     }
@@ -43,10 +40,6 @@ final class StaticTableViewController: UIViewController {
         super.viewDidLayoutSubviews()
         // Resize table view
         self.tableView.frame = self.view.bounds
-        // Resize table view table header view
-        self.tableView.fitHeaderTableViewHeight()
-        // Resize table view table footer view
-        self.tableView.fitFooterViewHeight()
     }
     
 }

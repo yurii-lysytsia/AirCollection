@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-class StaticTableSectionHeaderView: UITableViewHeaderFooterView, IdentificableView, ModelConfigurableView {
+class StaticTableSectionHeaderView: UITableViewHeaderFooterView, ModelConfigurableView {
 
     // MARK: Outlet properties
     

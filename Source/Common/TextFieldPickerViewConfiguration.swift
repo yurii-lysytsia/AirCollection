@@ -16,7 +16,7 @@ import func Foundation.objc_getAssociatedObject
 import func Foundation.objc_setAssociatedObject
 
 // MARK: - TextFieldPickerViewDataSource
-public protocol TextFieldPickerViewDataSource: class {
+public protocol TextFieldPickerViewDataSource: AnyObject {
     /// Called by the text field picker view when it needs the number of components
     func textField(_ textField: UITextField, numberOfComponentsInPickerView pickerView: UIPickerView) -> Int
     

@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-class TableHightlightAndSelectTableViewCell: UITableViewCell, IdentificableView, ModelConfigurableView, HighlightableView, SelectableView {
+class TableHightlightAndSelectTableViewCell: UITableViewCell, ModelConfigurableView, HighlightableView, SelectableView {
 
     // MARK: Stored properties
     private let contentViewColor = UIColor.white

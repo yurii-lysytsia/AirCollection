@@ -45,7 +45,7 @@ extension TableHighlightAndSelectPresenter: TableHighlightAndSelectViewOutput {
     }
     
     func tableRowIdentifier(for indexPath: IndexPath) -> String {
-        return TableHightlightAndSelectTableViewCell.viewIdentifier
+        return "TableHightlightAndSelectTableViewCell"
     }
     
     func tableRowHeight(for indexPath: IndexPath) -> TableViewRowHeight {

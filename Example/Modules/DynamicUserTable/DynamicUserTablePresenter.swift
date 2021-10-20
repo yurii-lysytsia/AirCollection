@@ -63,7 +63,7 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     }
     
     func tableRowIdentifier(for indexPath: IndexPath) -> String {
-        return DynamicUserTableViewCell.viewIdentifier
+        return "DynamicUserTableViewCell"
     }
     
     func tableRowHeight(for indexPath: IndexPath) -> TableViewRowHeight {
@@ -93,7 +93,7 @@ extension DynamicUserTablePresenter: DynamicUserTableViewOutput {
     }
     
     func tableFooterIdentifier(for section: Int) -> String? {
-        return DynamicUserFooterView.viewIdentifier
+        return "DynamicUserFooterView"
     }
     
     func tableFooterHeight(for section: Int) -> TableViewHeaderFooterViewHeight {

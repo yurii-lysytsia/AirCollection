@@ -10,7 +10,7 @@ import struct Foundation.IndexPath
 import struct CoreGraphics.CGFloat
 import struct UIKit.UIEdgeInsets
 
-public protocol CollectionViewPresenterProtocol: class {
+public protocol CollectionViewPresenterProtocol: AnyObject {
     
     /// Number of sections in the collection view
     var collectionSections: Int { get }

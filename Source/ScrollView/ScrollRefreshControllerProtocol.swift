@@ -11,7 +11,7 @@ import class UIKit.UIRefreshControl
 import func Foundation.objc_setAssociatedObject
 import func Foundation.objc_getAssociatedObject
 
-public protocol ScrollRefreshControllerProtocol: class {
+public protocol ScrollRefreshControllerProtocol: AnyObject {
     
     /// Configure refresh control view for scroll view using reference to refresh presenter where will delegate all view action. You can customize refresh control using configuration.
     func configureScrollRefresh(for scrollView: UIScrollView, using presenter: ScrollRefreshPresenterProtocol, configuration: ScrollRefreshConfiguration)

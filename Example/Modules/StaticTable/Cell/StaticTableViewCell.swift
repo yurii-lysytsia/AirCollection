@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-class StaticTableViewCell: UITableViewCell, IdentificableView, ModelConfigurableView {
+class StaticTableViewCell: UITableViewCell, ModelConfigurableView {
         
     // MARK: Outlet properties
     private let titleLabel: UILabel = UILabel()

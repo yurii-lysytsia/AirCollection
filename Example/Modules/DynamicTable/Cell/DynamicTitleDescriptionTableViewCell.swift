@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-class DynamicTitleDescriptionTableViewCell: UITableViewCell, IdentificableView, NibLoadableView, ModelConfigurableView {
+class DynamicTitleDescriptionTableViewCell: UITableViewCell, ModelConfigurableView {
     
     // MARK: Outlet properties
     @IBOutlet private weak var stackView: UIStackView!

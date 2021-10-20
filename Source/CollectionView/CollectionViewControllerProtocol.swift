@@ -15,7 +15,7 @@ import protocol UIKit.UIScrollViewDelegate
 import func Foundation.objc_getAssociatedObject
 import func Foundation.objc_setAssociatedObject
 
-public protocol CollectionViewControllerProtocol: class {
+public protocol CollectionViewControllerProtocol: AnyObject {
 
     /// Return an instanse of the collection view. This collection view will be use by presenter
     var collectionViewSource: UICollectionView { get }

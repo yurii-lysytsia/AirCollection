@@ -28,7 +28,7 @@ import enum UIKit.UITextItemInteraction
 import func Foundation.objc_getAssociatedObject
 import func Foundation.objc_setAssociatedObject
 
-public protocol TextViewDelegate: class {
+public protocol TextViewDelegate: AnyObject {
     
     /// Asks the delegate if editing should begin in the specified text view
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool

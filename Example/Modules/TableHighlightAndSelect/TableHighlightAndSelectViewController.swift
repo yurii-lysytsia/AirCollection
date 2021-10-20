@@ -29,7 +29,7 @@ final class TableHighlightAndSelectViewController: UIViewController {
         self.tableView.frame = self.view.bounds
         self.tableView.allowsMultipleSelection = true
         self.configureTableView { (tableView) in
-            tableView.register(TableHightlightAndSelectTableViewCell.self)
+            tableView.register(TableHightlightAndSelectTableViewCell.self, forCellReuseIdentifier: "TableHightlightAndSelectTableViewCell")
         }
         
         self.output.didLoad()
