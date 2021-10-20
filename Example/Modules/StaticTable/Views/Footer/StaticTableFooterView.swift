@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-class StaticTableFooterView: UIView, NibLoadableView {
+class StaticTableFooterView: UIView {
     
     // MARK: Properties [Outlet]
     

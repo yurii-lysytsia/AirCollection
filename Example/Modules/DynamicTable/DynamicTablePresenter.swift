@@ -66,7 +66,7 @@ extension DynamicTablePresenter: DynamicTableViewOutput {
     func tableRowIdentifier(for indexPath: IndexPath) -> String {
         switch self.sections[indexPath.section] {
         case .users, .stories:
-            return DynamicTitleDescriptionTableViewCell.viewIdentifier
+            return "DynamicTitleDescriptionTableViewCell"
         }
     }
     

@@ -9,7 +9,7 @@
 import struct Foundation.Date
 import struct Foundation.IndexPath
 
-public protocol DatePickerPresenterProtocol: class {
+public protocol DatePickerPresenterProtocol: AnyObject {
     /// Called by controller (`DatePickerControllerProtocol`) when the user selects a row with date for index path
     func datePickerDidSelectDate(_ date: Date, at indexPath: IndexPath)
     

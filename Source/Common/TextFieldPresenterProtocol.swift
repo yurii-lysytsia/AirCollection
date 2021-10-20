@@ -8,7 +8,7 @@
 
 import struct Foundation.IndexPath
 
-public protocol TextFieldPresenterProtocol: class {
+public protocol TextFieldPresenterProtocol: AnyObject {
     
     /// Called by controller (`TextFieldControllerProtocol`) if editing should begin in the specified index path
     func textFieldShouldBeginEditing(at indexPath: IndexPath) -> Bool

@@ -11,7 +11,7 @@
 /// You shouldn't use this protocol for your views (include cells) implementation, but you able to create additional protocol that implement default implementation. See [ModelConfigurableView](https://github.com/YuriFox/AirCollection/blob/master/README_VIEW.md#model-configurable-view) for your custom implementation sample.
 ///
 /// Read more about [ConfigurableView](https://github.com/YuriFox/AirCollection/blob/master/README_VIEW.md#configurable-view).
-public protocol ConfigurableView: class {
+public protocol ConfigurableView: AnyObject {
     
     /// Abstract method called when view have to update.
     ///

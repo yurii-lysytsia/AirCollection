@@ -27,8 +27,8 @@ final class DynamicStoryTableViewController: UIViewController {
         
         view.addSubview(tableView)
         
-        tableView.register(DynamicUserTableViewCell.self)
-        tableView.register(DynamicStoryTableViewCell.self)
+        tableView.register(DynamicUserTableViewCell.self, forCellReuseIdentifier: "DynamicUserTableViewCell")
+        tableView.register(DynamicStoryTableViewCell.self, forCellReuseIdentifier: "DynamicStoryTableViewCell")
         configureTableView(tableView, with: output)
     }
     

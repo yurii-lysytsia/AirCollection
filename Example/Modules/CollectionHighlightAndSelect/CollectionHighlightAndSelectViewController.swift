@@ -31,7 +31,7 @@ final class CollectionHighlightAndSelectViewController: UIViewController {
         collectionView.backgroundColor = UIColor.white
         collectionView.frame = view.bounds
         collectionView.allowsMultipleSelection = true
-        collectionView.register(CollectionHighlightAndSelectCollectionViewCell.self)
+        collectionView.register(CollectionHighlightAndSelectCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionHighlightAndSelectCollectionViewCell")
         configureCollectionView(collectionView, with: output)
         
         output.didLoad()

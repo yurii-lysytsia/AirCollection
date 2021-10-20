@@ -11,7 +11,7 @@ import Foundation
 /// Protocol for views that need observe selection state and defines one property `isSelected` and one method `didSetSelected(_:,:)`. **Do not confuse** `didSetSelected(_:,:)` method with `UITableViewCell.setSelected(_:,animated:)` method.
 ///
 /// You can implement this protocol that observe selection state change and you can set appearance for your `UITableViewCell` or `UICollectionViewCell`
-public protocol SelectableView: class {
+public protocol SelectableView: AnyObject {
     
     /// A Boolean value that indicates whether the view is selected.
     var isSelected: Bool { get }

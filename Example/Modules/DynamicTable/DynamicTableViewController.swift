@@ -28,7 +28,7 @@ final class DynamicTableViewController: UIViewController {
         
         view.addSubview(tableView)
         
-        tableView.register(DynamicTitleDescriptionTableViewCell.self)
+        tableView.register(DynamicTitleDescriptionTableViewCell.self, forCellReuseIdentifier: "DynamicTitleDescriptionTableViewCell")
         configureTableView(tableView, with: output)
         
         let scrollRefreshConfiguration = ScrollRefreshConfiguration(tintColor: UIColor.systemBlue, attributedTitle: nil)

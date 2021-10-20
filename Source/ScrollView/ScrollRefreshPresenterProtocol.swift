@@ -6,7 +6,7 @@
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
 //
 
-public protocol ScrollRefreshPresenterProtocol: class {
+public protocol ScrollRefreshPresenterProtocol: AnyObject {
     
     /// Called when refresh indicator start animating
     func scrollDidShowRefreshControl()

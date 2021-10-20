@@ -6,7 +6,7 @@
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
 //
 
-public protocol PickerViewControllerProtocol: class {
+public protocol PickerViewControllerProtocol: AnyObject {
     /// Return an instanse of the picker view presenter
     var pickerViewPresenter: PickerViewPresenterProtocol { get }
 }

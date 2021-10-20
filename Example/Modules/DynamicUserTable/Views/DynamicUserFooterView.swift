@@ -9,7 +9,7 @@
 import UIKit
 import Source
 
-class DynamicUserFooterView: UITableViewHeaderFooterView, IdentificableView, NibLoadableView, ModelConfigurableView {
+class DynamicUserFooterView: UITableViewHeaderFooterView, ModelConfigurableView {
 
     // MARK: Outlet properties
     @IBOutlet private weak var titleLabel: UILabel!

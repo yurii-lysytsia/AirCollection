@@ -11,12 +11,12 @@ open class DisplayRow<RowKey>: Equatable where RowKey: Equatable {
     // MARK: Properties [Public]
     
     public let rowKey: RowKey
-    public let cellType: IdentificableView.Type
+    public let cellType: String
     public let viewModel: Any?
     
     // MARK: Lifecycle
     
-    public init(rowKey: RowKey, cellType: IdentificableView.Type, viewModel: Any? = nil) {
+    public init(rowKey: RowKey, cellType: String, viewModel: Any? = nil) {
         self.rowKey = rowKey
         self.cellType = cellType
         self.viewModel = viewModel

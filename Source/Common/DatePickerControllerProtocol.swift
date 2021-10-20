@@ -6,7 +6,7 @@
 //  Copyright © 2020 Lysytsia Yurii. All rights reserved.
 //
 
-public protocol DatePickerControllerProtocol: class {
+public protocol DatePickerControllerProtocol: AnyObject {
     /// Return an instanse of the date picker presented
     var datePickerPresenter: DatePickerPresenterProtocol { get }
 }

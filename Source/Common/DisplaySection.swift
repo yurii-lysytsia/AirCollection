@@ -48,7 +48,7 @@ open class DisplaySection<SectionKey, RowKey>: Equatable where SectionKey: Equat
 
 public extension DisplaySection where RowKey: CaseIterable {
  
-    open func configureRows(transform: (RowKey) -> Row) {
+    func configureRows(transform: (RowKey) -> Row) {
         self.rows = RowKey.allCases.map(transform)
     }
     

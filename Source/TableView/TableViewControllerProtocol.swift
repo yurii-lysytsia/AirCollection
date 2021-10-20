@@ -16,7 +16,7 @@ import protocol UIKit.UIScrollViewDelegate
 import func Foundation.objc_getAssociatedObject
 import func Foundation.objc_setAssociatedObject
 
-public protocol TableViewControllerProtocol: class {
+public protocol TableViewControllerProtocol: AnyObject {
     
     /// Configure `UITableViewDataSource` and `UITableViewDelegate` for specific table view and presenter. Also automatically add `TableViewDelegate` to current view controller if implemented.
     /// - Parameter tableView: Instanse of the table view source that will be use by presenter.

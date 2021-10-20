@@ -11,7 +11,7 @@ import struct Foundation.IndexPath
 import struct Foundation.URL
 import class UIKit.NSTextAttachment
 
-public protocol TextViewPresenterProtocol: class {
+public protocol TextViewPresenterProtocol: AnyObject {
 
     /// Asks by controller (`TextViewControllerProtocol`) if editing should begin in the specified index path
     func textViewShouldBeginEditing(at indexPath: IndexPath) -> Bool

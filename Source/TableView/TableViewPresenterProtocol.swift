@@ -10,7 +10,7 @@ import struct Foundation.IndexPath
 import class UIKit.UITableView
 import class UIKit.UISwipeActionsConfiguration
 
-public protocol TableViewPresenterProtocol: class {
+public protocol TableViewPresenterProtocol: AnyObject {
     
     /// Number of sections in the table view
     var tableSections: Int { get }

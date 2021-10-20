@@ -46,7 +46,7 @@ open class DisplayCollection<SectionKey, RowKey>: NSObject where SectionKey: Equ
         return row(at: indexPath).rowKey
     }
     
-    open func rowIdentifier(for indexPath: IndexPath) -> IdentificableView.Type {
+    open func rowIdentifier(for indexPath: IndexPath) -> String {
         return row(at: indexPath).cellType
     }
  
@@ -62,7 +62,7 @@ open class DisplayCollection<SectionKey, RowKey>: NSObject where SectionKey: Equ
 
 public extension DisplayCollection where SectionKey: CaseIterable {
  
-    public func configureSections(transform: (SectionKey) -> Section) {
+    func configureSections(transform: (SectionKey) -> Section) {
         self.sections = SectionKey.allCases.map(transform)
     }
     

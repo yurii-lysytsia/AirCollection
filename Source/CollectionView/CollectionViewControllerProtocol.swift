@@ -16,7 +16,7 @@ import protocol UIKit.UIScrollViewDelegate
 import func Foundation.objc_getAssociatedObject
 import func Foundation.objc_setAssociatedObject
 
-public protocol CollectionViewControllerProtocol: class {
+public protocol CollectionViewControllerProtocol: AnyObject {
     
     /// Configure `UICollectionViewDataSource` and `UICollectionViewDelegate` for specific table view and presenter. Also automatically add `CollectionViewDelegate` to current view controller if implemented.
     /// - Parameter collectonView: Instanse of the table view source that will be use by presenter.
